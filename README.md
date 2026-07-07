@@ -1,9 +1,8 @@
 # Sefa — premium beauty-tech redesign
 
 Full redesign in English: cinematic Ken Burns hero (real editorial
-photography, no fabricated video links), a new AI section, meaningful
-beauty 3D (perfume bottle, lipstick, nail polish, serum drop, mirror
-ring), a two-typeface logo and a warm cream / deep noir / gold palette.
+photography, no fabricated video links), a new AI section, a two-typeface
+logo and a warm cream / deep noir / gold palette.
 
 ## Run locally
 
@@ -27,13 +26,16 @@ folder isn't at the root of your Git repository.
   working, honest stand-in. Swap the `slides` array for real `<video>`
   sources once footage is shot.
 - **No Spline scene.** Spline scenes are built and hosted on Spline's own
-  platform with an account — they can't be generated from here. The
-  existing Three.js beauty scene (`components/beauty-scene.tsx`) covers
-  the same "meaningful 3D" goal without that dependency.
-- **No guaranteed Lighthouse 95+.** Between the 3D scene, the pinned
-  scroll section and the photo crossfade, this is a genuine trade-off
-  against raw performance. Test it yourself with the Lighthouse plugin
-  Netlify offers on your dashboard, and dial back animations if a
+  platform with an account — they can't be generated from here. An earlier
+  pass added a hand-built Three.js beauty scene as a stand-in
+  (`components/beauty-scene.tsx`), but it was purely decorative floating
+  objects with no functional or narrative purpose, so it was removed —
+  don't reintroduce a 3D scene unless it's actually load-bearing for the
+  design, not decoration for its own sake.
+- **No guaranteed Lighthouse 95+.** Between the pinned scroll section
+  (`ProductShowcase`) and the hero photo crossfade, there's still a real
+  trade-off against raw performance. Test it yourself with the Lighthouse
+  plugin Netlify offers on your dashboard, and dial back animations if a
   specific score matters more than the visual richness.
 
 ## Logo

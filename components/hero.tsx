@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
@@ -8,11 +7,6 @@ import { Button } from "@/components/ui/button";
 import { AnimatedCounter } from "@/components/animated-counter";
 import { PhoneMockup } from "@/components/phone-mockup";
 import { HeroPhotos } from "@/components/hero-photos";
-
-const BeautyScene = dynamic(
-  () => import("@/components/beauty-scene").then((m) => m.BeautyScene),
-  { ssr: false }
-);
 
 const container = {
   hidden: {},
@@ -34,9 +28,6 @@ export function Hero() {
   return (
     <section ref={ref} className="relative min-h-[100svh] overflow-hidden bg-ink pb-24 pt-32 text-paper">
       <HeroPhotos />
-      <div className="pointer-events-none absolute inset-0 opacity-80">
-        <BeautyScene />
-      </div>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink" />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-16 px-6 lg:grid-cols-[1.1fr_0.9fr]">

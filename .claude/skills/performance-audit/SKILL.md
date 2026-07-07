@@ -1,17 +1,20 @@
 ---
 name: performance-audit
-description: Audit and improve real-world load/runtime performance of sefa.is (bundle size, Lighthouse/Core Web Vitals, heavy animation libraries, 3D scene cost). Use when asked to make the site faster, before/after adding heavy dependencies or animations, or when a change touches hero/scroll-pinned sections.
+description: Audit and improve real-world load/runtime performance of sefa.is (bundle size, Lighthouse/Core Web Vitals, heavy animation libraries, scroll-pinned section cost). Use when asked to make the site faster, before/after adding heavy dependencies or animations, or when a change touches hero/scroll-pinned sections.
 ---
 
 # Performance audit
 
 This site carries real, acknowledged performance risk: `README.md` says
 Lighthouse 95+ isn't guaranteed because of the pinned-scroll `ProductShowcase`
-section, the `BeautyScene` three.js hero, and the `HeroPhotos` Ken Burns
-crossfade. This skill is about measuring that risk concretely and not
-making it worse — this is arguably the highest-leverage lever for actually
-improving the site, since slow load directly costs bounce rate, SEO ranking,
-and conversions on a marketing page.
+section and the `HeroPhotos` Ken Burns crossfade. (An earlier three.js
+"beauty scene" in the hero was removed for being decorative dead weight
+with no real purpose — don't reintroduce a 3D scene or similarly heavy
+dependency without a concrete reason.) This skill is about measuring the
+remaining risk concretely and not making it worse — this is arguably the
+highest-leverage lever for actually improving the site, since slow load
+directly costs bounce rate, SEO ranking, and conversions on a marketing
+page.
 
 ## Baseline: know the current numbers
 
@@ -31,28 +34,29 @@ investigate, not just accept.
 
 ## Heavy dependencies already in play
 
-`package.json` carries several genuinely heavy libraries:
-`@react-three/fiber` + `@react-three/drei` + `three` (the hero 3D scene),
-`framer-motion` (used almost everywhere), `gsap` + `lenis` (global smooth
-scroll + ScrollTrigger). Before adding another animation/3D/scroll library,
-check whether one of these already covers the need — every new dependency
-here compounds an already-heavy client bundle.
+`package.json` carries `framer-motion` (used almost everywhere) and
+`gsap` + `lenis` (global smooth scroll + ScrollTrigger). Before adding
+another animation/scroll/3D library, check whether one of these already
+covers the need — every new dependency here compounds an already-heavy
+client bundle. A three.js/React Three Fiber hero scene was previously
+removed for being purely decorative with no functional payoff — don't
+bring 3D back in without a concrete, non-decorative reason.
 
-## Follow the existing lazy-load pattern
+## Use next/dynamic for anything heavy and non-critical
 
-`components/hero.tsx` already does the right thing for the heaviest piece:
+Any client-only, heavy, below-the-fold component (a chart library, a 3D
+scene, a heavy modal) should be lazy-loaded with `next/dynamic` +
+`ssr: false` rather than imported eagerly at the top of a section file:
 
 ```tsx
-const BeautyScene = dynamic(
-  () => import("@/components/beauty-scene").then((m) => m.BeautyScene),
+const HeavyThing = dynamic(
+  () => import("@/components/heavy-thing").then((m) => m.HeavyThing),
   { ssr: false }
 );
 ```
 
-Any other client-only, heavy, below-the-fold component (a future 3D scene,
-a chart library, a heavy modal) should follow this same `next/dynamic` +
-`ssr: false` pattern rather than being imported eagerly at the top of a
-section file.
+This keeps it out of the initial bundle and out of server-side rendering
+entirely, so it only costs bytes/CPU for users who actually scroll to it.
 
 ## Scroll-driven sections
 

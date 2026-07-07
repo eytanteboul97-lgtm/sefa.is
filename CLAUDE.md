@@ -12,8 +12,11 @@ auth, and no real booking functionality. Every interactive-looking feature
 (waitlist, style quiz, pricing) is presentational/UI-only.
 
 Stack: **Next.js 14 (App Router) + React 18 + TypeScript + Tailwind CSS**,
-with **Framer Motion** and **GSAP/Lenis** for animation and smooth scroll, and
-**React Three Fiber / three.js** for a small 3D "beauty scene" in the hero.
+with **Framer Motion** and **GSAP/Lenis** for animation and smooth scroll.
+An earlier pass added a Three.js/React Three Fiber "beauty scene" to the
+hero, but it was purely decorative floating objects with no real purpose
+and was removed — don't reintroduce a 3D scene without a concrete reason,
+per the `performance-audit` skill's cost concerns.
 
 ## Repository structure
 
