@@ -112,6 +112,24 @@ Deploys via Netlify using `netlify.toml` (`npm run build` +
 `netlify.toml` needs an explicit `base` pointing at the new folder (see the
 note at the bottom of `README.md`).
 
+## Project skills
+
+`.claude/skills/` has repo-specific skills — invoke them (or let them
+trigger automatically) instead of improvising these workflows from scratch:
+
+- `add-section` — scaffold a new landing-page section the same way existing
+  ones are built.
+- `design-audit` — check code against the color/font/utility-class design
+  system.
+- `netlify-deploy-check` — validate `netlify.toml` and diagnose Netlify
+  build-config issues.
+- `seo-metadata-update` — update SEO/OG/JSON-LD metadata in `app/layout.tsx`
+  consistently.
+- `visual-check` — actually view a UI change in the browser before calling
+  it done.
+- `copy-tone-check` — keep new marketing copy in the site's premium
+  editorial-luxury voice.
+
 ## Working in this repo
 
 - This is a small, single-purpose site (~1,900 lines across `components/`).
