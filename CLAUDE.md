@@ -133,6 +133,10 @@ trigger automatically) instead of improvising these workflows from scratch:
   hero/LCP handling, alt text, and the missing OG image gap.
 - `video-integration` — wire in a real video (self-hosted or embed) once one
   exists; never fabricates a video source.
+- `performance-audit` — bundle size, Core Web Vitals, and the cost of the
+  3D scene/scroll-pinned sections.
+- `accessibility-audit` — contrast, keyboard nav, ARIA, and the known
+  mobile-nav/custom-tabs gaps.
 
 ## Working in this repo
 
