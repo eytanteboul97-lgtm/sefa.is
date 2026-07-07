@@ -136,10 +136,14 @@ trigger automatically) instead of improvising these workflows from scratch:
   hero/LCP handling, alt text, and the missing OG image gap.
 - `video-integration` — wire in a real video (self-hosted or embed) once one
   exists; never fabricates a video source.
-- `performance-audit` — bundle size, Core Web Vitals, and the cost of the
-  3D scene/scroll-pinned sections.
+- `performance-audit` — bundle size, Core Web Vitals, and the cost of
+  scroll-pinned sections.
 - `accessibility-audit` — contrast, keyboard nav, ARIA, and the known
   mobile-nav/custom-tabs gaps.
+- `photo-treatment` — consistent crossfade transitions and a shared warm
+  color grade across all photography.
+- `responsive-parity` — mobile is a first-class layout, not desktop with
+  things quietly hidden.
 
 ## Working in this repo
 
