@@ -148,6 +148,12 @@ trigger automatically) instead of improvising these workflows from scratch:
   footer, and favicon, and give it a real exportable asset.
 - `photo-curation` — criteria for replacing the actual stock photos with a
   coherent, premium-feeling set instead of generic/mismatched images.
+- `seo-structured-data` — FAQPage/Organization JSON-LD generated from real
+  content, not fabricated fields.
+- `safe-area-mobile` — notch/Dynamic Island handling for fixed UI
+  (navbar, scroll progress bar).
+- `conversion-audit` — every CTA either does something real or honestly
+  points somewhere; catches the dead hero/founding-program buttons.
 
 ## Working in this repo
 
