@@ -131,6 +131,8 @@ trigger automatically) instead of improvising these workflows from scratch:
   editorial-luxury voice.
 - `image-optimization` — `next/image` usage, remote host whitelisting,
   hero/LCP handling, alt text, and the missing OG image gap.
+- `video-integration` — wire in a real video (self-hosted or embed) once one
+  exists; never fabricates a video source.
 
 ## Working in this repo
 
