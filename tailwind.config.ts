@@ -78,6 +78,10 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "diamond-glint": {
+          "0%, 100%": { filter: "brightness(1)" },
+          "50%": { filter: "brightness(1.45)" },
+        },
       },
       animation: {
         marquee: "marquee 28s linear infinite",
@@ -87,6 +91,7 @@ const config: Config = {
         float: "float 7s ease-in-out infinite",
         "float-slow": "float-slow 9s ease-in-out infinite",
         shimmer: "shimmer 3.5s linear infinite",
+        "diamond-glint": "diamond-glint 3.2s ease-in-out infinite",
       },
     },
   },

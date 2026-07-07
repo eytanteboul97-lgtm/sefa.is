@@ -41,14 +41,14 @@ const salons = [
 export function PopularSalons() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
-      <Reveal className="flex items-end justify-between">
+      <Reveal className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <span className="text-xs font-medium uppercase tracking-widest text-teal">Discover</span>
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
             Most loved, <span className="font-accent-italic">near you</span>
           </h2>
         </div>
-        <a href="#" className="hidden text-sm font-medium text-ink/60 hover:text-ink sm:block">
+        <a href="#" className="inline-block py-1 text-sm font-medium text-ink/60 hover:text-ink">
           View all →
         </a>
       </Reveal>

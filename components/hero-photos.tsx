@@ -43,8 +43,11 @@ export function HeroPhotos() {
           exit={{ opacity: 0 }}
           transition={
             prefersReducedMotion
-              ? { opacity: { duration: 0.3 } }
-              : { opacity: { duration: 1.4 }, scale: { duration: 5.6, ease: "linear" } }
+              ? { opacity: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }
+              : {
+                  opacity: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
+                  scale: { duration: 5.6, ease: "linear" },
+                }
           }
           className="absolute inset-0"
         >

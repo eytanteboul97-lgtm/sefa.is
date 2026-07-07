@@ -12,8 +12,11 @@ auth, and no real booking functionality. Every interactive-looking feature
 (waitlist, style quiz, pricing) is presentational/UI-only.
 
 Stack: **Next.js 14 (App Router) + React 18 + TypeScript + Tailwind CSS**,
-with **Framer Motion** and **GSAP/Lenis** for animation and smooth scroll, and
-**React Three Fiber / three.js** for a small 3D "beauty scene" in the hero.
+with **Framer Motion** and **GSAP/Lenis** for animation and smooth scroll.
+An earlier pass added a Three.js/React Three Fiber "beauty scene" to the
+hero, but it was purely decorative floating objects with no real purpose
+and was removed — don't reintroduce a 3D scene without a concrete reason,
+per the `performance-audit` skill's cost concerns.
 
 ## Repository structure
 
@@ -130,9 +133,19 @@ trigger automatically) instead of improvising these workflows from scratch:
 - `copy-tone-check` — keep new marketing copy in the site's premium
   editorial-luxury voice.
 - `image-optimization` — `next/image` usage, remote host whitelisting,
-  hero/LCP handling, alt text, and the missing OG image gap.
+  hero/LCP handling, alt text, and the OG image.
 - `video-integration` — wire in a real video (self-hosted or embed) once one
   exists; never fabricates a video source.
+- `performance-audit` — bundle size, Core Web Vitals, and the cost of
+  scroll-pinned sections.
+- `accessibility-audit` — contrast, keyboard nav, ARIA, and the known
+  mobile-nav/custom-tabs gaps.
+- `photo-treatment` — consistent crossfade transitions and a shared warm
+  color grade across all photography.
+- `responsive-parity` — mobile is a first-class layout, not desktop with
+  things quietly hidden.
+- `logo-polish` — keep the wordmark/diamond mark consistent across navbar,
+  footer, and favicon, and give it a real exportable asset.
 
 ## Working in this repo
 
