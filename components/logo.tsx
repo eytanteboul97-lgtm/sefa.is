@@ -29,7 +29,7 @@ export function Logo({
       <span className="relative font-display text-[1em] font-semibold tracking-tight">
         <svg
           viewBox="0 0 10 10"
-          className="absolute -top-[0.7em] left-1/2 -translate-x-1/2 h-[0.22em] w-[0.22em]"
+          className="absolute -top-[0.7em] left-1/2 -translate-x-1/2 h-[0.22em] w-[0.22em] animate-diamond-glint"
           aria-hidden="true"
         >
           <rect
