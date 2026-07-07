@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { shimmerDataUrl } from "@/lib/blur-placeholder";
 
 /**
  * A slow-crossfading, slow-zooming sequence of real editorial beauty
@@ -23,6 +24,7 @@ const slides = [
 
 export function HeroPhotos() {
   const [index, setIndex] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -36,10 +38,14 @@ export function HeroPhotos() {
       <AnimatePresence>
         <motion.div
           key={slides[index]}
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1.18 }}
+          initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 1.08 }}
+          animate={{ opacity: 1, scale: prefersReducedMotion ? 1 : 1.18 }}
           exit={{ opacity: 0 }}
-          transition={{ opacity: { duration: 1.4 }, scale: { duration: 5.6, ease: "linear" } }}
+          transition={
+            prefersReducedMotion
+              ? { opacity: { duration: 0.3 } }
+              : { opacity: { duration: 1.4 }, scale: { duration: 5.6, ease: "linear" } }
+          }
           className="absolute inset-0"
         >
           <Image
@@ -48,6 +54,8 @@ export function HeroPhotos() {
             fill
             priority={index === 0}
             sizes="100vw"
+            placeholder="blur"
+            blurDataURL={shimmerDataUrl(1600, 900)}
             className="object-cover"
           />
         </motion.div>

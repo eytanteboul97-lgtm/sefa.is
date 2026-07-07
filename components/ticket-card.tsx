@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { shimmerDataUrl } from "@/lib/blur-placeholder";
 
 export function TicketCard({
   image,
@@ -21,7 +22,15 @@ export function TicketCard({
   return (
     <div className={cn("ticket tilt-card shadow-glass transition-transform duration-500 hover:-translate-y-2 hover:shadow-glass-lg", className)}>
       <div className="relative h-48 w-full">
-        <Image src={image} alt={name} fill sizes="320px" className="object-cover" />
+        <Image
+          src={image}
+          alt={name}
+          fill
+          sizes="(min-width: 1024px) 260px, (min-width: 640px) 44vw, 90vw"
+          placeholder="blur"
+          blurDataURL={shimmerDataUrl(600, 400)}
+          className="object-cover"
+        />
         <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-3 py-1 font-mono text-[11px] text-paper backdrop-blur">
           {status}
         </span>
