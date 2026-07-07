@@ -146,6 +146,8 @@ trigger automatically) instead of improvising these workflows from scratch:
   things quietly hidden.
 - `logo-polish` — keep the wordmark/diamond mark consistent across navbar,
   footer, and favicon, and give it a real exportable asset.
+- `photo-curation` — criteria for replacing the actual stock photos with a
+  coherent, premium-feeling set instead of generic/mismatched images.
 
 ## Working in this repo
 
