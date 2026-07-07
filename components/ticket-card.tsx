@@ -21,7 +21,7 @@ export function TicketCard({
 }) {
   return (
     <div className={cn("ticket tilt-card shadow-glass transition-transform duration-500 hover:-translate-y-2 hover:shadow-glass-lg", className)}>
-      <div className="relative h-48 w-full">
+      <div className="photo-grade relative h-48 w-full">
         <Image
           src={image}
           alt={name}

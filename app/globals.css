@@ -146,6 +146,21 @@ body {
   transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
 }
 
+/* Warm ink/gold wash so any stock photo reads as part of the site's
+   palette instead of a neutral, uncorrected daylight photo. */
+.photo-grade {
+  position: relative;
+}
+
+.photo-grade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(23, 20, 15, 0.22), rgba(183, 147, 85, 0.14));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
