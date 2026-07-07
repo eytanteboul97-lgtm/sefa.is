@@ -129,6 +129,8 @@ trigger automatically) instead of improvising these workflows from scratch:
   it done.
 - `copy-tone-check` — keep new marketing copy in the site's premium
   editorial-luxury voice.
+- `image-optimization` — `next/image` usage, remote host whitelisting,
+  hero/LCP handling, alt text, and the missing OG image gap.
 
 ## Working in this repo
 
