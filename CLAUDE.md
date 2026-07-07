@@ -144,6 +144,8 @@ trigger automatically) instead of improvising these workflows from scratch:
   color grade across all photography.
 - `responsive-parity` — mobile is a first-class layout, not desktop with
   things quietly hidden.
+- `logo-polish` — keep the wordmark/diamond mark consistent across navbar,
+  footer, and favicon, and give it a real exportable asset.
 
 ## Working in this repo
 
