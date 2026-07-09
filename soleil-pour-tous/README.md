@@ -46,13 +46,33 @@ Sans clé configurée, le champ reste une saisie libre classique (aucune
 erreur, juste pas de suggestions) — voir
 `components/address-autocomplete-input.tsx`.
 
-## Brancher un CRM / webhook / Airtable / Google Sheets / email
+## Notification email des prospects (Resend)
 
-Le formulaire de lead poste déjà vers `app/api/lead/route.ts`, qui valide les
-données côté serveur avec le même schéma Zod que le frontend
-(`lib/lead-schema.ts`). L'intégration réelle est à ajouter dans ce fichier,
-à l'endroit marqué par le commentaire `TODO(intégration backend)` — il
-suffit d'y ajouter l'appel vers le CRM, le webhook ou le service choisi.
+Chaque soumission valide du formulaire déclenche l'envoi d'un email
+récapitulatif (coordonnées, adresse, logement, budget) via
+[Resend](https://resend.com), géré dans `app/api/lead/route.ts`.
+
+Pour l'activer :
+
+1. Créer un compte sur [resend.com](https://resend.com) et générer une clé
+   API.
+2. Copier `.env.example` en `.env.local` et renseigner `RESEND_API_KEY`.
+3. Ajouter/adapter `LEAD_NOTIFICATION_EMAIL` si l'adresse de réception
+   change (par défaut `soleilpourtouspro@gmail.com`).
+4. Facultatif mais recommandé pour la délivrabilité : vérifier un domaine
+   sur Resend et régler `RESEND_FROM_EMAIL` sur une adresse de ce domaine
+   (sinon l'envoi se fait depuis `onboarding@resend.dev`, qui fonctionne
+   mais atterrit plus souvent en spam).
+5. Ajouter les mêmes variables d'environnement sur Netlify (Site settings →
+   Environment variables) pour la production.
+
+Sans `RESEND_API_KEY` configurée, le lead est toujours validé et reçu par
+le serveur (le formulaire ne plante pas), mais aucun email n'est envoyé —
+un avertissement est loggé côté serveur à la place.
+
+Pour brancher en plus (ou à la place) un CRM, un webhook ou Airtable/Google
+Sheets, ajouter l'appel correspondant dans `app/api/lead/route.ts`, à côté
+de l'envoi Resend.
 
 ## Déploiement (Netlify)
 
