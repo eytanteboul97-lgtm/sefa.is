@@ -24,6 +24,28 @@ npm run build
 npm run lint
 ```
 
+## Autocomplétion d'adresse (Google Places)
+
+Le champ « Adresse postale complète » de l'étape 2 du formulaire propose des
+suggestions d'adresse via l'API Google Places pendant que l'utilisateur tape,
+et pré-remplit automatiquement le code postal et la ville.
+
+Pour l'activer :
+
+1. Créer un projet sur [Google Cloud Console](https://console.cloud.google.com/),
+   activer l'API **Places API** (et **Maps JavaScript API**).
+2. Créer une clé API, puis la restreindre par référent HTTP (le(s) domaine(s)
+   de production et `localhost` pour le dev) et par API (Places + Maps
+   JavaScript uniquement).
+3. Copier `.env.example` en `.env.local` et renseigner
+   `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`.
+4. Ajouter la même variable d'environnement sur Netlify (Site settings →
+   Environment variables) pour la production.
+
+Sans clé configurée, le champ reste une saisie libre classique (aucune
+erreur, juste pas de suggestions) — voir
+`components/address-autocomplete-input.tsx`.
+
 ## Brancher un CRM / webhook / Airtable / Google Sheets / email
 
 Le formulaire de lead poste déjà vers `app/api/lead/route.ts`, qui valide les

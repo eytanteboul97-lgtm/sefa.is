@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Reveal } from "@/components/reveal";
 import { LeadFormSuccess } from "@/components/lead-form-success";
+import { AddressAutocompleteInput } from "@/components/address-autocomplete-input";
 import { leadFormSchema, stepFields, type LeadFormValues } from "@/lib/lead-schema";
 
 const STEP_TITLES = ["Vos coordonnées", "Votre logement", "Votre habitation", "Votre situation"];
@@ -33,6 +34,7 @@ export function LeadForm() {
     register,
     control,
     trigger,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<LeadFormValues>({
@@ -160,7 +162,28 @@ export function LeadForm() {
               <>
                 <div className="sm:col-span-2">
                   <Label htmlFor="adresse">Adresse postale complète</Label>
-                  <Input id="adresse" error={!!errors.adresse} {...register("adresse")} />
+                  <Controller
+                    control={control}
+                    name="adresse"
+                    render={({ field }) => (
+                      <AddressAutocompleteInput
+                        id="adresse"
+                        placeholder="12 rue de la République, 75001 Paris"
+                        error={!!errors.adresse}
+                        value={field.value}
+                        onChange={field.onChange}
+                        onAddressSelect={({ adresse, codePostal, ville }) => {
+                          field.onChange(adresse);
+                          if (codePostal) {
+                            setValue("codePostal", codePostal, { shouldValidate: true });
+                          }
+                          if (ville) {
+                            setValue("ville", ville, { shouldValidate: true });
+                          }
+                        }}
+                      />
+                    )}
+                  />
                   <FieldError message={errors.adresse?.message} />
                 </div>
                 <div>
