@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
+import { makeCottonTextures, makeLeatherTextures } from "@/components/naturel/procedural-textures";
 
 /**
  * A fixed vertical FOV crops the subject on portrait/narrow viewports
@@ -80,6 +81,8 @@ export function CapModel({
   const group = useRef<THREE.Group>(null);
   const brimShape = useLeatherShape();
   const patchShape = usePatchShape();
+  const cotton = useMemo(() => makeCottonTextures(), []);
+  const leather = useMemo(() => makeLeatherTextures(), []);
 
   useFrame((_, delta) => {
     if (autoRotate && group.current) {
@@ -94,10 +97,13 @@ export function CapModel({
     <group ref={group} scale={scale}>
       {/* Crown */}
       <mesh position={[0, 0.08 + explode * 0.55, 0]} castShadow receiveShadow>
-        <sphereGeometry args={[1.02, 48, 32, 0, Math.PI * 2, 0, Math.PI * 0.56]} />
+        <sphereGeometry args={[1.02, 96, 64, 0, Math.PI * 2, 0, Math.PI * 0.56]} />
         <meshPhysicalMaterial
           color="#ddccb0"
           roughness={0.88}
+          roughnessMap={cotton.roughnessMap}
+          normalMap={cotton.normalMap}
+          normalScale={new THREE.Vector2(0.35, 0.35)}
           sheen={1}
           sheenRoughness={0.75}
           sheenColor={new THREE.Color("#f3e9d4")}
@@ -107,8 +113,16 @@ export function CapModel({
 
       {/* Crown button, seated at the apex of the dome */}
       <mesh position={[0, 1.06 + explode * 1.1, 0]} castShadow>
-        <sphereGeometry args={[0.075, 16, 16]} />
-        <meshPhysicalMaterial color="#ddccb0" roughness={0.85} sheen={1} sheenColor={new THREE.Color("#f3e9d4")} />
+        <sphereGeometry args={[0.075, 24, 24]} />
+        <meshPhysicalMaterial
+          color="#ddccb0"
+          roughness={0.85}
+          roughnessMap={cotton.roughnessMap}
+          normalMap={cotton.normalMap}
+          normalScale={new THREE.Vector2(0.35, 0.35)}
+          sheen={1}
+          sheenColor={new THREE.Color("#f3e9d4")}
+        />
       </mesh>
 
       {/* Brim — laid flat (rotated 90° off the shape's drawing plane) and
@@ -116,7 +130,15 @@ export function CapModel({
       <group position={[0, -0.13 - explode * 0.65, 0.95 + explode * 0.95]} rotation={[Math.PI / 2 - 0.2, 0, 0]}>
         <mesh castShadow receiveShadow>
           <extrudeGeometry args={[brimShape, extrude]} />
-          <meshPhysicalMaterial color="#a9835a" roughness={0.55} clearcoat={0.18} clearcoatRoughness={0.4} />
+          <meshPhysicalMaterial
+            color="#a9835a"
+            roughness={0.55}
+            roughnessMap={leather.roughnessMap}
+            normalMap={leather.normalMap}
+            normalScale={new THREE.Vector2(0.6, 0.6)}
+            clearcoat={0.18}
+            clearcoatRoughness={0.4}
+          />
         </mesh>
       </group>
 
@@ -124,7 +146,15 @@ export function CapModel({
       <group position={[0, 0.28 - explode * 0.15, 1.06 + explode * 1.2]} rotation={[-0.12, 0, 0]}>
         <mesh castShadow>
           <extrudeGeometry args={[patchShape, patchExtrude]} />
-          <meshPhysicalMaterial color="#8a5a34" roughness={0.5} clearcoat={0.2} clearcoatRoughness={0.35} />
+          <meshPhysicalMaterial
+            color="#8a5a34"
+            roughness={0.5}
+            roughnessMap={leather.roughnessMap}
+            normalMap={leather.normalMap}
+            normalScale={new THREE.Vector2(0.5, 0.5)}
+            clearcoat={0.2}
+            clearcoatRoughness={0.35}
+          />
         </mesh>
       </group>
 
@@ -132,7 +162,14 @@ export function CapModel({
       <group position={[0, -0.1 + explode * 0.1, -1.0 - explode * 1.2]}>
         <mesh castShadow>
           <boxGeometry args={[0.5, 0.16, 0.03]} />
-          <meshPhysicalMaterial color="#a9835a" roughness={0.55} clearcoat={0.18} />
+          <meshPhysicalMaterial
+            color="#a9835a"
+            roughness={0.55}
+            roughnessMap={leather.roughnessMap}
+            normalMap={leather.normalMap}
+            normalScale={new THREE.Vector2(0.5, 0.5)}
+            clearcoat={0.18}
+          />
         </mesh>
         <mesh position={[0, 0, 0.02]}>
           <torusGeometry args={[0.09, 0.014, 12, 24]} />
@@ -165,7 +202,20 @@ export function StudioLighting() {
   return (
     <>
       <ambientLight intensity={0.55} color="#fff3df" />
-      <directionalLight position={[3, 4, 2]} intensity={1.1} color="#fff0d8" castShadow />
+      <directionalLight
+        position={[3, 4, 2]}
+        intensity={1.1}
+        color="#fff0d8"
+        castShadow
+        shadow-mapSize={[1024, 1024]}
+        shadow-bias={-0.0003}
+        shadow-camera-near={0.5}
+        shadow-camera-far={10}
+        shadow-camera-left={-2.5}
+        shadow-camera-right={2.5}
+        shadow-camera-top={2.5}
+        shadow-camera-bottom={-2.5}
+      />
       <directionalLight position={[-3, 2, -2]} intensity={0.35} color="#dfe8ee" />
       <pointLight position={[0, 3, -3]} intensity={0.4} color="#e8c98a" />
       <Environment resolution={256}>

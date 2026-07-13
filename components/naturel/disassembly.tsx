@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { motion, useScroll, useTransform, useSpring, type MotionValue } from "framer-motion";
 import { CapModel, ResponsiveFov, StudioLighting } from "@/components/naturel/procedural-cap";
+import { PostFX } from "@/components/naturel/post-fx";
 
 const PARTS = [
   {
@@ -101,10 +102,11 @@ export function Disassembly() {
 function ExplodedCanvas({ explode }: { explode: MotionValue<number> }) {
   return (
     <div className="absolute inset-0">
-      <Canvas camera={{ position: [0, 0.3, 6.8], fov: 26 }} dpr={[1, 1.75]}>
+      <Canvas camera={{ position: [0, 0.3, 6.8], fov: 26, near: 0.1, far: 20 }} dpr={[1, 1.75]} shadows="soft">
         <ResponsiveFov baseFov={26} baseAspect={1.7} />
         <StudioLighting />
         <ExplodedCap explode={explode} />
+        <PostFX focusDistance={0.32} bokehScale={1.4} />
       </Canvas>
     </div>
   );

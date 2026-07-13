@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { Sparkles } from "@react-three/drei";
 import { motion } from "framer-motion";
 import { CapModel, ResponsiveFov, StudioLighting } from "@/components/naturel/procedural-cap";
+import { PostFX } from "@/components/naturel/post-fx";
 
 type TimeOfDay = "morning" | "afternoon" | "golden" | "night";
 
@@ -37,14 +38,16 @@ export function Hero() {
     >
       <div className="absolute inset-0">
         <Canvas
-          camera={{ position: [0, 0.35, 6.4], fov: 26 }}
+          camera={{ position: [0, 0.35, 6.4], fov: 26, near: 0.1, far: 20 }}
           dpr={[1, 1.75]}
           gl={{ antialias: true }}
+          shadows="soft"
         >
           <ResponsiveFov baseFov={26} baseAspect={1.7} />
           <StudioLighting />
           <Sparkles count={60} scale={[5, 3, 5]} size={1.6} speed={0.15} opacity={0.35} color="#e9d9b8" />
           <CapModel rotationSpeed={0.08} scale={0.85} />
+          <PostFX focusDistance={0.3} bokehScale={1.5} />
         </Canvas>
       </div>
 
