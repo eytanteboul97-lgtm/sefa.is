@@ -30,6 +30,25 @@ const config: Config = {
           light: "#D4B87B",
         },
         pearl: "#FFFBF3",
+
+        // Naturel — the standalone luxury cap flagship at /naturel.
+        // Its own quiet, warm-neutral palette: never black, never saturated.
+        naturel: {
+          pearl: "#F8F4EC",
+          ivory: "#FBF9F4",
+          sand: "#D9C7AC",
+          "sand-dark": "#C2AC8A",
+          sea: "#E6DFCF",
+          champagne: "#EAD9BB",
+          linen: "#EFE8DA",
+          gold: "#B8975C",
+          stone: "#D1CABD",
+          driftwood: "#A6957A",
+          mist: "#F1F0EC",
+          snow: "#FFFFFF",
+          frost: "#E9EDEE",
+          ink: "#2B2620",
+        },
       },
       fontFamily: {
         // "FA" half of the wordmark + UI labels — modern, geometric, tech
@@ -82,6 +101,14 @@ const config: Config = {
           "0%, 100%": { filter: "brightness(1)" },
           "50%": { filter: "brightness(1.45)" },
         },
+        "naturel-breathe": {
+          "0%, 100%": { opacity: "0.85", transform: "scale(1)" },
+          "50%": { opacity: "1", transform: "scale(1.015)" },
+        },
+        "naturel-drift": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(1.5%, -2%)" },
+        },
       },
       animation: {
         marquee: "marquee 28s linear infinite",
@@ -92,6 +119,8 @@ const config: Config = {
         "float-slow": "float-slow 9s ease-in-out infinite",
         shimmer: "shimmer 3.5s linear infinite",
         "diamond-glint": "diamond-glint 3.2s ease-in-out infinite",
+        "naturel-breathe": "naturel-breathe 6s ease-in-out infinite",
+        "naturel-drift": "naturel-drift 40s ease-in-out infinite",
       },
     },
   },

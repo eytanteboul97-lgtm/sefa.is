@@ -1,0 +1,75 @@
+/* Naturel — styles scoped to the standalone /naturel flagship experience.
+   Deliberately isolated from Sefa's globals.css design system: this is a
+   different brand living at a different route. */
+
+.naturel-page {
+  background: #f8f4ec;
+  color: #2b2620;
+}
+
+.naturel-page ::selection {
+  background: #b8975c;
+  color: #f8f4ec;
+}
+
+.naturel-page :focus-visible {
+  outline: 2px solid #b8975c;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* A near-invisible film grain so flat pearl/sand fields never read as a
+   dead, digital flat tint — texture instead of noise. */
+.naturel-grain {
+  position: relative;
+}
+
+.naturel-grain::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: naturel-drift 40s ease-in-out infinite;
+}
+
+.naturel-serif {
+  font-family: var(--font-luxury);
+}
+
+.naturel-display {
+  font-family: var(--font-display);
+}
+
+.naturel-accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+}
+
+/* First-letter drop cap for editorial story copy. */
+.naturel-dropcap::first-letter {
+  font-family: var(--font-luxury);
+  font-size: 3.6em;
+  float: left;
+  line-height: 0.8;
+  padding-right: 0.08em;
+  padding-top: 0.05em;
+  color: #b8975c;
+}
+
+.naturel-hairline {
+  border-color: rgba(43, 38, 32, 0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .naturel-page *,
+  .naturel-page *::before,
+  .naturel-page *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
