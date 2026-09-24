@@ -186,3 +186,11 @@ Ce qui **bloque** une mise en ligne publique :
 - les chiffres DAJ/OECP 2024 (233,3 Md€, 60 %, 25 %) et leur source exacte ;
 - les tarifs (149 € HT/mois, 1 490 € HT/an, 99 € HT/mois fondateur) ;
 - les sources de données envisagées (BOAMP, TED) et la feuille de route.
+
+## Version en un seul fichier (`en-ligne/`)
+
+`en-ligne/index.html` est une version autonome du site (même contenu, veille
+BOAMP appelée directement depuis le navigateur). Le projet Netlify
+`elaborate-bienenstitch-0f9cb6` est prévu pour publier ce dossier
+automatiquement à chaque envoi sur la branche : base et publication =
+`ready-to-reply/en-ligne`, sans commande de build.
