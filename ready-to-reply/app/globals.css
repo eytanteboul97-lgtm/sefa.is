@@ -38,6 +38,26 @@
   .figure {
     @apply font-serif tabular-nums;
   }
+  /* Portrait du fondateur : arche de la couleur du fond de la photo, bords fondus. */
+  .portrait-arch {
+    background: #e3d3c7;
+    border-radius: 999px 999px 1.25rem 1.25rem;
+  }
+  .portrait-arch::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    width: 42%;
+    height: 36%;
+    border-right: 2px solid theme("colors.terracotta.DEFAULT");
+    border-bottom: 2px solid theme("colors.terracotta.DEFAULT");
+    border-bottom-right-radius: 1.25rem;
+  }
+  .portrait-fade {
+    -webkit-mask-image: radial-gradient(ellipse 52% 50% at 56% 42%, #000 52%, transparent 100%);
+    mask-image: radial-gradient(ellipse 52% 50% at 56% 42%, #000 52%, transparent 100%);
+  }
   .prose-legal h2 {
     @apply mt-10 text-2xl;
   }

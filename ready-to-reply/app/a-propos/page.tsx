@@ -36,22 +36,26 @@ export default function AboutPage() {
       />
 
       <Section labelledBy="fondateur-titre">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
-          <figure className="mx-auto w-full max-w-[22rem]">
-            <div className="relative aspect-[841/1590] max-h-[34rem] overflow-hidden rounded-2xl bg-sand lg:max-h-none">
-              <Image
-                src="/eytan-fondateur.jpg"
-                alt={`Portrait en noir et blanc d'${founder.firstName}, fondateur de Ready to Reply`}
-                fill
-                sizes="(min-width: 1024px) 22rem, 90vw"
-                className="object-cover object-top"
-              />
-            </div>
-            <figcaption className="mt-4">
-              <p className="font-semibold">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,23rem)_1fr] lg:gap-[4.5rem]">
+          <figure className="relative mx-auto w-full max-w-[20rem] pt-6 lg:max-w-[23rem]">
+            {/* Arche de la couleur du fond de la photo : le portrait s'y fond au lieu d'être posé en bloc. */}
+            <span aria-hidden="true" className="portrait-arch absolute bottom-[5.5rem] left-[9%] right-0 top-0" />
+            <Image
+              src="/eytan-fondateur-duo.jpg"
+              alt={`Portrait d'${founderDisplayName()}, fondateur de Ready to Reply`}
+              width={620}
+              height={1172}
+              sizes="(min-width: 1024px) 23rem, 20rem"
+              className="portrait-fade relative block h-auto max-h-[36rem] w-full object-cover object-top"
+            />
+            <figcaption className="relative -mt-9 pl-[9%]">
+              <p className="font-serif text-2xl leading-tight">
                 {founderDisplayName()} {!founder.lastName && <Placeholder>Nom à compléter</Placeholder>}
               </p>
-              <p className="text-sm text-ink-muted">{founder.role}</p>
+              <p className="mt-1.5 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-terracotta-deep">
+                <span aria-hidden="true" className="h-0.5 w-7 bg-terracotta" />
+                Fondateur
+              </p>
             </figcaption>
           </figure>
 
@@ -82,9 +86,9 @@ export default function AboutPage() {
             </ul>
             <blockquote className="mt-10 rounded-2xl bg-terracotta p-7 text-ivory sm:p-8">
               <p className="font-serif text-xl leading-relaxed">
-                « Cent plateformes. Cent identifiants. Des dossiers de cinquante pages qu&apos;on ne comprend qu&apos;à
-                moitié. C&apos;est le quotidien des PME qui répondent aux marchés publics. Je crée Ready to Reply pour y
-                mettre fin. »
+                « Trop de plateformes. Trop d&apos;identifiants. Trop de pages à lire pour savoir si un marché vaut le
+                coup. Les PME savent faire le travail : c&apos;est la réponse qui les épuise. Ready to Reply, c&apos;est
+                l&apos;outil que j&apos;aurais voulu avoir. »
               </p>
               <footer className="mt-4 text-sm">— {founderDisplayName()}, fondateur</footer>
             </blockquote>
