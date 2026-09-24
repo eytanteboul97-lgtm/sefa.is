@@ -1,0 +1,8 @@
+# Déployer ce dossier comme un site Netlify séparé : régler « Base directory »
+# sur `ready-to-reply` dans l'interface Netlify (ou décommenter `base`).
+[build]
+  # base = "ready-to-reply"
+  command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

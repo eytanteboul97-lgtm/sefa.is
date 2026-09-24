@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem; /* ancres sous l'en-tête fixe */
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    @apply font-serif text-ink;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-terracotta-deep;
+  }
+  ::selection {
+    @apply bg-terracotta-soft text-ink;
+  }
+}
+
+@layer components {
+  /* Petit titre en capitales au-dessus des titres de section (repris de la plaquette). */
+  .eyebrow {
+    @apply font-sans text-xs font-bold uppercase tracking-[0.16em] text-terracotta-deep;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-ivory shadow-card;
+  }
+  /* Chiffres de la maquette : serif, comme dans la plaquette. */
+  .figure {
+    @apply font-serif tabular-nums;
+  }
+  .prose-legal h2 {
+    @apply mt-10 text-2xl;
+  }
+  .prose-legal p,
+  .prose-legal li {
+    @apply mt-3 leading-relaxed text-ink-soft;
+  }
+  .prose-legal ul {
+    @apply mt-3 list-disc pl-5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
