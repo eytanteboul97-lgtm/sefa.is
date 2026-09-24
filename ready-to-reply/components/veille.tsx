@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { MarchesResponse } from "@/app/api/marches/route";
 import { buttonClasses } from "@/components/ui";
+import { AffinityScale, VerdictPill, toneBox, tonePhrase } from "@/components/verdict-tag";
 import { defaultProfile, parseProfile, type MarketType, type Profile, type ScoredNotice } from "@/lib/matching";
 import { cn } from "@/lib/utils";
 
@@ -114,6 +115,14 @@ export function Veille() {
             </p>
           )}
         </div>
+
+        <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border border-line bg-ivory px-4 py-3 text-sm leading-relaxed text-ink-muted">
+          <span>
+            <strong className="text-ink">Comment lire la note :</strong> l&apos;affinité, sur 100, mesure à quel point
+            l&apos;avis correspond à votre profil (métier, type de marché, montant, délai).
+          </span>
+          <AffinityScale />
+        </p>
 
         {state.kind === "ok" && results.length > 0 && (
           <div role="group" aria-label="Filtrer par avis" className="mt-4 flex flex-wrap gap-2">
@@ -344,20 +353,20 @@ function ProfileForm({
   );
 }
 
-const verdictStyle = {
-  go: { label: "Allez-y", box: "bg-terracotta text-ivory" },
-  maybe: { label: "À étudier", box: "bg-ochre-soft text-ink" },
-  pass: { label: "Passez", box: "bg-sand text-ink" },
-} as const;
 
 function NoticeCard({ n }: { n: ScoredNotice }) {
-  const v = verdictStyle[n.verdict];
   return (
     <li className="card overflow-hidden">
       <div className="grid gap-5 p-5 sm:grid-cols-[6.5rem_1fr] sm:p-6">
-        <div className={cn("flex flex-row items-center gap-3 rounded-xl px-4 py-3 sm:flex-col sm:justify-center sm:gap-1 sm:text-center", v.box)}>
-          <p className="figure text-3xl leading-none">{n.score}</p>
-          <p className="whitespace-nowrap text-[0.68rem] font-bold uppercase tracking-[0.08em]">{v.label}</p>
+        <div
+          aria-label={`Affinité ${n.score} sur 100`}
+          className={cn("flex flex-row items-center gap-3 rounded-xl px-4 py-3 sm:flex-col sm:justify-center sm:gap-1 sm:text-center", toneBox[n.verdict])}
+        >
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.12em]">Affinité</p>
+          <p className="figure text-3xl leading-none">
+            {n.score}
+            <span className="text-sm opacity-85">/100</span>
+          </p>
         </div>
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">
@@ -365,6 +374,10 @@ function NoticeCard({ n }: { n: ScoredNotice }) {
             {n.departments.length > 0 && ` · ${n.departments.join(", ")}`}
           </p>
           <h3 className="mt-1.5 break-words text-lg leading-snug sm:text-xl">{n.title}</h3>
+          <p className="mt-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-sm text-ink-soft">
+            <VerdictPill tone={n.verdict} />
+            {tonePhrase[n.verdict]}
+          </p>
           <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
             <div className="flex gap-1.5">
               <dt className="text-ink-muted">Date limite :</dt>
@@ -388,7 +401,7 @@ function NoticeCard({ n }: { n: ScoredNotice }) {
       </div>
       <details className="group border-t border-line">
         <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-5 py-3 text-sm font-semibold text-terracotta-deep sm:px-6 [&::-webkit-details-marker]:hidden">
-          Pourquoi cette note, et le détail de l&apos;avis
+          Pourquoi {n.score}/100 ? Le calcul et le détail de l&apos;avis
           <span aria-hidden="true" className="transition-transform group-open:rotate-45">
             +
           </span>

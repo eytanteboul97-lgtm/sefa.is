@@ -1,6 +1,7 @@
 import { MockupLabel } from "@/components/labels";
-import { VerdictTag } from "@/components/verdict-tag";
-import { priceRange, weeklyMarkets } from "@/content/demo";
+import { AffinityScale, VerdictTag, toneBar } from "@/components/verdict-tag";
+import { cn } from "@/lib/utils";
+import { priceRange, verdict, weeklyMarkets } from "@/content/demo";
 
 const k = (n: number) => Math.round(n / 1000);
 
@@ -16,17 +17,24 @@ export function HeroMockup() {
       <div className="card animate-rise p-5 sm:p-6" style={{ animationDelay: "120ms" }}>
         <div className="flex items-baseline justify-between gap-4 border-b border-ink pb-3">
           <p className="text-[0.95rem] font-bold">Vos marchés de la semaine</p>
-          <p className="text-xs text-ink-muted">Notés sur 100 pour vous</p>
+          <p className="text-xs text-ink-muted">Affinité avec votre entreprise</p>
         </div>
         <ul className="divide-y divide-line">
           {weeklyMarkets.map((m) => (
             <li key={m.title} className="flex items-center gap-4 py-3">
-              <span className="figure w-8 text-2xl text-terracotta-deep">{m.score}</span>
+              <span className="w-[3.7rem] shrink-0 leading-none" aria-label={`Affinité ${m.score} sur 100`}>
+                <span className="figure text-[1.35rem]">{m.score}</span>
+                <span className="text-[0.7rem] text-ink-muted">/100</span>
+                <span aria-hidden="true" className="mt-1.5 block h-1 overflow-hidden rounded-full bg-sand">
+                  <span className={cn("block h-full rounded-full", toneBar[verdict(m.score).tone])} style={{ width: `${m.score}%` }} />
+                </span>
+              </span>
               <span className="flex-1 text-sm font-medium">{m.title}</span>
               <VerdictTag score={m.score} />
             </li>
           ))}
         </ul>
+        <AffinityScale className="flex w-full border-t border-line pt-3" />
       </div>
 
       <div
@@ -38,7 +46,7 @@ export function HeroMockup() {
             82<span className="text-base text-tan">/100</span>
           </p>
           <div>
-            <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-tan">Score d&apos;affinité · Allez-y</p>
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-tan">Affinité · Allez-y</p>
             <p className="text-sm font-medium">Éclairage LED — gymnase</p>
           </div>
         </div>

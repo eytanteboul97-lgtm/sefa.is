@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useId, useRef, useState } from "react";
 import { FictionalLabel } from "@/components/labels";
 import { buttonClasses, Arrow } from "@/components/ui";
+import { toneBox, tonePhrase } from "@/components/verdict-tag";
 import {
   consultation,
   documents,
@@ -364,18 +365,17 @@ function Score() {
         <div
           className={cn(
             "flex flex-col justify-center rounded-2xl px-8 py-6 text-center lg:w-56",
-            v.tone === "go" && "bg-terracotta text-ivory",
-            v.tone === "maybe" && "bg-ochre-soft text-ink",
-            v.tone === "pass" && "bg-ink text-cream",
+            toneBox[v.tone],
           )}
           aria-live="polite"
         >
-          <p className="figure text-6xl leading-none">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] opacity-90">Affinité</p>
+          <p className="figure mt-2 text-6xl leading-none">
             {total}
             <span className="text-xl">/100</span>
           </p>
           <p className="mt-2 text-sm font-bold uppercase tracking-[0.14em]">{v.label}</p>
-          <p className="mt-1 text-xs opacity-90">Score d&apos;affinité illustratif</p>
+          <p className="mt-2 text-sm">{tonePhrase[v.tone]}</p>
         </div>
 
         <div>
@@ -407,14 +407,20 @@ function Score() {
       </div>
 
       <div className="mt-8 grid gap-3 text-sm sm:grid-cols-3">
-        <p className="rounded-lg bg-terracotta-soft px-4 py-2.5 text-terracotta-deep">
-          <strong>80 et plus</strong> · allez-y
+        <p className="rounded-lg bg-sage-soft px-4 py-2.5 text-sage">
+          <strong>80 à 100 · Allez-y</strong>
+          <br />
+          Très bon match, à regarder en priorité
         </p>
         <p className="rounded-lg bg-ochre-soft px-4 py-2.5 text-ochre">
-          <strong>60 à 79</strong> · à étudier
+          <strong>60 à 79 · À étudier</strong>
+          <br />
+          Correspond en partie, à vérifier
         </p>
         <p className="rounded-lg bg-sand px-4 py-2.5 text-ink-soft">
-          <strong>Moins de 60</strong> · passez
+          <strong>0 à 59 · Passez</strong>
+          <br />
+          Peu adapté à votre entreprise
         </p>
       </div>
       <p className="mt-5 max-w-3xl text-sm leading-relaxed text-ink-muted">
