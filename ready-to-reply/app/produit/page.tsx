@@ -2,7 +2,7 @@ import { FinalCta } from "@/components/final-cta";
 import Link from "next/link";
 import { StatusBadge, type FeatureStatus } from "@/components/labels";
 import { PageHero } from "@/components/page-hero";
-import { Arrow, ButtonLink, Section, SectionHeading } from "@/components/ui";
+import { Arrow, ButtonLink, Section, SectionHeading, buttonClasses } from "@/components/ui";
 import { features, productStatus } from "@/content/product";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -14,6 +14,7 @@ export const metadata = pageMetadata({
 });
 
 const legend: { status: FeatureStatus; text: string }[] = [
+  { status: "test", text: "utilisable dès aujourd'hui, en version de test" },
   { status: "v1", text: "en cours de conception, prévu pour la première version (V1)" },
   { status: "later", text: "envisagé après la première version" },
 ];
@@ -51,6 +52,11 @@ export default function ProductPage() {
               <h3 className="mt-5 text-2xl">{f.title}</h3>
               <p className="mt-3 font-medium leading-relaxed">{f.description}</p>
               <p className="mt-3 leading-relaxed text-ink-soft">{f.detail}</p>
+              {f.tryHref && (
+                <Link href={f.tryHref} className={buttonClasses("primary", "mt-5 self-start")}>
+                  Essayer la veille <Arrow />
+                </Link>
+              )}
               {f.inDemo && (
                 <Link
                   href="/#demo"

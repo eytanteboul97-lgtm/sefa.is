@@ -17,7 +17,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Les fonctions sont-elles déjà disponibles ?",
-    a: "Pas encore. Ready to Reply est un projet en construction. Seule la démonstration présentée sur ce site est utilisable, sur un marché fictif. La première version sera construite et testée avec des entreprises pilotes du secteur de l'éclairage.",
+    a: "En partie. La veille est utilisable en version de test : elle interroge les avis réellement publiés au BOAMP et les trie selon votre profil. Les autres fonctions (fiche complète, coffre-fort, préparation, suivi) sont en conception et ne sont montrées que dans la démonstration, sur un marché fictif.",
   },
   {
     q: "Comment sont traités les documents et les données de l'entreprise ?",

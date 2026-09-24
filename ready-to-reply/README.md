@@ -13,9 +13,9 @@ propres dépendances, son propre déploiement.
 
 ## État réel du produit (à lire avant toute modification)
 
-Au moment de la création du site (septembre 2026), **aucune fonction de la
-plateforme n'existe** : le dépôt ne contient aucun code de veille, de fiche
-marché, de score, de coffre-fort ni de préparation de dossier. Le site en tient
+Septembre 2026 : **une seule fonction est réellement utilisable, la veille
+BOAMP** (`/veille`, version de test). Tout le reste (fiche marché complète,
+coffre-fort, préparation, suivi) n'existe qu'en maquette. Le site en tient
 compte partout :
 
 | Élément | Statut sur le site |
@@ -23,7 +23,8 @@ compte partout :
 | Site de présentation | Fonctionnel |
 | Démonstration interactive (marché fictif) | Fonctionnelle, **maquette** — mention « Exemple fictif — données illustratives » |
 | Formulaire pilote / démo / rappel | Fonctionnel, **transmission à brancher** (voir plus bas) |
-| Veille, fiche de synthèse, vigilance, score, coffre-fort, préparation | « En conception · V1 » |
+| **Veille BOAMP** (`/veille`) : avis réels, filtrés et notés selon un profil | **Version de test** |
+| Fiche de synthèse, vigilance, score complet, coffre-fort, préparation | « En conception · V1 » |
 | Fourchette de prix, suivi des candidatures | « Envisagé · après la V1 » |
 | Paiement, comptes utilisateurs | Absents, volontairement |
 
@@ -60,6 +61,32 @@ npm start           # sert le build de production
 Ne pas lancer `npm run dev` et `npm start` en même temps dans ce dossier :
 les deux écrivent dans `.next/`.
 
+## Veille BOAMP (version de test)
+
+- `lib/boamp.ts` interroge côté serveur l'API ouverte du BOAMP (DILA, jeu
+  « boamp » sur Opendatasoft, API Explore v2.1) : avis publiés sur la période
+  choisie, recherche plein texte sur les mots-clés (repli automatique sur un
+  filtrage local si l'API refuse la requête), 600 avis maximum par recherche,
+  cache de 15 minutes. Les avis d'attribution, rectificatifs et annulations sont
+  écartés.
+- `lib/matching.ts` : profil (mots-clés, types, départements, montant minimum,
+  période) et score sur 100 expliqué ligne par ligne : métier 40, type 20,
+  montant 20, délai 20. Avis exclus : aucun mot-clé, hors zone, date limite
+  passée, montant connu inférieur au minimum. Un avis sans montant est
+  conservé et signalé.
+- `app/api/marches/route.ts` : `GET /api/marches?keywords=…&types=…&departments=…&minAmount=…&days=…`.
+- `components/veille.tsx` : écran de profil et de résultats. Le profil est
+  mémorisé dans le navigateur uniquement (aucun compte).
+
+**À vérifier sur les vraies données :** le connecteur a été écrit d'après la
+documentation publique du jeu de données et testé contre une copie simulée
+de l'API, l'environnement de développement n'ayant pas accès au BOAMP. Au
+premier déploiement, ouvrir `/veille` et contrôler que les avis, dates,
+départements et liens remontent correctement. Les noms de champs sont lus de
+façon tolérante (`normalize()` dans `lib/boamp.ts`) : c'est le seul endroit à
+ajuster si un champ s'appelle autrement. Le montant est extrait du détail de
+l'avis (`donnees`) quand il y figure ; beaucoup d'avis ne l'indiquent pas.
+
 ## Configuration (variables d'environnement)
 
 Voir `.env.example`. Aucune valeur secrète n'est présente dans le code.
@@ -69,6 +96,7 @@ Voir `.env.example`. Aucune valeur secrète n'est présente dans le code.
 | `NEXT_PUBLIC_SITE_URL` | URL publique (canonique, Open Graph, sitemap) | `http://localhost:3000` est utilisé : **à définir avant la mise en ligne** |
 | `NEXT_PUBLIC_ALLOW_INDEXING` | `true` pour autoriser l'indexation | `robots.txt` interdit l'indexation (volontaire tant que les textes légaux ne sont pas prêts) |
 | `CONTACT_WEBHOOK_URL` | Reçoit les demandes du formulaire en POST JSON | Dev : demande affichée dans la console, le formulaire dit « non transmise ». Prod : réponse 503, le formulaire dit « n'a pas pu être envoyée » |
+| `BOAMP_API_URL` | Adresse de l'API BOAMP (facultatif, pour un miroir ou des tests) | API officielle de la DILA |
 | `CONTACT_WEBHOOK_SECRET` | Jeton envoyé en `Authorization: Bearer …` au webhook | Pas d'en-tête d'authentification |
 
 ### Brancher la réception des demandes
@@ -124,7 +152,7 @@ Les champs laissés à `null` dans `lib/site.ts` s'affichent comme
 ## Pages
 
 `/` accueil · `/comment-ca-marche` · `/produit` · `/tarifs` · `/a-propos` ·
-`/contact` · `/mentions-legales` · `/confidentialite` · `/cookies` · 404 ·
+`/contact` · `/veille` (version de test) · `/mentions-legales` · `/confidentialite` · `/cookies` · 404 ·
 `/sitemap.xml` · `/robots.txt` · `/opengraph-image` (image de partage générée).
 
 ## Déploiement (Netlify)

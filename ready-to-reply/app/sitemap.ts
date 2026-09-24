@@ -8,6 +8,7 @@ const routes = [
   "/tarifs",
   "/a-propos",
   "/contact",
+  "/veille",
   "/mentions-legales",
   "/confidentialite",
   "/cookies",

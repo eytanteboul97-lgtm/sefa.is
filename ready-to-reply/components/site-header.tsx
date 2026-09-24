@@ -57,7 +57,7 @@ export function SiteHeader() {
           <Logo className="w-[8.5rem] sm:w-[9.5rem]" title="" />
         </Link>
 
-        <nav aria-label="Navigation principale" className="hidden lg:block">
+        <nav aria-label="Navigation principale" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {nav.map((item) => (
               <li key={item.href}>
@@ -65,7 +65,7 @@ export function SiteHeader() {
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn(
-                    "rounded-full px-4 py-2 text-[0.93rem] font-medium text-ink-soft transition-colors hover:text-ink",
+                    "whitespace-nowrap rounded-full px-4 py-2 text-[0.93rem] font-medium text-ink-soft transition-colors hover:text-ink",
                     isActive(item.href) && "bg-sand text-ink",
                   )}
                 >
@@ -77,13 +77,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href={primaryCta.href} className={buttonClasses("primary", "hidden px-5 py-2.5 sm:inline-flex")}>
+          <Link href={primaryCta.href} className={buttonClasses("primary", "hidden whitespace-nowrap px-5 py-2.5 sm:inline-flex")}>
             {primaryCta.label}
           </Link>
           <button
             ref={toggleRef}
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-sand lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-sand xl:hidden"
             aria-expanded={open}
             aria-controls="menu-mobile"
             onClick={() => setOpen((v) => !v)}
@@ -104,7 +104,7 @@ export function SiteHeader() {
         id="menu-mobile"
         ref={panelRef}
         hidden={!open}
-        className="h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-cream lg:hidden"
+        className="h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-cream xl:hidden"
       >
         <nav aria-label="Navigation mobile" className="px-5 pb-10 pt-4 sm:px-8">
           <ul className="divide-y divide-line">

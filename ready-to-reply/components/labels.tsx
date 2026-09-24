@@ -33,9 +33,10 @@ export function FictionalLabel({ className }: { className?: string }) {
   );
 }
 
-export type FeatureStatus = "demo" | "v1" | "later";
+export type FeatureStatus = "test" | "demo" | "v1" | "later";
 
 export const statusLabels: Record<FeatureStatus, string> = {
+  test: "Version de test disponible",
   demo: "Démonstration sur ce site",
   v1: "En conception · V1",
   later: "Envisagé · après la V1",
@@ -46,7 +47,7 @@ export function StatusBadge({ status, className }: { status: FeatureStatus; clas
     <span
       className={cn(
         "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold",
-        status === "demo" && "bg-sage-soft text-sage",
+        (status === "demo" || status === "test") && "bg-sage-soft text-sage",
         status === "v1" && "bg-terracotta-soft text-terracotta-deep",
         status === "later" && "bg-sand text-ink-soft",
         className,

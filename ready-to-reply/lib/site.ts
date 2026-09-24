@@ -47,10 +47,11 @@ export const nav = [
   { href: "/produit", label: "Le produit" },
   { href: "/tarifs", label: "Tarifs" },
   { href: "/a-propos", label: "À propos" },
+  { href: "/veille", label: "Veille (test)" },
 ] as const;
 
 /**
- * Action principale. Aucune fonction du produit n'est encore utilisable :
+ * Action principale. Seule la veille est utilisable (version de test) :
  * l'action cohérente est de rejoindre la phase pilote (ou demander un échange).
  */
 export const primaryCta = { href: "/contact", label: "Rejoindre le pilote" } as const;

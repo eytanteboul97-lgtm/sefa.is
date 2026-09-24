@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FinalCta } from "@/components/final-cta";
 import { FictionalLabel, StatusBadge } from "@/components/labels";
 import { PageHero } from "@/components/page-hero";
@@ -74,6 +75,12 @@ export default function HowItWorksPage() {
             <h3 className="font-sans text-sm font-bold uppercase tracking-[0.14em] text-sage">Disponible aujourd&apos;hui</h3>
             <ul className="mt-4 space-y-2 leading-relaxed">
               <li>Ce site de présentation.</li>
+              <li>
+                <Link href="/veille" className="font-semibold underline underline-offset-2">
+                  La veille des avis du BOAMP
+                </Link>{" "}
+                (version de test) : avis réels, triés et notés selon votre profil.
+              </li>
               <li>Une démonstration interactive sur un marché fictif.</li>
               <li>Un formulaire pour rejoindre la phase pilote ou demander un échange.</li>
             </ul>
@@ -81,7 +88,7 @@ export default function HowItWorksPage() {
           <div className="rounded-2xl border border-line bg-cream p-7">
             <h3 className="font-sans text-sm font-bold uppercase tracking-[0.14em] text-ink-muted">Pas encore disponible</h3>
             <ul className="mt-4 space-y-2 leading-relaxed text-ink-soft">
-              <li>Aucune fonction de la plateforme : veille, fiche marché, score, coffre-fort, préparation, suivi.</li>
+              <li>La fiche marché complète (lecture des documents de la consultation), le coffre-fort, la préparation du dossier et le suivi.</li>
               <li>Aucun compte utilisateur, aucun paiement.</li>
             </ul>
           </div>

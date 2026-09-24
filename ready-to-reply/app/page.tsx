@@ -86,7 +86,12 @@ export default function HomePage() {
                 {demoCta.label}
               </ButtonLink>
             </div>
-            <p className="mt-5 text-sm text-ink-muted">
+            <p className="mt-5 text-sm">
+              <Link href="/veille" className="font-semibold text-terracotta-deep underline underline-offset-4">
+                Nouveau : essayez la veille sur les vrais avis du BOAMP (version de test)
+              </Link>
+            </p>
+            <p className="mt-2 text-sm text-ink-muted">
               Pour commencer : les entreprises de l&apos;électricité et de l&apos;éclairage.
             </p>
           </div>
@@ -156,7 +161,7 @@ export default function HomePage() {
           id="demo-titre"
           eyebrow="Démonstration interactive"
           title="Cinquante pages de consultation. Une page à lire."
-          intro="Parcourez la fiche d'un marché fictif, telle que Ready to Reply veut la présenter. C'est une maquette cliquable : la plateforme elle-même est en construction et aucune de ses fonctions n'est encore utilisable."
+          intro="Parcourez la fiche d'un marché fictif, telle que Ready to Reply veut la présenter. C'est une maquette cliquable : ces fonctions sont en conception. Seule la veille des avis est déjà utilisable, en version de test."
         />
         <div className="mt-12">
           <Demo />

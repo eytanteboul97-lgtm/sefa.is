@@ -1,14 +1,14 @@
 import type { FeatureStatus } from "@/components/labels";
 
 /**
- * État réel du produit (septembre 2026) : aucune fonction de la plateforme
- * n'est encore utilisable. Seule la démonstration interactive de ce site
- * fonctionne, sur un marché fictif. Mettre à jour les statuts ci-dessous à
+ * État réel du produit (septembre 2026) : seule la veille BOAMP (/veille)
+ * est utilisable, en version de test. Les autres fonctions ne sont montrées
+ * que dans la démonstration, sur un marché fictif. Mettre à jour les statuts à
  * mesure que les fonctions sont réellement livrées — jamais avant.
  */
 export const productStatus = {
   summary:
-    "Ready to Reply est en construction. Aucune fonction de la plateforme n'est encore utilisable : ce site présente le projet et une démonstration sur un marché fictif.",
+    "Ready to Reply est en construction. Une première brique est utilisable en version de test : la veille des avis du BOAMP, triés et notés selon votre profil. Les autres fonctions sont en conception ; la démonstration de ce site les montre sur un marché fictif.",
 };
 
 export const steps = [
@@ -19,7 +19,7 @@ export const steps = [
     long: "Les annonces sont publiées sur de nombreuses plateformes. Ready to Reply veut les rassembler et ne garder que celles qui correspondent à votre entreprise : votre métier, les départements où vous intervenez, des montants à votre portée.",
     example:
       "Un distributeur d'éclairage lyonnais reçoit chaque semaine une courte sélection : éclairage LED d'un gymnase, maintenance de l'éclairage public, luminaires pour des écoles.",
-    status: "v1" as FeatureStatus,
+    status: "test" as FeatureStatus,
   },
   {
     n: "02",
@@ -56,13 +56,16 @@ export const features: {
   status: FeatureStatus;
   /** Montré, sous forme de maquette, dans la démonstration interactive. */
   inDemo?: boolean;
+  /** Lien vers la fonction utilisable, quand elle existe. */
+  tryHref?: string;
 }[] = [
   {
     title: "Veille et filtrage des appels d'offres",
     description: "Les annonces de votre métier, de votre zone et de votre taille, rassemblées au même endroit.",
     detail:
       "Sources envisagées : les avis publiés au BOAMP (bulletin officiel des annonces des marchés publics) et, pour l'Europe, TED (le journal des marchés européens). La couverture des autres plateformes reste à étudier.",
-    status: "v1",
+    tryHref: "/veille",
+    status: "test",
   },
   {
     title: "Fiche de synthèse",
@@ -82,7 +85,7 @@ export const features: {
     title: "Score d'affinité",
     description: "Une note sur 100 calculée pour votre entreprise, et un avis franc.",
     detail:
-      "La note aide à trier les marchés ; elle ne garantit ni la pertinence d'une candidature, ni son succès. La méthode sera construite et validée avec les entreprises pilotes.",
+      "La note aide à trier les marchés ; elle ne garantit ni la pertinence d'une candidature, ni son succès. Une version simple (mots-clés, type, montant, délai) est utilisable dans la veille de test ; la version complète sera construite avec les entreprises pilotes.",
     status: "v1",
     inDemo: true,
   },
