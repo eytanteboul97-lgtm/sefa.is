@@ -358,6 +358,41 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
 .dlg p{margin-top:.6rem;color:var(--ink-soft)}
 .dlg .warnbox{margin-top:1rem;border:1px solid rgba(122,88,16,.3);background:var(--ochre-soft);border-radius:.75rem;padding:1rem;font-size:.875rem}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Veille */
+.vgrid{margin-top:2.5rem;display:grid;grid-template-columns:20rem minmax(0,1fr);gap:2.5rem;align-items:start}
+@media (max-width:1023px){.vgrid{grid-template-columns:minmax(0,1fr)}}
+.vform{padding:1.5rem;display:grid;gap:1.25rem;min-width:0}
+@media (min-width:1024px){.vform{position:sticky;top:5.5rem}}
+.vchips{margin-top:.75rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.vchips li{display:inline-flex;align-items:center;gap:.15rem;background:var(--sand);border-radius:999px;padding:.2rem .2rem .2rem .75rem;font-size:.875rem}
+.vchips button{width:1.75rem;height:1.75rem;border-radius:50%;border:0;background:transparent;cursor:pointer;color:var(--ink-muted)}
+.vchips button:hover{background:var(--line);color:var(--ink)}
+.vfilters{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.5rem}
+.vfilters button{min-height:2.5rem;border-radius:999px;padding:0 1rem;font-weight:600;font-size:.875rem;border:1px solid var(--line);background:var(--ivory);color:var(--ink-soft);cursor:pointer}
+.vfilters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ivory)}
+.vlist{margin-top:1.5rem;display:grid;gap:1rem}
+.vcard{overflow:hidden}
+.vtop{display:grid;grid-template-columns:6.5rem minmax(0,1fr);gap:1.25rem;padding:1.25rem 1.5rem}
+@media (max-width:640px){.vtop{grid-template-columns:minmax(0,1fr)}}
+.vscore{border-radius:.75rem;padding:.75rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+@media (max-width:640px){.vscore{flex-direction:row;gap:.75rem;justify-content:flex-start}}
+.vscore .figure{font-size:1.9rem;line-height:1}
+.vscore .lab{font-size:.66rem;white-space:nowrap;letter-spacing:.08em}
+.vbuyer{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
+.vtitle{margin-top:.35rem;font-size:1.2rem;line-height:1.35;overflow-wrap:anywhere}
+.vmeta{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.25rem 1.5rem;font-size:.875rem}
+.vmeta dt{display:inline;color:var(--ink-muted)}.vmeta dd{display:inline;margin:0 0 0 .3rem;font-weight:500}
+.vcard details{border-top:1px solid var(--line)}
+.vcard summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;padding:.8rem 1.5rem;font-size:.875rem;font-weight:600;color:var(--terra-deep)}
+.vcard summary::-webkit-details-marker{display:none}
+.vdet{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding:.5rem 1.5rem 1.5rem;background:rgba(247,238,229,.5)}
+@media (max-width:767px){.vdet{grid-template-columns:minmax(0,1fr)}}
+.vrs li{font-size:.875rem;margin-top:.6rem}
+.vrs .row{display:flex;justify-content:space-between;gap:.75rem}
+.vinfo div{display:grid;grid-template-columns:8rem minmax(0,1fr);gap:.75rem;font-size:.875rem;margin-top:.4rem}
+.vinfo dt{color:var(--ink-muted)}.vinfo dd{margin:0;overflow-wrap:anywhere}
+.vskel{height:7rem;border-radius:1rem;background:var(--sand);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.5}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -380,6 +415,7 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
       <a href="#produit">Le produit</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#a-propos">À propos</a>
+      <a href="#veille">Veille (test)</a>
     </nav>
     <div style="display:flex;align-items:center;gap:.5rem">
       <a class="btn btn-dark" href="#contact">Rejoindre le pilote</a>
@@ -397,6 +433,7 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
         <li><a class="big" href="#produit">Le produit</a></li>
         <li><a class="big" href="#tarifs">Tarifs</a></li>
         <li><a class="big" href="#a-propos">À propos</a></li>
+        <li><a class="big" href="#veille">Veille (test)</a></li>
       </ul>
       <a class="btn btn-dark" href="#contact" style="width:100%;margin-top:1.5rem">Rejoindre le pilote</a>
       <p class="small muted" style="text-align:center;margin-top:1rem">Projet en construction · phase pilote en préparation</p>
@@ -415,7 +452,8 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
         <a class="btn btn-dark" href="#contact">Rejoindre le pilote <span aria-hidden="true">→</span></a>
         <a class="btn btn-line" href="#demo">Voir la démonstration</a>
       </div>
-      <p class="small muted" style="margin-top:1.25rem">Pour commencer : les entreprises de l'électricité et de l'éclairage.</p>
+      <p class="small" style="margin-top:1.25rem"><a class="link" href="#veille">Nouveau : essayez la veille sur les vrais avis du BOAMP (version de test)</a></p>
+      <p class="small muted" style="margin-top:.5rem">Pour commencer : les entreprises de l'électricité et de l'éclairage.</p>
     </div>
     <figure style="margin:0" class="rise">
       <div class="card market">
@@ -488,13 +526,55 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
     </div>
   </section>
 
+  <!-- VEILLE (version de test, données réelles du BOAMP) -->
+  <section id="veille" aria-labelledby="t-veille">
+    <div class="wrap">
+      <div style="max-width:44rem">
+        <p class="pill ok" style="font-size:.75rem">Version de test · données réelles du BOAMP</p>
+        <h2 class="h2" id="t-veille">Vos marchés de la semaine</h2>
+        <p class="lede">Les avis de marchés publiés au BOAMP, triés pour votre entreprise. Ajustez votre profil : la sélection et les notes se recalculent.</p>
+      </div>
+      <div class="vgrid">
+        <form id="vprofile" class="card vform" aria-label="Profil de votre entreprise">
+          <div><h3 style="font-size:1.25rem">Votre profil</h3><p class="xs muted" style="margin-top:.25rem">Mémorisé dans ce navigateur uniquement.</p></div>
+          <div>
+            <label class="f" for="vkw">Mots-clés de votre métier</label>
+            <ul id="vchips" class="vchips" aria-label="Mots-clés retenus"></ul>
+            <div style="display:flex;gap:.5rem;margin-top:.75rem"><input class="inp" style="margin:0;padding:.55rem .8rem" id="vkw" maxlength="40" placeholder="ex. éclairage public"><button type="button" class="btn btn-line" id="vkw-add" style="min-height:2.5rem;padding:.5rem 1rem">Ajouter</button></div>
+          </div>
+          <fieldset><legend>Type de marché</legend>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-top:.6rem" class="small">
+              <label class="consent" style="align-items:center"><input type="checkbox" name="vtype" id="vt-f" value="FOURNITURES">Fournitures</label>
+              <label class="consent" style="align-items:center"><input type="checkbox" name="vtype" id="vt-t" value="TRAVAUX">Travaux</label>
+              <label class="consent" style="align-items:center"><input type="checkbox" name="vtype" id="vt-s" value="SERVICES">Services</label>
+            </div>
+          </fieldset>
+          <div><label class="f" for="vdep">Départements</label><input class="inp" style="padding:.55rem .8rem" id="vdep" placeholder="Toute la France" aria-describedby="vdep-hint"><p class="hint xs" id="vdep-hint">Laisser vide pour toute la France, ou saisir des numéros : 69, 01, 38</p></div>
+          <div><label class="f" for="vmin">Montant minimum</label><select class="inp" style="padding:.55rem .8rem" id="vmin"><option value="0">Pas de minimum</option><option value="40000">40 000 € HT et plus</option><option value="100000">100 000 € HT et plus</option><option value="250000">250 000 € HT et plus</option><option value="500000">500 000 € HT et plus</option></select></div>
+          <div><label class="f" for="vdays">Période</label><select class="inp" style="padding:.55rem .8rem" id="vdays"><option value="7">Avis des 7 derniers jours</option><option value="14">Avis des 14 derniers jours</option><option value="21">Avis des 21 derniers jours</option><option value="30">Avis des 30 derniers jours</option></select></div>
+          <button type="submit" class="btn btn-dark" id="vgo">Mettre à jour ma sélection</button>
+          <button type="button" class="link small" id="vreset" style="background:none;border:0;cursor:pointer">Revenir au profil de départ</button>
+        </form>
+        <div style="min-width:0">
+          <p id="vsummary" class="small soft" aria-live="polite">Recherche dans les avis du BOAMP…</p>
+          <div id="vfilters" class="vfilters" role="group" aria-label="Filtrer par avis" hidden></div>
+          <ol id="vlist" class="vlist"></ol>
+        </div>
+      </div>
+      <div class="small muted" style="margin-top:3rem;border-top:1px solid var(--line);padding-top:1.5rem;display:grid;gap:.5rem;max-width:56rem">
+        <p>Source : Bulletin officiel des annonces des marchés publics (BOAMP), données ouvertes publiées par la DILA sous licence ouverte. Ready to Reply est un service indépendant, sans lien officiel avec la DILA ni avec les acheteurs.</p>
+        <p>Limites de cette version : la recherche porte sur l'objet et les descripteurs des avis, pas encore sur les documents de la consultation ; le montant n'est connu que lorsque l'avis l'indique ; seuls les avis publiés au BOAMP sont couverts. Le score est une aide au tri, pas une garantie.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- DÉMO -->
   <section id="demo" class="sandbg" aria-labelledby="t-demo">
     <div class="wrap">
       <div style="max-width:42rem">
         <p class="eyebrow">Démonstration interactive</p>
         <h2 class="h2" id="t-demo">Cinquante pages de consultation. Une page à lire.</h2>
-        <p class="lede">Parcourez la fiche d'un marché fictif, telle que Ready to Reply veut la présenter. C'est une maquette cliquable : la plateforme elle-même est en construction et aucune de ses fonctions n'est encore utilisable.</p>
+        <p class="lede">Parcourez la fiche d'un marché fictif, telle que Ready to Reply veut la présenter. C'est une maquette cliquable : ces fonctions sont en conception. Seule la veille des avis est déjà utilisable, en version de test.</p>
       </div>
       <div class="card demo">
         <div class="demo-head">
@@ -690,7 +770,7 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
         <div><span class="pill st-later">Envisagé · après la V1</span> envisagé plus tard</div>
       </div>
       <ul class="features">
-        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Veille et filtrage des appels d'offres</h3><p class="d">Les annonces de votre métier, de votre zone et de votre taille, rassemblées au même endroit.</p><p class="x">Sources envisagées : les avis publiés au BOAMP (bulletin officiel des annonces des marchés publics) et, pour l'Europe, TED (le journal des marchés européens). La couverture des autres plateformes reste à étudier.</p></li>
+        <li class="card"><span class="pill ok">Version de test disponible</span><h3>Veille et filtrage des appels d'offres</h3><p class="d">Les annonces de votre métier, de votre zone et de votre taille, rassemblées au même endroit.</p><p class="x">Sources envisagées : les avis publiés au BOAMP (bulletin officiel des annonces des marchés publics) et, pour l'Europe, TED (le journal des marchés européens). La couverture des autres plateformes reste à étudier.</p><a class="btn btn-dark" style="margin-top:1rem;align-self:flex-start" href="#veille">Essayer la veille</a></li>
         <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Fiche de synthèse</h3><p class="d">Une consultation de plusieurs dizaines de pages résumée en une page claire.</p><p class="x">Objet, acheteur, montant, durée, critères de notation, dates clés.</p><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
         <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Points de vigilance</h3><p class="d">Les clauses qui peuvent faire écarter une offre, signalées en clair.</p><p class="x">Visite obligatoire, variantes interdites, pièces exigées, pénalités. La lecture du règlement complet reste indispensable.</p><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
         <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Score d'affinité</h3><p class="d">Une note sur 100 calculée pour votre entreprise, et un avis franc.</p><p class="x">La note aide à trier les marchés ; elle ne garantit ni la pertinence d'une candidature, ni son succès. La méthode sera construite et validée avec les entreprises pilotes.</p><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
@@ -702,11 +782,11 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
       <div class="state">
         <div style="border:1px solid rgba(51,101,63,.3);background:var(--sage-soft)">
           <p class="lab" style="color:var(--sage)">Disponible aujourd'hui</p>
-          <ul><li>Ce site de présentation.</li><li>Une démonstration interactive sur un marché fictif.</li></ul>
+          <ul><li>Ce site de présentation.</li><li>Une démonstration interactive sur un marché fictif.</li><li><a class="link" href="#veille">La veille des avis du BOAMP</a> (version de test).</li></ul>
         </div>
         <div style="border:1px solid var(--line);background:var(--ivory)">
           <p class="lab muted">Pas encore disponible</p>
-          <ul class="soft"><li>Aucune fonction de la plateforme : veille, fiche marché, score, coffre-fort, préparation, suivi.</li><li>Aucun compte utilisateur, aucun paiement.</li></ul>
+          <ul class="soft"><li>La fiche marché complète, le coffre-fort, la préparation du dossier et le suivi.</li><li>Aucun compte utilisateur, aucun paiement.</li></ul>
         </div>
       </div>
       <ol class="roadmap">
@@ -803,7 +883,7 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
         <details><summary>Quelles étapes la plateforme aide-t-elle à préparer ?<span class="plus" aria-hidden="true">+</span></summary><p>Quatre étapes : trouver les appels d'offres adaptés, comprendre chaque consultation grâce à une fiche d'une page, préparer le dossier à partir de vos pièces et informations, puis suivre vos candidatures jusqu'au résultat. Ces fonctions sont en cours de conception.</p></details>
         <details><summary>Le dépôt du dossier est-il automatique ?<span class="plus" aria-hidden="true">+</span></summary><p>Non. Ready to Reply prépare, vous décidez. Votre entreprise relit, modifie, valide, signe et dépose elle-même son offre sur la plateforme de l'acheteur. Vous restez responsable du contenu et de la conformité de votre dossier.</p></details>
         <details><summary>Le score garantit-il qu'un marché est adapté ?<span class="plus" aria-hidden="true">+</span></summary><p>Non. Le score d'affinité est une aide au tri, calculée à partir de ce que vous nous dites de votre entreprise. Il ne garantit ni que le marché vous convient, ni que vous le remporterez, ni que votre dossier sera conforme. La lecture du règlement de la consultation reste indispensable.</p></details>
-        <details><summary>Les fonctions sont-elles déjà disponibles ?<span class="plus" aria-hidden="true">+</span></summary><p>Pas encore. Ready to Reply est un projet en construction. Seule la démonstration présentée sur ce site est utilisable, sur un marché fictif. La première version sera construite et testée avec des entreprises pilotes du secteur de l'éclairage.</p></details>
+        <details><summary>Les fonctions sont-elles déjà disponibles ?<span class="plus" aria-hidden="true">+</span></summary><p>En partie. La veille est utilisable en version de test : elle interroge les avis réellement publiés au BOAMP et les trie selon votre profil. Les autres fonctions sont en conception et ne sont montrées que dans la démonstration, sur un marché fictif. La première version sera construite et testée avec des entreprises pilotes du secteur de l'éclairage.</p></details>
         <details><summary>Comment sont traités les documents et les données de l'entreprise ?<span class="plus" aria-hidden="true">+</span></summary><p>Aujourd'hui, aucun document d'entreprise n'est demandé ni stocké. Les conditions d'hébergement, de sécurité et de conservation des documents de la future plateforme seront définies et publiées avant toute ouverture, et vous resterez propriétaire de vos données.</p></details>
         <details><summary>Quel est le tarif ?<span class="plus" aria-hidden="true">+</span></summary><p>Le tarif de référence envisagé est de 149 € HT par mois, ou 1 490 € HT par an. Un tarif fondateur de 99 € HT par mois pour les 100 premiers clients est à l'étude. Ces tarifs sont en cours de validation et peuvent évoluer : rien n'est facturé aujourd'hui.</p></details>
         <details><summary>Comment demander une démonstration ou rejoindre le pilote ?<span class="plus" aria-hidden="true">+</span></summary><p>Remplissez le formulaire ci-dessous en indiquant votre métier et votre besoin principal. Tant que la réception des demandes n'est pas branchée sur cette page, le formulaire vous l'indique clairement.</p></details>
@@ -885,13 +965,13 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
   <div class="wrap">
     <div class="g">
       <div>
-        <svg class="logo" viewBox="36 25 800 230" focusable="false" role="img" aria-label="Ready to Reply"><use href="#lg-R" fill="#D05E2C"/><use href="#lg-leg" fill="#E6C9AB"/><use href="#lg-READY" fill="#F7EEE5"/><use href="#lg-TO" fill="#D05E2C"/><use href="#lg-REPLY" fill="#F7EEE5"/></svg>
+        <svg class="logo" viewBox="36 25 800 230" role="img" aria-label="Ready to Reply" focusable="false"><use href="#lg-R" fill="#D05E2C"/><use href="#lg-leg" fill="#E6C9AB"/><use href="#lg-READY" fill="#F7EEE5"/><use href="#lg-TO" fill="#D05E2C"/><use href="#lg-REPLY" fill="#F7EEE5"/></svg>
         <p style="margin-top:1.25rem;font-family:var(--serif);font-size:1.25rem;line-height:1.35;max-width:18rem">Les bons marchés. Les bonnes réponses.</p>
         <p class="small" style="margin-top:.5rem;color:var(--tan)">From opportunity to submission.</p>
       </div>
       <nav aria-label="Plan du site">
         <h2>Le site</h2>
-        <ul><li><a href="#comment">Comment ça marche</a></li><li><a href="#produit">Le produit</a></li><li><a href="#tarifs">Tarifs</a></li><li><a href="#a-propos">À propos</a></li><li><a href="#contact">Contact et phase pilote</a></li></ul>
+        <ul><li><a href="#comment">Comment ça marche</a></li><li><a href="#produit">Le produit</a></li><li><a href="#tarifs">Tarifs</a></li><li><a href="#a-propos">À propos</a></li><li><a href="#veille">Veille (test)</a></li><li><a href="#contact">Contact et phase pilote</a></li></ul>
       </nav>
       <nav aria-label="Informations légales">
         <h2>Informations</h2>
@@ -931,6 +1011,7 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
 <dialog id="dlg-cookies" aria-labelledby="dc-t"><div class="dlg">
   <h2 id="dc-t">Cookies</h2>
   <p>Cette page n'utilise aucun cookie de mesure d'audience, de publicité ou de réseaux sociaux, et n'intègre aucun contenu tiers qui en déposerait. Les polices de caractères sont chargées depuis Google Fonts.</p>
+  <p>La veille enregistre votre profil (mots-clés, départements, montant) dans le stockage local de votre navigateur uniquement ; pour afficher les avis, votre navigateur interroge directement l'API publique du BOAMP (DILA).</p>
   <p>Si un outil de mesure d'audience ou un autre traceur non essentiel est ajouté, il ne sera activé qu'après votre accord.</p>
   <p style="margin-top:1.5rem"><button type="button" class="btn btn-dark" data-close>Fermer</button></p>
 </div></dialog>
@@ -1043,6 +1124,114 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
       result.style.marginBottom='1.5rem'; result.focus();
     },400);
   });
+})();
+</script>
+<script>
+// Veille BOAMP (version de test) — appel direct de l'API ouverte de la DILA depuis le navigateur.
+(function(){
+  var API='https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records';
+  var KEY='rtr-veille-profil-v1';
+  var DEF={keywords:['éclairage','luminaire','LED','candélabre','projecteur','lanterne','lampe'],types:['FOURNITURES'],departments:[],minAmount:100000,days:21};
+  var EXCL=['attribution','rectificatif','annulation','resultat','modification'];
+  var draft, filter='all', results=[], reqId=0;
+  var $=function(id){return document.getElementById(id)};
+  var fold=function(s){return String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()};
+  var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+  var reEsc=function(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')};
+  function hasKw(text,k){k=fold(k.trim()); return !!k && new RegExp('(^|[^a-z0-9])'+reEsc(k)+'s?($|[^a-z0-9])').test(fold(text))}
+  function list(v){if(v==null)return[]; if(Array.isArray(v))return v.map(String).map(function(s){return s.trim()}).filter(Boolean); var s=String(v).trim(); return s?s.split(/\s*[,;|]\s*/):[]}
+  function text(){for(var i=0;i<arguments.length;i++){var v=arguments[i]; if(v==null)continue; var s=Array.isArray(v)?v.join(', '):String(v); if(s.trim())return s.trim()} return null}
+  function date(v){var s=text(v); if(!s)return null; var d=new Date(s); return isNaN(d)?null:d}
+  function amt(v){if(typeof v==='number')return isFinite(v)?v:null; if(typeof v!=='string')return null; var c=v.replace(/[\s  €]/g,'').replace(/,(\d{1,2})$/,'.$1').replace(/,/g,''); return /^\d+(\.\d+)?$/.test(c)?Number(c):null}
+  function findAmount(d){var root=d; if(typeof d==='string'){try{root=JSON.parse(d)}catch(e){return null}} var f=[];
+    (function walk(n,depth){if(depth>12||n==null)return; if(Array.isArray(n))return n.forEach(function(x){walk(x,depth+1)}); if(typeof n!=='object')return;
+      Object.keys(n).forEach(function(key){var v=n[key],k=fold(key);
+        if(/(valeur|montant|estimated_value|val_estimated|val_total|amount)/.test(k)&&!/(devise|currency|pourcentage|percent|nb|nombre)/.test(k)){var a=amt(v); if(a!==null)f.push(a); else if(v&&typeof v==='object')Object.keys(v).forEach(function(x){var b=amt(v[x]); if(b!==null)f.push(b)})}
+        if(v&&typeof v==='object')walk(v,depth+1)})})(root,0);
+    f=f.filter(function(a){return a>=1000&&a<=5e9}); return f.length?Math.max.apply(null,f):null}
+  function normalize(r){var id=text(r.idweb,r.id), title=text(r.objet,r.intitule); if(!id||!title)return null;
+    return {id:id,title:title,buyer:text(r.nomacheteur,r.nom_acheteur),departments:list(r.code_departement!=null?r.code_departement:r.departement).map(function(d){return d.toUpperCase()}),
+      published:date(r.dateparution),deadline:date(r.datelimitereponse),types:list(r.type_marche!=null?r.type_marche:r.type_marche_facette).map(function(t){return t.toUpperCase()}),
+      descriptors:list(r.descripteur_libelle),procedure:text(r.procedure_libelle,r.type_procedure),nature:text(r.nature_libelle,r.nature_categorise_libelle,r.nature),
+      amount:findAmount(r.donnees),url:text(r.url_avis)||('https://www.boamp.fr/pages/avis/?q=idweb:%22'+encodeURIComponent(id)+'%22')}}
+  function daysLeft(d){if(!d)return null; var t=new Date(); return Math.round((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(t.getFullYear(),t.getMonth(),t.getDate()))/864e5)}
+  function score(n,p){
+    var th=p.keywords.filter(function(k){return hasKw(n.title,k)}), dh=p.keywords.filter(function(k){return th.indexOf(k)<0&&n.descriptors.some(function(d){return hasKw(d,k)})});
+    if(!th.length&&!dh.length)return null;
+    if(p.departments.length&&!n.departments.some(function(d){return p.departments.indexOf(d)>=0}))return null;
+    var dl=daysLeft(n.deadline); if(dl!==null&&dl<0)return null;
+    if(p.minAmount>0&&n.amount!==null&&n.amount<p.minAmount)return null;
+    var R=[];
+    R.push({l:th.length?"Objet de l'avis : "+th.join(', '):'Seulement dans les descripteurs : '+dh.join(', '),p:th.length?Math.min(40,30+(th.length-1)*5):20,m:40});
+    var tf=n.types.map(fold), ok=!p.types.length||p.types.some(function(t){return tf.some(function(x){return x.indexOf(fold(t))>=0})});
+    R.push({l:!n.types.length?"Type de marché non précisé dans l'avis":ok?'Type de marché : '+n.types.join(', ').toLowerCase():'Type différent de votre cible : '+n.types.join(', ').toLowerCase(),p:!n.types.length?10:ok?20:0,m:20});
+    R.push({l:n.amount===null?"Montant non indiqué dans l'avis : à vérifier dans le dossier":'Montant estimé : '+eur(n.amount),p:n.amount===null?10:20,m:20});
+    R.push({l:dl===null?'Date limite non indiquée':dl===0?"Date limite aujourd'hui":dl+' jour'+(dl>1?'s':'')+' pour répondre',p:dl===null?10:dl>=15?20:dl>=8?12:dl>=3?5:0,m:20});
+    var s=R.reduce(function(a,r){return a+r.p},0);
+    return Object.assign({},n,{score:s,verdict:s>=80?'go':s>=60?'maybe':'pass',reasons:R,matched:th.concat(dh),daysLeft:dl})}
+  function eur(n){return n.toLocaleString('fr-FR').replace(/ |\s/g,' ')+' € HT'}
+  var df=new Intl.DateTimeFormat('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  var fd=function(d){return d?df.format(d):'non indiquée'};
+  var ods=function(s){return '"'+s.replace(/\\/g,'\\\\').replace(/"/g,'\\"')+'"'};
+
+  async function page(where,offset){
+    var u=new URL(API); u.searchParams.set('where',where); u.searchParams.set('order_by','dateparution desc'); u.searchParams.set('limit','100'); u.searchParams.set('offset',String(offset));
+    var res=await fetch(u.toString(),{headers:{Accept:'application/json'}}); if(!res.ok){var e=new Error('HTTP '+res.status); e.status=res.status; throw e}
+    var j=await res.json(); var rows=j.results||(j.records||[]).map(function(x){return x.fields||(x.record&&x.record.fields)||{}});
+    return {rows:rows,total:typeof j.total_count==='number'?j.total_count:rows.length}}
+  async function collect(where){var rows=[],total=0; for(var o=0;o<600;o+=100){var p=await page(where,o); total=p.total; rows=rows.concat(p.rows); if(p.rows.length<100||rows.length>=total)break} return rows}
+  async function search(p){
+    var since=new Date(Date.now()-p.days*864e5), dc="dateparution >= date'"+since.toISOString().slice(0,10)+"'";
+    var rows; try{rows=await collect(dc+' AND ('+p.keywords.map(ods).join(' OR ')+')')}catch(e){if(e.status!==400)throw e; rows=await collect(dc)}
+    var seen={}; var ns=rows.map(normalize).filter(function(n){if(!n||seen[n.id])return false; seen[n.id]=1; return !n.nature||!EXCL.some(function(x){return fold(n.nature).indexOf(x)>=0})});
+    return {notices:ns,scanned:rows.length,since:since}}
+
+  function readForm(){return {keywords:draft.keywords.slice(),types:[].slice.call(document.querySelectorAll('input[name=vtype]:checked')).map(function(i){return i.value}),
+    departments:$('vdep').value.split(/[\s,;]+/).map(function(d){return d.trim().toUpperCase()}).filter(function(d){return /^(\d{2,3}|2A|2B)$/.test(d)}),
+    minAmount:Number($('vmin').value)||0,days:Number($('vdays').value)||21}}
+  function fill(p){draft=JSON.parse(JSON.stringify(p)); chips();
+    document.querySelectorAll('input[name=vtype]').forEach(function(i){i.checked=p.types.indexOf(i.value)>=0});
+    $('vdep').value=p.departments.join(', '); $('vmin').value=String(p.minAmount); $('vdays').value=String(p.days)}
+  function chips(){$('vchips').innerHTML=draft.keywords.map(function(k,i){return '<li>'+esc(k)+'<button type="button" data-i="'+i+'" aria-label="Retirer le mot-clé '+esc(k)+'">×</button></li>'}).join('')}
+  $('vchips').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b)return; draft.keywords.splice(Number(b.dataset.i),1); chips()});
+  function addKw(){var k=$('vkw').value.trim(); if(k&&draft.keywords.length<20&&!draft.keywords.some(function(x){return fold(x)===fold(k)})){draft.keywords.push(k.slice(0,40)); chips()} $('vkw').value=''}
+  $('vkw-add').addEventListener('click',addKw);
+  $('vkw').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault(); addKw()}});
+  $('vreset').addEventListener('click',function(){fill(DEF)});
+  $('vprofile').addEventListener('submit',function(e){e.preventDefault(); var p=readForm(); if(!p.keywords.length)p.keywords=DEF.keywords.slice(); try{localStorage.setItem(KEY,JSON.stringify(p))}catch(x){} fill(p); run(p)});
+
+  var VS={go:['Allez-y','go'],maybe:['À étudier','maybe'],pass:['Passez','todo']};
+  function render(){
+    var shown=results.filter(function(r){return filter==='all'||r.verdict===filter});
+    var c={all:results.length,go:0,maybe:0}; results.forEach(function(r){if(c[r.verdict]!=null)c[r.verdict]++});
+    var fl=$('vfilters'); fl.hidden=!results.length;
+    fl.innerHTML=[['all','Tous ('+c.all+')'],['go','Allez-y ('+c.go+')'],['maybe','À étudier ('+c.maybe+')']].map(function(x){return '<button type="button" data-f="'+x[0]+'" aria-pressed="'+(filter===x[0])+'">'+x[1]+'</button>'}).join('');
+    if(!shown.length){$('vlist').innerHTML='<li class="card" style="padding:2rem;box-shadow:none;border-style:dashed"><p style="font-family:var(--serif);font-size:1.25rem">'+(results.length?'Aucun marché dans ce filtre.':'Aucun avis ne correspond à votre profil sur cette période.')+'</p>'+(results.length?'':'<p class="soft" style="margin-top:.75rem">Essayez d\'allonger la période, d\'ajouter des mots-clés proches de votre métier ou de baisser le montant minimum.</p>')+'</li>'; return}
+    $('vlist').innerHTML=shown.map(function(n){var v=VS[n.verdict];
+      return '<li class="card vcard"><div class="vtop"><div class="vscore '+v[1]+'"><p class="figure">'+n.score+'</p><p class="lab">'+v[0]+'</p></div><div style="min-width:0">'+
+      '<p class="vbuyer">'+esc(n.buyer||'Acheteur non indiqué')+(n.departments.length?' · '+esc(n.departments.join(', ')):'')+'</p><h3 class="vtitle">'+esc(n.title)+'</h3>'+
+      '<dl class="vmeta"><div><dt>Date limite :</dt><dd'+(n.daysLeft!==null&&n.daysLeft<8?' style="color:var(--terra-deep)"':'')+'>'+fd(n.deadline)+(n.daysLeft!==null?' (J-'+n.daysLeft+')':'')+'</dd></div><div><dt>Montant :</dt><dd>'+(n.amount!==null?eur(n.amount):'non indiqué')+'</dd></div><div><dt>Publié le :</dt><dd style="font-weight:400">'+fd(n.published)+'</dd></div></dl></div></div>'+
+      '<details><summary>Pourquoi cette note, et le détail de l\'avis<span aria-hidden="true">+</span></summary><div class="vdet"><div><p class="h4">Calcul de la note</p><ul class="vrs">'+
+      n.reasons.map(function(r){return '<li><div class="row"><span class="soft">'+esc(r.l)+'</span><span class="figure">'+r.p+'/'+r.m+'</span></div><div class="bar2" style="height:6px"><span style="width:'+(r.p/r.m*100)+'%;background:var(--ink)"></span></div></li>'}).join('')+
+      '</ul><p class="xs muted" style="margin-top:1rem">Une aide au tri, pas une garantie. Lisez toujours l\'avis et le règlement de la consultation avant de décider.</p></div>'+
+      '<div><p class="h4">Informations de l\'avis</p><dl class="vinfo"><div><dt>Référence BOAMP</dt><dd>'+esc(n.id)+'</dd></div><div><dt>Procédure</dt><dd>'+esc(n.procedure||'non indiquée')+'</dd></div><div><dt>Type</dt><dd>'+esc(n.types.join(', ').toLowerCase()||'non indiqué')+'</dd></div><div><dt>Descripteurs</dt><dd>'+esc(n.descriptors.join(' · ')||'non indiqués')+'</dd></div><div><dt>Mots-clés trouvés</dt><dd>'+esc(n.matched.join(', '))+'</dd></div></dl>'+
+      '<a class="btn btn-line" style="margin-top:1.25rem;min-height:2.5rem;padding:.5rem 1.1rem;font-size:.875rem" href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer">Voir l\'avis officiel sur boamp.fr</a></div></div></details></li>'}).join('')}
+  $('vfilters').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b)return; filter=b.dataset.f; render()});
+
+  async function run(p){var id=++reqId; filter='all'; $('vgo').disabled=true; $('vgo').textContent='Recherche…';
+    $('vsummary').textContent='Recherche dans les avis du BOAMP…'; $('vfilters').hidden=true; $('vlist').innerHTML='<li class="vskel"></li><li class="vskel"></li><li class="vskel"></li>';
+    try{var s=await search(p); if(id!==reqId)return;
+      results=s.notices.map(function(n){return score(n,p)}).filter(Boolean).sort(function(a,b){return b.score-a.score||((a.daysLeft==null?999:a.daysLeft)-(b.daysLeft==null?999:b.daysLeft))});
+      var unk=results.filter(function(r){return r.amount===null}).length;
+      $('vsummary').innerHTML='<strong style="color:var(--ink)">'+results.length+' marché'+(results.length>1?'s':'')+' pour votre profil</strong> · '+s.scanned+' avis analysés, publiés depuis le '+fd(s.since)+(unk?' · '+unk+' sans montant indiqué (conservés, à vérifier)':'');
+      render()}
+    catch(e){if(id!==reqId)return; results=[]; $('vsummary').textContent=''; $('vfilters').hidden=true;
+      $('vlist').innerHTML='<li role="alert" class="alert e" style="padding:1.5rem"><p style="font-weight:600">La recherche n\'a pas abouti.</p><p class="soft" style="margin-top:.5rem">Le BOAMP n\'a pas pu être consulté pour le moment. Réessayez dans quelques minutes.</p><button type="button" class="btn btn-dark" id="vretry" style="margin-top:1rem">Réessayer</button></li>';
+      $('vretry').addEventListener('click',function(){run(p)})}
+    finally{if(id===reqId){$('vgo').disabled=false; $('vgo').textContent='Mettre à jour ma sélection'}}}
+
+  var start=DEF; try{var sv=localStorage.getItem(KEY); if(sv){var o=JSON.parse(sv); if(o&&Array.isArray(o.keywords)&&o.keywords.length)start=Object.assign({},DEF,o)}}catch(e){}
+  fill(start); run(start);
 })();
 </script>
 
