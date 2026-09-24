@@ -35,6 +35,18 @@ export function PricingPlans() {
       <p className="mx-auto mb-8 flex w-fit items-center gap-2 rounded-full bg-ochre-soft px-4 py-1.5 text-center text-sm font-semibold text-ochre">
         <span aria-hidden="true">◆</span> Tarifs en cours de validation · rien n&apos;est facturé aujourd&apos;hui
       </p>
+      <div className="mb-10 grid gap-6 rounded-2xl bg-ink p-7 text-cream sm:p-9 md:grid-cols-[1.2fr_1fr] md:items-center">
+        <p className="font-serif text-2xl leading-snug text-ivory sm:text-[1.75rem]">
+          149 € HT par mois ? Vous pouvez les économiser.
+        </p>
+        <div>
+          <p className="leading-relaxed text-cream">
+            Mais combien vous coûtent, chaque année, les marchés que vous n&apos;avez pas vus passer ? Et ceux
+            auxquels vous avez renoncé faute de temps ? Le bon calcul n&apos;est peut-être pas celui qu&apos;on croit.
+          </p>
+          <p className="mt-3 text-xs text-tan">Une question à vous poser, pas une promesse : aucun marché n&apos;est garanti.</p>
+        </div>
+      </div>
       <ul className="grid gap-5 md:grid-cols-3">
         {plans.map((p) => (
           <li

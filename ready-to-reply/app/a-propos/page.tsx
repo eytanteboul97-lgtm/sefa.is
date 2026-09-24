@@ -82,10 +82,11 @@ export default function AboutPage() {
             </ul>
             <blockquote className="mt-10 rounded-2xl bg-terracotta p-7 text-ivory sm:p-8">
               <p className="font-serif text-xl leading-relaxed">
-                « Cent sites, cent comptes, et des documents qu&apos;on ne comprend pas. C&apos;est ce que vivent les PME
-                qui répondent, et c&apos;est ce que je veux changer. »
+                « Cent plateformes. Cent identifiants. Des dossiers de cinquante pages qu&apos;on ne comprend qu&apos;à
+                moitié. C&apos;est le quotidien des PME qui répondent aux marchés publics. Je crée Ready to Reply pour y
+                mettre fin. »
               </p>
-              <footer className="mt-4 text-sm">— {founder.firstName}, fondateur</footer>
+              <footer className="mt-4 text-sm">— {founderDisplayName()}, fondateur</footer>
             </blockquote>
           </div>
         </div>
@@ -131,8 +132,7 @@ export default function AboutPage() {
 
       <Container className="pb-16">
         <p className="text-sm text-ink-muted">
-          Informations à compléter par le fondateur : <Placeholder>nom complet</Placeholder>{" "}
-          <Placeholder>société et statut juridique</Placeholder>
+          Informations à compléter par le fondateur :           <Placeholder>société et statut juridique</Placeholder>
         </p>
       </Container>
 

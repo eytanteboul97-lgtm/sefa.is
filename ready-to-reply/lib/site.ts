@@ -19,8 +19,7 @@ export const site = {
 
 export const founder = {
   firstName: "Eytan",
-  /** Nom de famille : absent de la plaquette, à compléter. */
-  lastName: null as string | null,
+  lastName: "Teboul" as string | null,
   role: "Fondateur de Ready to Reply",
 };
 

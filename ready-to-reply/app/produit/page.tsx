@@ -19,6 +19,13 @@ const legend: { status: FeatureStatus; text: string }[] = [
   { status: "later", text: "envisagé après la première version" },
 ];
 
+const vaultPromises = [
+  ["Elles restent les vôtres", "Vous les consultez, les téléchargez ou les supprimez quand vous voulez."],
+  ["Confidentielles, point", "Jamais revendues, jamais partagées, jamais utilisées pour une autre entreprise."],
+  ["Pour vos dossiers uniquement", "Elles ne servent qu'à préparer vos réponses, et seule votre entreprise y a accès."],
+  ["Nous veillons dessus", "Une alerte avant chaque expiration, pour ne jamais déposer une pièce périmée."],
+];
+
 export default function ProductPage() {
   return (
     <>
@@ -68,6 +75,33 @@ export default function ProductPage() {
             </li>
           ))}
         </ul>
+      </Section>
+
+      <Section labelledBy="coffre-titre" className="bg-ink text-cream">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-tan">Coffre-fort documentaire</p>
+            <h2 id="coffre-titre" className="mt-3 text-3xl leading-tight text-ivory sm:text-4xl">
+              Vos pièces, sous bonne garde.
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-cream">
+              Kbis, attestations, bilans, assurances : des documents sensibles, qui disent tout de votre entreprise.
+              Voici nos engagements, pris avant même l&apos;ouverture du coffre-fort.
+            </p>
+          </div>
+          <ul className="grid gap-x-8 gap-y-7 sm:grid-cols-2">
+            {vaultPromises.map(([t, d]) => (
+              <li key={t} className="border-t-2 border-terracotta-bright pt-4">
+                <h3 className="text-xl text-ivory">{t}</h3>
+                <p className="mt-2 leading-relaxed text-cream">{d}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="mt-10 text-sm text-tan">
+          Le coffre-fort est en conception. Les conditions précises d&apos;hébergement et de sécurité seront publiées
+          avant son ouverture.
+        </p>
       </Section>
 
       <Section labelledBy="principes-titre" className="bg-ivory">
