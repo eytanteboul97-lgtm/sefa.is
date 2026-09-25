@@ -1,9 +1,15 @@
 import { MockupLabel } from "@/components/labels";
+import { Logo } from "@/components/logo";
 import { AffinityScale, VerdictTag, toneBar } from "@/components/verdict-tag";
 import { cn } from "@/lib/utils";
 import { priceRange, verdict, weeklyMarkets } from "@/content/demo";
 
 const k = (n: number) => Math.round(n / 1000);
+
+const FOLIO_SCRIPT = `(function(){var f=document.getElementById('folio');if(!f)return;var go=function(){f.classList.add('play')};
+if(!('IntersectionObserver' in window))return go();
+var io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting})){go();io.disconnect()}},{threshold:.3});
+io.observe(f);setTimeout(go,8000);})();`;
 
 /** Maquette du hero, reprise de la plaquette. Purement illustrative. */
 export function HeroMockup() {
@@ -13,8 +19,10 @@ export function HeroMockup() {
   const marker = ((priceRange.example - priceRange.min) / span) * 100;
 
   return (
-    <figure className="relative mx-auto w-full max-w-[34rem]">
-      <div className="card animate-rise p-5 sm:p-6" style={{ animationDelay: "120ms" }}>
+    <figure id="folio" className="folio relative mx-auto w-full max-w-[34rem]">
+      <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      <div className="folio-book">
+      <div className="card market p-5 sm:p-6">
         <div className="flex items-baseline justify-between gap-4 border-b border-ink pb-3">
           <p className="text-[0.95rem] font-bold">Vos marchés de la semaine</p>
           <p className="text-xs text-ink-muted">Affinité avec votre entreprise</p>
@@ -34,12 +42,19 @@ export function HeroMockup() {
             </li>
           ))}
         </ul>
-        <AffinityScale className="flex w-full border-t border-line pt-3" />
+        <AffinityScale className="folio-legend flex w-full border-t border-line pt-3" />
+      </div>
+      {/* Couverture du « dossier de consultation » : pivote comme un livre pour révéler la page claire. */}
+      <div className="folio-cover" aria-hidden="true">
+        <Logo markOnly variant="terracotta" title="" className="mb-3.5 w-10" />
+        <p className="text-xs font-bold uppercase tracking-[0.16em] opacity-90">Dossier de consultation</p>
+        <p className="font-serif text-[clamp(1.7rem,3.4vw,2.2rem)] leading-tight">50 pages à lire</p>
+        <p className="text-sm opacity-90">Règlement · cahier des charges · annexes</p>
+      </div>
       </div>
 
       <div
-        className="relative z-10 -mt-3 ml-auto w-[88%] animate-rise overflow-hidden rounded-2xl bg-ivory shadow-float sm:-mt-5 sm:w-[78%]"
-        style={{ animationDelay: "320ms" }}
+        className="folio-card relative z-10 -mt-3 ml-auto w-[88%] overflow-hidden rounded-2xl bg-ivory shadow-float sm:-mt-5 sm:w-[78%]"
       >
         <div className="flex items-center gap-4 bg-ink px-5 py-4 text-cream">
           <p className="figure text-4xl leading-none">
@@ -69,6 +84,8 @@ export function HeroMockup() {
       <figcaption className="mt-4 text-right">
         <MockupLabel />
       </figcaption>
+      {/* Lance l'ouverture quand le dossier arrive à l'écran (sur mobile il est sous le titre). */}
+      <script dangerouslySetInnerHTML={{ __html: FOLIO_SCRIPT }} />
     </figure>
   );
 }

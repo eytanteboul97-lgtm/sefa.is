@@ -452,6 +452,30 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
 .vinfo dt{color:var(--ink-muted)}.vinfo dd{margin:0;overflow-wrap:anywhere}
 .vskel{height:7rem;border-radius:1rem;background:var(--sand);animation:pulse 1.4s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.5}}
+/* Ouverture du dossier (hero) : la couverture pivote comme un livre, la page claire apparaît. */
+.folio-book{position:relative;perspective:1600px}
+.folio-book::before{content:"";position:absolute;inset:7px -7px -7px 7px;border-radius:1rem;background:#F1E6DA;border:1px solid var(--line);box-shadow:var(--shadow)}
+.folio-book .market{position:relative;z-index:1}
+.folio-cover{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:.35rem;padding:2rem 2.25rem;border-radius:1rem;background:var(--terra);color:var(--ivory);
+  box-shadow:inset 0 0 0 12px var(--terra),inset 0 0 0 13px rgba(255,252,247,.45),var(--shadow-lg);
+  transform-origin:left center;backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;
+  animation:folio-open .95s cubic-bezier(.65,0,.25,1) .5s both}
+.folio-cover .fc-mark{width:2.6rem;height:auto;margin-bottom:.9rem}
+.folio-cover .fc-lab{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.92}
+.folio-cover .fc-title{font-family:var(--serif);font-size:clamp(1.7rem,3.4vw,2.2rem);line-height:1.15}
+.folio-cover .fc-sub{font-size:.85rem;opacity:.92}
+@keyframes folio-open{0%{transform:rotateY(0)}100%{transform:rotateY(-160deg);visibility:hidden}}
+@keyframes folio-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.folio .market-head{animation:folio-in .45s ease-out 1.05s both}
+.folio .market li{animation:folio-in .45s ease-out both}
+.folio .market li:nth-child(1){animation-delay:1.15s}.folio .market li:nth-child(2){animation-delay:1.25s}
+.folio .market li:nth-child(3){animation-delay:1.35s}.folio .market li:nth-child(4){animation-delay:1.45s}
+.folio .market .aff-legend{animation:folio-in .45s ease-out 1.55s both}
+.folio .scorecard{animation:folio-in .6s cubic-bezier(.2,.7,.2,1) 1.7s both}
+.folio figcaption{animation:folio-in .5s ease-out 2s both}
+/* L'animation attend que le dossier soit à l'écran (mobile : sous le titre). Sans JavaScript, elle joue au chargement. */
+.js .folio:not(.play) *,.js .folio:not(.play) *::before{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){.folio-cover{display:none}.folio *{animation:none!important}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -514,7 +538,9 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
       <p class="small" style="margin-top:1.25rem"><a class="link" href="#veille">Nouveau : essayez la veille sur les vrais avis du BOAMP (version de test)</a></p>
       <p class="small muted" style="margin-top:.5rem">Pour commencer : les entreprises de l'électricité et de l'éclairage.</p>
     </div>
-    <figure style="margin:0" class="rise">
+    <figure style="margin:0" class="folio" id="folio">
+      <script>document.documentElement.classList.add('js')</script>
+      <div class="folio-book">
       <div class="card market">
         <div class="market-head"><p style="font-weight:700;font-size:.95rem">Vos marchés de la semaine</p><p class="xs muted">Affinité avec votre entreprise</p></div>
         <ul>
@@ -524,6 +550,13 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
           <li><span class="mkt-score" aria-label="Affinité 38 sur 100"><b>38</b><small>/100</small><span class="gauge" aria-hidden="true"><i class="g-pass" style="width:38%"></i></span></span><span class="t">Travaux électriques — hôpital</span><span class="vp vp-pass">Passez</span></li>
         </ul>
         <p class="aff-legend" style="margin-top:.4rem;border-top:1px solid var(--line);padding-top:.85rem"><span class="vp vp-go">80–100 · Allez-y</span><span class="vp vp-maybe">60–79 · À étudier</span><span class="vp vp-pass">0–59 · Passez</span></p>
+      </div>
+      <div class="folio-cover" aria-hidden="true">
+        <svg class="fc-mark" viewBox="36 25 200 230" focusable="false"><use href="#lg-R" fill="#F7EEE5"/><use href="#lg-leg" fill="#2B1E18"/></svg>
+        <p class="fc-lab">Dossier de consultation</p>
+        <p class="fc-title">50 pages à lire</p>
+        <p class="fc-sub">Règlement · cahier des charges · annexes</p>
+      </div>
       </div>
       <div class="scorecard">
         <div class="sc-top">
@@ -538,6 +571,12 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
         </div>
       </div>
       <figcaption style="margin-top:1rem;text-align:right"><span class="mock">Aperçu du produit — maquette illustrative · données fictives</span></figcaption>
+      <script>
+      (function(){var f=document.getElementById('folio'); if(!f)return; var go=function(){f.classList.add('play')};
+        if(!('IntersectionObserver' in window))return go();
+        var io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting})){go(); io.disconnect()}},{threshold:.3});
+        io.observe(f); setTimeout(go,8000);})();
+      </script>
     </figure>
   </div>
 
