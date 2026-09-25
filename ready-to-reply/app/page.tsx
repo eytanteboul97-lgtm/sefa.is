@@ -245,15 +245,16 @@ export default function HomePage() {
 
       {/* FAQ */}
       <Section labelledBy="faq-titre" className="bg-ivory">
-        <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16">
           <SectionHeading
+            className="faq-aside"
             id="faq-titre"
             eyebrow="Questions fréquentes"
             title="Ce qu'il faut savoir."
             intro={
               <>
                 Une autre question ?{" "}
-                <Link href="/contact?demande=rappel" className="font-semibold text-terracotta-deep underline underline-offset-2">
+                <Link href="/contact?demande=rappel" className="faq-link font-semibold text-terracotta-deep">
                   Écrivez-nous
                 </Link>
                 .
