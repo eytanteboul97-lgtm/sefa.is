@@ -38,7 +38,7 @@ button{font:inherit;color:inherit}
 .eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep)}
 .lede{margin-top:1.25rem;font-size:1.1rem;line-height:1.7;color:var(--ink-soft);max-width:40rem}
 .h2{margin-top:.75rem;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.18}
-section{padding-block:clamp(4rem,9vw,7rem)}
+section{padding-block:clamp(3rem,6vw,5rem)}
 .alt{background:var(--ivory)}
 .sandbg{background:#F1E6DA}
 .muted{color:var(--ink-muted)}
@@ -213,7 +213,7 @@ legend{padding:0;font-weight:700;font-size:.875rem}
 .g-go{background:var(--sage)}.g-maybe{background:#B98A2E}.g-pass{background:#A8998E}
 .aff-legend{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .6rem;font-size:.78rem;color:var(--ink-muted)}
 .mkt-score{width:3.7rem;flex:none;line-height:1}.mkt-score b{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--ink)}.mkt-score small{font-size:.7rem;color:var(--ink-muted)}.mkt-score .gauge{margin-top:.35rem}
-.vphrase{margin-top:.7rem;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem;font-size:.9rem;color:var(--ink-soft)}
+.vphrase{margin-top:.45rem;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem;font-size:.9rem;color:var(--ink-soft)}
 .vleg{margin-top:1rem;padding:.9rem 1.1rem;border:1px solid var(--line);border-radius:.75rem;background:var(--ivory);line-height:1.6}
 .crit li{display:grid;grid-template-columns:13rem 1fr 2.5rem;align-items:center;gap:.4rem 1rem;padding:.4rem 0;font-size:.875rem}
 .crit .bar2{margin:0}
@@ -248,12 +248,17 @@ input[type=range]{width:100%;margin-top:.75rem;accent-color:var(--ink)}
 .chips li{background:var(--sand);color:var(--ink-soft);border-radius:999px;padding:.35rem .9rem;font-size:.875rem;font-weight:500}
 
 /* Produit */
-.features{margin-top:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.features li{padding:1.75rem;display:flex;flex-direction:column}
+.features{margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.features li{padding:1.4rem 1.5rem;display:flex;flex-direction:column}
+.features details{margin-top:.6rem}
+.features summary{cursor:pointer;font-size:.875rem;font-weight:600;color:var(--terra-deep);list-style:none}
+.features summary::-webkit-details-marker{display:none}
+.features summary::after{content:" +"}
+.features details[open] summary::after{content:" −"}
 .features .pill{align-self:flex-start}
 .features h3{margin-top:1.25rem;font-size:1.4rem}
 .features .d{margin-top:.75rem;font-weight:500}
-.features .x{margin-top:.75rem;color:var(--ink-soft)}
+.features .x{margin-top:.5rem;color:var(--ink-soft);font-size:.95rem}
 @media (max-width:767px){.features{grid-template-columns:1fr}}
 .legend{margin-top:1.75rem;display:flex;flex-wrap:wrap;gap:.75rem 2rem;font-size:.875rem;color:var(--ink-soft)}
 .legend div{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
@@ -389,10 +394,18 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
 @media (max-width:1023px){.vault{grid-template-columns:1fr}}
 @media (max-width:640px){.vault{padding:1.75rem}.vault ul{grid-template-columns:1fr}}
 /* Veille */
-.vgrid{margin-top:2.5rem;display:grid;grid-template-columns:20rem minmax(0,1fr);gap:2.5rem;align-items:start}
-@media (max-width:1023px){.vgrid{grid-template-columns:minmax(0,1fr)}}
-.vform{padding:1.5rem;display:grid;gap:1.25rem;min-width:0}
-@media (min-width:1024px){.vform{position:sticky;top:5.5rem}}
+.vgrid{margin-top:1rem}
+.vbar{margin-top:2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1.5rem;padding:1rem 1.25rem;box-shadow:none}
+.vbar-txt{min-width:0;flex:1 1 18rem}
+.vbar-txt p+p{margin-top:.2rem}
+.vactions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.25rem}
+.vmore{margin-top:1.25rem;display:flex;justify-content:center}
+
+.vform{padding:1.5rem;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25rem 1.5rem;align-items:start;min-width:0;margin-bottom:1.5rem;box-shadow:none}
+.vform>.full{grid-column:1/-1}
+@media (max-width:900px){.vform{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.vform{grid-template-columns:minmax(0,1fr);padding:1.25rem}}
+
 .vchips{margin-top:.75rem;display:flex;flex-wrap:wrap;gap:.4rem}
 .vchips li{display:inline-flex;align-items:center;gap:.15rem;background:var(--sand);border-radius:999px;padding:.2rem .2rem .2rem .75rem;font-size:.875rem}
 .vchips button{width:1.75rem;height:1.75rem;border-radius:50%;border:0;background:transparent;cursor:pointer;color:var(--ink-muted)}
@@ -400,20 +413,20 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
 .vfilters{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.5rem}
 .vfilters button{min-height:2.5rem;border-radius:999px;padding:0 1rem;font-weight:600;font-size:.875rem;border:1px solid var(--line);background:var(--ivory);color:var(--ink-soft);cursor:pointer}
 .vfilters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ivory)}
-.vlist{margin-top:1.5rem;display:grid;gap:1rem}
+.vlist{margin-top:1.25rem;display:grid;gap:.75rem}
 .vcard{overflow:hidden}
-.vtop{display:grid;grid-template-columns:6.5rem minmax(0,1fr);gap:1.25rem;padding:1.25rem 1.5rem}
-@media (max-width:640px){.vtop{grid-template-columns:minmax(0,1fr)}}
+.vtop{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:1.1rem;padding:1rem 1.25rem;align-items:center}
+@media (max-width:640px){.vtop{grid-template-columns:4.6rem minmax(0,1fr);gap:.85rem;padding:.9rem 1rem}}
 .vscore{border-radius:.75rem;padding:.75rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-@media (max-width:640px){.vscore{flex-direction:row;gap:.75rem;justify-content:flex-start}}
+@media (max-width:640px){.vscore{padding:.6rem .4rem}.vscore .figure{font-size:1.5rem}.vph-t{display:none}}
 .vscore .figure{font-size:1.9rem;line-height:1}.vscore .figure small{font-size:.8rem;opacity:.85}
 .vscore .lab{font-size:.66rem;white-space:nowrap;letter-spacing:.08em}
 .vbuyer{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
-.vtitle{margin-top:.35rem;font-size:1.2rem;line-height:1.35;overflow-wrap:anywhere}
-.vmeta{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.25rem 1.5rem;font-size:.875rem}
+.vtitle{margin-top:.25rem;font-size:1.08rem;line-height:1.35;overflow-wrap:anywhere}
+.vmeta{margin-top:.45rem;display:flex;flex-wrap:wrap;gap:.15rem 1.25rem;font-size:.84rem}
 .vmeta dt{display:inline;color:var(--ink-muted)}.vmeta dd{display:inline;margin:0 0 0 .3rem;font-weight:500}
 .vcard details{border-top:1px solid var(--line)}
-.vcard summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;padding:.8rem 1.5rem;font-size:.875rem;font-weight:600;color:var(--terra-deep)}
+.vcard summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;padding:.6rem 1.25rem;font-size:.875rem;font-weight:600;color:var(--terra-deep)}
 .vcard summary::-webkit-details-marker{display:none}
 .vdet{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding:.5rem 1.5rem 1.5rem;background:rgba(247,238,229,.5)}
 @media (max-width:767px){.vdet{grid-template-columns:minmax(0,1fr)}}
@@ -565,10 +578,13 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
         <h2 class="h2" id="t-veille">Vos marchés de la semaine</h2>
         <p class="lede">Les avis de marchés publiés au BOAMP, triés pour votre entreprise. Ajustez votre profil : la sélection et les notes se recalculent.</p>
       </div>
+      <div class="card vbar">
+        <div class="vbar-txt"><p class="lab muted">Votre profil · mémorisé dans ce navigateur</p><p id="vprofsum" class="small" style="color:var(--ink)"></p></div>
+        <button type="button" class="btn btn-line" id="vedit" aria-expanded="false" aria-controls="vprofile" style="min-height:2.5rem;padding:.5rem 1.1rem">Modifier mon profil</button>
+      </div>
       <div class="vgrid">
-        <form id="vprofile" class="card vform" aria-label="Profil de votre entreprise">
-          <div><h3 style="font-size:1.25rem">Votre profil</h3><p class="xs muted" style="margin-top:.25rem">Mémorisé dans ce navigateur uniquement.</p></div>
-          <div>
+        <form id="vprofile" class="card vform" aria-label="Profil de votre entreprise" hidden>
+          <div class="full">
             <label class="f" for="vkw">Mots-clés de votre métier</label>
             <ul id="vchips" class="vchips" aria-label="Mots-clés retenus"></ul>
             <div style="display:flex;gap:.5rem;margin-top:.75rem"><input class="inp" style="margin:0;padding:.55rem .8rem" id="vkw" maxlength="40" placeholder="ex. éclairage public"><button type="button" class="btn btn-line" id="vkw-add" style="min-height:2.5rem;padding:.5rem 1rem">Ajouter</button></div>
@@ -583,14 +599,17 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
           <div><label class="f" for="vdep">Départements</label><input class="inp" style="padding:.55rem .8rem" id="vdep" placeholder="Toute la France" aria-describedby="vdep-hint"><p class="hint xs" id="vdep-hint">Laisser vide pour toute la France, ou saisir des numéros : 69, 01, 38</p></div>
           <div><label class="f" for="vmin">Montant minimum</label><select class="inp" style="padding:.55rem .8rem" id="vmin"><option value="0">Pas de minimum</option><option value="40000">40 000 € HT et plus</option><option value="100000">100 000 € HT et plus</option><option value="250000">250 000 € HT et plus</option><option value="500000">500 000 € HT et plus</option></select></div>
           <div><label class="f" for="vdays">Période</label><select class="inp" style="padding:.55rem .8rem" id="vdays"><option value="7">Avis des 7 derniers jours</option><option value="14">Avis des 14 derniers jours</option><option value="21">Avis des 21 derniers jours</option><option value="30">Avis des 30 derniers jours</option></select></div>
-          <button type="submit" class="btn btn-dark" id="vgo">Mettre à jour ma sélection</button>
-          <button type="button" class="link small" id="vreset" style="background:none;border:0;cursor:pointer">Revenir au profil de départ</button>
+          <div class="full vactions">
+            <button type="submit" class="btn btn-dark" id="vgo">Mettre à jour ma sélection</button>
+            <button type="button" class="link small" id="vreset" style="background:none;border:0;cursor:pointer">Revenir au profil de départ</button>
+          </div>
         </form>
         <div style="min-width:0">
           <p id="vsummary" class="small soft" aria-live="polite">Recherche dans les avis du BOAMP…</p>
           <div class="aff-legend vleg"><span><strong style="color:var(--ink)">Comment lire la note :</strong> l'affinité, sur 100, mesure à quel point l'avis correspond à votre profil (métier, type de marché, montant, délai).</span><span class="vp vp-go">80–100 · Allez-y</span><span class="vp vp-maybe">60–79 · À étudier</span><span class="vp vp-pass">0–59 · Passez</span></div>
           <div id="vfilters" class="vfilters" role="group" aria-label="Filtrer par avis" hidden></div>
           <ol id="vlist" class="vlist"></ol>
+          <div id="vmore" class="vmore" hidden></div>
         </div>
       </div>
       <div class="small muted" style="margin-top:3rem;border-top:1px solid var(--line);padding-top:1.5rem;display:grid;gap:.5rem;max-width:56rem">
@@ -803,14 +822,14 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
         <div><span class="pill st-later">Envisagé · après la V1</span> envisagé plus tard</div>
       </div>
       <ul class="features">
-        <li class="card"><span class="pill ok">Version de test disponible</span><h3>Veille et filtrage des appels d'offres</h3><p class="d">Les annonces de votre métier, de votre zone et de votre taille, rassemblées au même endroit.</p><p class="x">Sources envisagées : les avis publiés au BOAMP (bulletin officiel des annonces des marchés publics) et, pour l'Europe, TED (le journal des marchés européens). La couverture des autres plateformes reste à étudier.</p><a class="btn btn-dark" style="margin-top:1rem;align-self:flex-start" href="#veille">Essayer la veille</a></li>
-        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Fiche de synthèse</h3><p class="d">Une consultation de plusieurs dizaines de pages résumée en une page claire.</p><p class="x">Objet, acheteur, montant, durée, critères de notation, dates clés.</p><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
-        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Points de vigilance</h3><p class="d">Les clauses qui peuvent faire écarter une offre, signalées en clair.</p><p class="x">Visite obligatoire, variantes interdites, pièces exigées, pénalités. La lecture du règlement complet reste indispensable.</p><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
-        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Score d'affinité</h3><p class="d">Une note sur 100 calculée pour votre entreprise, et un avis franc.</p><p class="x">La note aide à trier les marchés ; elle ne garantit ni la pertinence d'une candidature, ni son succès. La méthode sera construite et validée avec les entreprises pilotes.</p><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
-        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Coffre-fort documentaire et alertes d'expiration</h3><p class="d">Kbis, attestations, assurances : saisis une fois, réutilisés partout.</p><p class="x">Avec une alerte avant l'expiration d'une pièce. Les conditions d'hébergement et de sécurité des documents seront précisées avant toute ouverture.</p></li>
-        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Préparation de dossier</h3><p class="d">Formulaires pré-remplis, bordereau de prix, dossier mis en page dans l'ordre des critères.</p><p class="x">Vous relisez, modifiez, validez, signez et déposez vous-même votre offre sur la plateforme de l'acheteur.</p></li>
-        <li class="card"><span class="pill st-later">Envisagé · après la V1</span><h3>Fourchette de prix indicative</h3><p class="d">Un ordre de prix tiré de marchés comparables déjà attribués.</p><p class="x">Fonction à l'étude : sa fiabilité dépendra des données d'attribution disponibles pour chaque métier.</p></li>
-        <li class="card"><span class="pill st-later">Envisagé · après la V1</span><h3>Suivi des candidatures</h3><p class="d">Chaque candidature suivie jusqu'au résultat, avec des alertes par e-mail.</p><p class="x">Prévu après la première version, une fois le parcours de préparation éprouvé par les pilotes.</p></li>
+        <li class="card"><span class="pill ok">Version de test disponible</span><h3>Veille et filtrage des appels d'offres</h3><p class="d">Les annonces de votre métier, de votre zone et de votre taille, rassemblées au même endroit.</p><details><summary>En savoir plus</summary><p class="x">Sources envisagées : les avis publiés au BOAMP (bulletin officiel des annonces des marchés publics) et, pour l'Europe, TED (le journal des marchés européens). La couverture des autres plateformes reste à étudier.</p></details><a class="btn btn-dark" style="margin-top:1rem;align-self:flex-start" href="#veille">Essayer la veille</a></li>
+        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Fiche de synthèse</h3><p class="d">Une consultation de plusieurs dizaines de pages résumée en une page claire.</p><details><summary>En savoir plus</summary><p class="x">Objet, acheteur, montant, durée, critères de notation, dates clés.</p></details><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
+        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Points de vigilance</h3><p class="d">Les clauses qui peuvent faire écarter une offre, signalées en clair.</p><details><summary>En savoir plus</summary><p class="x">Visite obligatoire, variantes interdites, pièces exigées, pénalités. La lecture du règlement complet reste indispensable.</p></details><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
+        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Score d'affinité</h3><p class="d">Une note sur 100 calculée pour votre entreprise, et un avis franc.</p><details><summary>En savoir plus</summary><p class="x">La note aide à trier les marchés ; elle ne garantit ni la pertinence d'une candidature, ni son succès. La méthode sera construite et validée avec les entreprises pilotes.</p></details><a class="link small" style="margin-top:1rem" href="#demo">Aperçu dans la démonstration (maquette) →</a></li>
+        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Coffre-fort documentaire et alertes d'expiration</h3><p class="d">Kbis, attestations, assurances : saisis une fois, réutilisés partout.</p><details><summary>En savoir plus</summary><p class="x">Avec une alerte avant l'expiration d'une pièce. Les conditions d'hébergement et de sécurité des documents seront précisées avant toute ouverture.</p></details></li>
+        <li class="card"><span class="pill st-v1">En conception · V1</span><h3>Préparation de dossier</h3><p class="d">Formulaires pré-remplis, bordereau de prix, dossier mis en page dans l'ordre des critères.</p><details><summary>En savoir plus</summary><p class="x">Vous relisez, modifiez, validez, signez et déposez vous-même votre offre sur la plateforme de l'acheteur.</p></details></li>
+        <li class="card"><span class="pill st-later">Envisagé · après la V1</span><h3>Fourchette de prix indicative</h3><p class="d">Un ordre de prix tiré de marchés comparables déjà attribués.</p><details><summary>En savoir plus</summary><p class="x">Fonction à l'étude : sa fiabilité dépendra des données d'attribution disponibles pour chaque métier.</p></details></li>
+        <li class="card"><span class="pill st-later">Envisagé · après la V1</span><h3>Suivi des candidatures</h3><p class="d">Chaque candidature suivie jusqu'au résultat, avec des alertes par e-mail.</p><details><summary>En savoir plus</summary><p class="x">Prévu après la première version, une fois le parcours de préparation éprouvé par les pilotes.</p></details></li>
       </ul>
       <div class="vault">
         <div>
@@ -1244,18 +1263,26 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
     minAmount:Number($('vmin').value)||0,days:Number($('vdays').value)||21}}
   function fill(p){draft=JSON.parse(JSON.stringify(p)); chips();
     document.querySelectorAll('input[name=vtype]').forEach(function(i){i.checked=p.types.indexOf(i.value)>=0});
-    $('vdep').value=p.departments.join(', '); $('vmin').value=String(p.minAmount); $('vdays').value=String(p.days)}
+    $('vdep').value=p.departments.join(', '); $('vmin').value=String(p.minAmount); $('vdays').value=String(p.days);
+    var kw=p.keywords.slice(0,4).join(', ')+(p.keywords.length>4?' +'+(p.keywords.length-4):'');
+    $('vprofsum').textContent=[kw, p.types.length?p.types.map(function(x){return x.toLowerCase()}).join(', '):'tous types', p.departments.length?'départements '+p.departments.join(', '):'toute la France', p.minAmount?p.minAmount.toLocaleString('fr-FR')+' € HT et plus':'pas de montant minimum', p.days+' derniers jours'].join(' · ')}
+  function toggleForm(open){$('vprofile').hidden=!open; $('vedit').setAttribute('aria-expanded',String(open)); $('vedit').textContent=open?'Fermer':'Modifier mon profil'; if(open)$('vkw').focus()}
+  $('vedit').addEventListener('click',function(){toggleForm($('vprofile').hidden)});
   function chips(){$('vchips').innerHTML=draft.keywords.map(function(k,i){return '<li>'+esc(k)+'<button type="button" data-i="'+i+'" aria-label="Retirer le mot-clé '+esc(k)+'">×</button></li>'}).join('')}
   $('vchips').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b)return; draft.keywords.splice(Number(b.dataset.i),1); chips()});
   function addKw(){var k=$('vkw').value.trim(); if(k&&draft.keywords.length<20&&!draft.keywords.some(function(x){return fold(x)===fold(k)})){draft.keywords.push(k.slice(0,40)); chips()} $('vkw').value=''}
   $('vkw-add').addEventListener('click',addKw);
   $('vkw').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault(); addKw()}});
   $('vreset').addEventListener('click',function(){fill(DEF)});
-  $('vprofile').addEventListener('submit',function(e){e.preventDefault(); var p=readForm(); if(!p.keywords.length)p.keywords=DEF.keywords.slice(); try{localStorage.setItem(KEY,JSON.stringify(p))}catch(x){} fill(p); run(p)});
+  $('vprofile').addEventListener('submit',function(e){e.preventDefault(); var p=readForm(); if(!p.keywords.length)p.keywords=DEF.keywords.slice(); try{localStorage.setItem(KEY,JSON.stringify(p))}catch(x){} fill(p); toggleForm(false); run(p)});
 
   var VS={go:['Allez-y','go','Très bon match avec votre profil : à regarder en priorité.'],maybe:['À étudier','maybe','Correspond en partie : lisez l\'avis avant de décider.'],pass:['Passez','pass','Peu adapté à votre profil.']};
+  var LIMIT=5, expanded=false;
   function render(){
-    var shown=results.filter(function(r){return filter==='all'||r.verdict===filter});
+    var all=results.filter(function(r){return filter==='all'||r.verdict===filter});
+    var shown=expanded?all:all.slice(0,LIMIT), rest=all.length-LIMIT;
+    var mo=$('vmore'); mo.hidden=rest<=0;
+    mo.innerHTML=rest>0?'<button type="button" class="btn btn-line">'+(expanded?'Afficher seulement les 5 meilleurs':'Voir les '+rest+' autre'+(rest>1?'s':'')+' marché'+(rest>1?'s':''))+'</button>':'';
     var c={all:results.length,go:0,maybe:0}; results.forEach(function(r){if(c[r.verdict]!=null)c[r.verdict]++});
     var fl=$('vfilters'); fl.hidden=!results.length;
     fl.innerHTML=[['all','Tous ('+c.all+')'],['go','Allez-y ('+c.go+')'],['maybe','À étudier ('+c.maybe+')']].map(function(x){return '<button type="button" data-f="'+x[0]+'" aria-pressed="'+(filter===x[0])+'">'+x[1]+'</button>'}).join('');
@@ -1263,16 +1290,17 @@ dialog::backdrop{background:rgba(43,30,24,.5)}
     $('vlist').innerHTML=shown.map(function(n){var v=VS[n.verdict];
       return '<li class="card vcard"><div class="vtop"><div class="vscore '+v[1]+'" aria-label="Affinité '+n.score+' sur 100"><p class="lab">Affinité</p><p class="figure" style="margin-top:.3rem">'+n.score+'<small>/100</small></p></div><div style="min-width:0">'+
       '<p class="vbuyer">'+esc(n.buyer||'Acheteur non indiqué')+(n.departments.length?' · '+esc(n.departments.join(', ')):'')+'</p><h3 class="vtitle">'+esc(n.title)+'</h3>'+
-      '<p class="vphrase"><span class="vp vp-'+n.verdict+'">'+v[0]+'</span>'+v[2]+'</p>'+
-      '<dl class="vmeta"><div><dt>Date limite :</dt><dd'+(n.daysLeft!==null&&n.daysLeft<8?' style="color:var(--terra-deep)"':'')+'>'+fd(n.deadline)+(n.daysLeft!==null?' (J-'+n.daysLeft+')':'')+'</dd></div><div><dt>Montant :</dt><dd>'+(n.amount!==null?eur(n.amount):'non indiqué')+'</dd></div><div><dt>Publié le :</dt><dd style="font-weight:400">'+fd(n.published)+'</dd></div></dl></div></div>'+
+      '<p class="vphrase"><span class="vp vp-'+n.verdict+'">'+v[0]+'</span><span class="vph-t">'+v[2]+'</span></p>'+
+      '<dl class="vmeta"><div><dt>Date limite :</dt><dd'+(n.daysLeft!==null&&n.daysLeft<8?' style="color:var(--terra-deep)"':'')+'>'+fd(n.deadline)+(n.daysLeft!==null?' <span style="white-space:nowrap">(J-'+n.daysLeft+')</span>':'')+'</dd></div><div><dt>Montant :</dt><dd>'+(n.amount!==null?eur(n.amount):'non indiqué')+'</dd></div></dl></div></div>'+
       '<details><summary>Pourquoi '+n.score+'/100 ? Le calcul et le détail de l\'avis<span aria-hidden="true">+</span></summary><div class="vdet"><div><p class="h4">Calcul de la note</p><ul class="vrs">'+
       n.reasons.map(function(r){return '<li><div class="row"><span class="soft">'+esc(r.l)+'</span><span class="figure">'+r.p+'/'+r.m+'</span></div><div class="bar2" style="height:6px"><span style="width:'+(r.p/r.m*100)+'%;background:var(--ink)"></span></div></li>'}).join('')+
       '</ul><p class="xs muted" style="margin-top:1rem">Une aide au tri, pas une garantie. Lisez toujours l\'avis et le règlement de la consultation avant de décider.</p></div>'+
       '<div><p class="h4">Informations de l\'avis</p><dl class="vinfo"><div><dt>Référence BOAMP</dt><dd>'+esc(n.id)+'</dd></div><div><dt>Procédure</dt><dd>'+esc(n.procedure||'non indiquée')+'</dd></div><div><dt>Type</dt><dd>'+esc(n.types.join(', ').toLowerCase()||'non indiqué')+'</dd></div><div><dt>Descripteurs</dt><dd>'+esc(n.descriptors.join(' · ')||'non indiqués')+'</dd></div><div><dt>Mots-clés trouvés</dt><dd>'+esc(n.matched.join(', '))+'</dd></div></dl>'+
       '<a class="btn btn-line" style="margin-top:1.25rem;min-height:2.5rem;padding:.5rem 1.1rem;font-size:.875rem" href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer">Voir l\'avis officiel sur boamp.fr</a></div></div></details></li>'}).join('')}
-  $('vfilters').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b)return; filter=b.dataset.f; render()});
+  $('vfilters').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b)return; filter=b.dataset.f; expanded=false; render()});
+  $('vmore').addEventListener('click',function(e){if(!e.target.closest('button'))return; expanded=!expanded; render(); if(!expanded)$('vsummary').scrollIntoView({block:'start'})});
 
-  async function run(p){var id=++reqId; filter='all'; $('vgo').disabled=true; $('vgo').textContent='Recherche…';
+  async function run(p){var id=++reqId; filter='all'; expanded=false; $('vmore').hidden=true; $('vgo').disabled=true; $('vgo').textContent='Recherche…';
     $('vsummary').textContent='Recherche dans les avis du BOAMP…'; $('vfilters').hidden=true; $('vlist').innerHTML='<li class="vskel"></li><li class="vskel"></li><li class="vskel"></li>';
     try{var s=await search(p); if(id!==reqId)return;
       results=s.notices.map(function(n){return score(n,p)}).filter(Boolean).sort(function(a,b){return b.score-a.score||((a.daysLeft==null?999:a.daysLeft)-(b.daysLeft==null?999:b.daysLeft))});
