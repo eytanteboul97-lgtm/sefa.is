@@ -1,0 +1,581 @@
+<title>Validation LinkedIn Ready To Reply</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+/* Charte Ready To Reply (plaquette) : un seul thème clair, couleurs peintes explicitement. */
+:root{
+  color-scheme:light;
+  --cream:#F7EEE5;--ivory:#FFFCF7;--sand:#EFE2D4;--line:#E2D2C1;--tan:#E6C9AB;
+  --terra:#BC542F;--terra-deep:#9A3F1E;--terra-soft:#F3DCCD;
+  --ink:#2B1E18;--ink-soft:#5A463C;--ink-muted:#6F5A4E;
+  --sage:#33653F;--sage-soft:#DCE9DD;--ochre:#7A5810;--ochre-soft:#F4E6C4;
+  --serif:"Libre Baskerville",Georgia,"Times New Roman",serif;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.65;padding-inline:max(16px,3vw);padding-block:0 4rem}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--terra-deep)}
+:focus-visible{outline:2px solid var(--terra-deep);outline-offset:2px}
+.wrap{max-width:62rem;margin:0 auto}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra-deep)}
+.muted{color:var(--ink-muted)}.soft{color:var(--ink-soft)}
+.small{font-size:.875rem}
+header.top{padding-block:3rem 2rem;border-bottom:1px solid var(--line)}
+header.top h1{margin-top:.6rem;font-size:clamp(2rem,4.5vw,2.9rem);line-height:1.12}
+header.top .lede{margin-top:1rem;max-width:44rem;font-size:1.05rem;color:var(--ink-soft)}
+.meta{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{display:inline-flex;align-items:center;gap:.4rem;border-radius:999px;padding:.25rem .75rem;font-size:.75rem;font-weight:600;background:var(--ivory);border:1px solid var(--line);color:var(--ink-soft)}
+.chip.warn{background:var(--ochre-soft);border-color:rgba(122,88,16,.25);color:var(--ochre)}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(247,238,229,.96);border-bottom:1px solid var(--line);margin-inline:calc(-1*max(16px,3vw));padding:.6rem max(16px,3vw)}
+nav.toc ol{list-style:none;margin:0 auto;padding:0;max-width:62rem;display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:thin}
+nav.toc a{display:block;white-space:nowrap;text-decoration:none;font-size:.8rem;font-weight:600;color:var(--ink-soft);padding:.35rem .7rem;border-radius:999px}
+nav.toc a:hover{background:var(--sand);color:var(--ink)}
+section{padding-block:3rem;border-bottom:1px solid var(--line)}
+section>h2{font-size:clamp(1.5rem,3vw,1.9rem);line-height:1.2;margin-top:.5rem}
+section>.intro{margin-top:.8rem;max-width:44rem;color:var(--ink-soft)}
+.num{font-family:var(--serif);color:var(--terra-deep);margin-right:.4rem}
+h3{font-size:1.2rem;margin-top:2rem}
+h4{font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);margin-top:1.5rem}
+ul.clean,ol.clean{margin:.75rem 0 0;padding-left:1.2rem;display:grid;gap:.4rem;max-width:46rem}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1rem;margin-top:1.25rem}
+.box{background:var(--ivory);border:1px solid var(--line);border-radius:.9rem;padding:1.25rem 1.4rem}
+.box h4{margin-top:0}
+.box.alert{background:var(--ochre-soft);border-color:rgba(122,88,16,.25)}
+.box.alert h4{color:var(--ochre)}
+.box ul{margin:.5rem 0 0;padding-left:1.1rem;display:grid;gap:.35rem}
+
+/* Textes prêts à publier */
+.ready{margin-top:1.25rem;background:var(--ivory);border:1px solid var(--line);border-radius:.9rem;overflow:hidden}
+.ready-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;padding:.7rem 1rem .7rem 1.25rem;border-bottom:1px solid var(--line);background:#FBF5EE}
+.ready-head .lab{font-size:.78rem;font-weight:700;color:var(--ink-soft)}
+.ready-head .count{font-size:.72rem;color:var(--ink-muted);font-variant-numeric:tabular-nums}
+.ready-body{padding:1.25rem 1.4rem;white-space:pre-wrap;font-size:.95rem;line-height:1.7;max-width:44rem}
+.copy{border:1px solid var(--terra);background:transparent;color:var(--terra-deep);font:600 .78rem var(--sans);border-radius:999px;padding:.35rem .85rem;cursor:pointer;min-height:2rem}
+.copy:hover{background:var(--terra-soft)}
+.copy.done{background:var(--sage-soft);border-color:var(--sage);color:var(--sage)}
+.ph{background:var(--terra-soft);color:var(--terra-deep);border-radius:4px;padding:0 .25rem;font-weight:600}
+.note{margin-top:.75rem;font-size:.85rem;color:var(--ink-muted);max-width:44rem}
+
+/* Tableaux */
+.tscroll{margin-top:1.25rem;overflow-x:auto;border:1px solid var(--line);border-radius:.9rem;background:var(--ivory)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:.7rem .9rem;border-bottom:1px solid var(--line)}
+th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);font-weight:700;background:#FBF5EE;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.k{font-weight:600;white-space:nowrap}
+.pill{display:inline-block;border-radius:999px;padding:.1rem .55rem;font-size:.72rem;font-weight:700;white-space:nowrap}
+.p-core{background:var(--sage-soft);color:var(--sage)}.p-test{background:var(--ochre-soft);color:var(--ochre)}.p-ctrl{background:var(--sand);color:var(--ink-soft)}.p-no{background:var(--terra-soft);color:var(--terra-deep)}
+
+/* Niveaux */
+.levels{margin-top:1.25rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.75rem}
+.lvl{border-radius:.8rem;padding:1rem 1.1rem;border:1px solid var(--line);background:var(--ivory)}
+.lvl b{display:block;font-family:var(--serif);font-weight:400;font-size:1.05rem}
+.lvl span{display:block;margin-top:.3rem;font-size:.85rem;color:var(--ink-soft)}
+.lvl.l3{border-color:rgba(51,101,63,.35);background:var(--sage-soft)}
+
+/* Déroulé */
+.timeline{margin-top:1.25rem;display:grid;gap:.75rem}
+.step{display:grid;grid-template-columns:7.5rem 1fr;gap:1rem;padding:1rem 1.25rem;background:var(--ivory);border:1px solid var(--line);border-radius:.9rem}
+.step .when{font-family:var(--serif);color:var(--terra-deep)}
+@media (max-width:560px){.step{grid-template-columns:1fr;gap:.25rem}}
+.decide{margin-top:1.25rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+.decide .box h4{margin-bottom:.25rem}
+.go h4{color:var(--sage)}.adj h4{color:var(--ochre)}.stop h4{color:var(--terra-deep)}
+footer{padding-block:2.5rem 0;font-size:.85rem;color:var(--ink-muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">Ready To Reply · kit de campagne</p>
+  <h1>Validation LinkedIn</h1>
+  <p class="lede">Une campagne courte et discrète pour vérifier, avant d'investir davantage, si des entreprises reconnaissent le problème traité par Ready To Reply et acceptent d'en parler. Tous les textes sont prêts à copier ; les éléments entre crochets <span class="ph">[ainsi]</span> sont à compléter.</p>
+  <div class="meta">
+    <span class="chip">6 semaines · sans budget publicitaire</span>
+    <span class="chip">4 publications</span>
+    <span class="chip">1 formulaire · 1 tableau de suivi</span>
+    <span class="chip warn">Aucun résultat inventé : les chiffres restent à compléter</span>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sommaire">
+  <ol>
+    <li><a href="#positionnement">Positionnement</a></li>
+    <li><a href="#page">1 · Page LinkedIn</a></li>
+    <li><a href="#publics">2 · Publics</a></li>
+    <li><a href="#posts">3 · Publications</a></li>
+    <li><a href="#formulaire">4 · Formulaire</a></li>
+    <li><a href="#messages">5 · Messages</a></li>
+    <li><a href="#echanges">6 · Échanges</a></li>
+    <li><a href="#suivi">7 · Suivi</a></li>
+    <li><a href="#synthese">8 · Synthèse</a></li>
+    <li><a href="#deroule">9 · Déroulé et décision</a></li>
+  </ol>
+</nav>
+
+<!-- POSITIONNEMENT -->
+<section id="positionnement" aria-labelledby="t-pos">
+  <p class="eyebrow">Avant de commencer</p>
+  <h2 id="t-pos">Le positionnement retenu</h2>
+  <p class="intro">Ready To Reply est un projet en construction qui veut aider les TPE et PME à repérer les appels d'offres publics adaptés à leur activité, à comprendre rapidement ce qui est demandé et à préparer leur réponse plus simplement. L'entreprise garde toujours la main : elle relit, valide et dépose elle-même son dossier. La cible de départ est l'électricité et l'éclairage. Le projet est en phase de validation : aucun client, aucun résultat, pas de produit en vente.</p>
+
+  <div class="grid2">
+    <div class="box">
+      <h4>Hypothèses utilisées</h4>
+      <ul>
+        <li>La page s'appelle « Ready To Reply » (le site écrit « Ready to Reply » : choisir une graphie unique).</li>
+        <li>Les publications partent de la page entreprise et sont relayées le jour même par le fondateur depuis son profil, où se trouvera l'essentiel de l'audience au début.</li>
+        <li>Le formulaire est un outil gratuit (Tally ou Google Forms), accessible par un lien.</li>
+        <li>Pas de budget publicitaire ; les formulaires intégrés de LinkedIn exigent une campagne payante et ne sont donc pas utilisés.</li>
+        <li>Durée : 6 semaines, dont 4 de publications.</li>
+      </ul>
+    </div>
+    <div class="box alert">
+      <h4>À trancher avant de publier</h4>
+      <ul>
+        <li><b>Lien vers le site :</b> le site public affiche les tarifs envisagés, la méthode du score et la feuille de route. Recommandation : ne pas le lier pendant le test, ne partager que le formulaire.</li>
+        <li><b>Mention de l'employeur du fondateur :</b> la plaquette cite l'entreprise où il travaille. À ne pas mentionner publiquement sans son accord.</li>
+        <li><b>Adresse e-mail de contact</b> pour les questions et les demandes de suppression : à créer, idéalement dédiée au projet.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Ce qui reste volontairement hors des publications</h3>
+  <div class="tscroll"><table>
+    <thead><tr><th>Élément sensible</th><th>Pourquoi</th><th>Formulation publique utilisée</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Tarifs envisagés</td><td>Stratégie commerciale non validée ; fausserait les réponses.</td><td>Aucune mention. « Il n'y a rien à acheter aujourd'hui. »</td></tr>
+      <tr><td class="k">Méthode et critères du score</td><td>Cœur de la méthode.</td><td>« Comprendre rapidement l'essentiel d'une consultation. »</td></tr>
+      <tr><td class="k">Sources de données et fourchettes de prix</td><td>Choix techniques et avantage concurrentiel.</td><td>« Repérer plus facilement les consultations adaptées. »</td></tr>
+      <tr><td class="k">Coffre-fort, préparation détaillée</td><td>Fonctionnalités détaillées.</td><td>« Préparer le dossier plus simplement. »</td></tr>
+      <tr><td class="k">Feuille de route, international</td><td>Stratégie.</td><td>« Nous commençons par l'électricité et l'éclairage. »</td></tr>
+      <tr><td class="k">Chiffres de la commande publique</td><td>Issus de la plaquette, non revérifiés ici.</td><td>Option en publication 2, à n'utiliser qu'après vérification de la source.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 1. PAGE -->
+<section id="page" aria-labelledby="t-page">
+  <p class="eyebrow">Livrable 1</p>
+  <h2 id="t-page"><span class="num">1</span>Page LinkedIn</h2>
+  <p class="intro">Réglages proposés : nom « Ready To Reply » · secteur « Développement de logiciels » · taille « 2 à 10 salariés » ou moins selon la réalité · localisation <span class="ph">[ville à confirmer]</span> · bouton d'action « En savoir plus » pointant vers le formulaire.</p>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Accroche (slogan de la page)</span><span class="count" data-count="t-slogan"></span><button class="copy" type="button" data-copy="t-slogan">Copier</button></div>
+    <div class="ready-body" id="t-slogan">Aider les TPE et PME à trouver les bons appels d'offres publics et à y répondre plus simplement.</div>
+  </div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Présentation (« À propos »)</span><span class="count" data-count="t-about"></span><button class="copy" type="button" data-copy="t-about">Copier</button></div>
+    <div class="ready-body" id="t-about">Ready To Reply est un projet en construction, né d'un constat de terrain : beaucoup de TPE et PME ont les compétences pour remporter des marchés publics, mais manquent de temps pour repérer les consultations qui leur correspondent et pour préparer des dossiers souvent longs et exigeants.
+
+Notre objectif : les aider à identifier plus facilement les appels d'offres adaptés à leur activité, à comprendre rapidement ce qui est demandé et à préparer leur réponse plus simplement. L'entreprise garde toujours la main : elle relit, valide et dépose elle-même son dossier.
+
+Nous sommes en phase de validation. Nous échangeons avec des professionnels qui répondent aux marchés publics, en commençant par les métiers de l'électricité et de l'éclairage, pour vérifier que nous travaillons sur les bons problèmes.
+
+Vous répondez à des appels d'offres ? Votre retour nous intéresse : <span class="ph">[lien du formulaire]</span>
+
+Ready To Reply est un service indépendant, sans lien avec les administrations ni avec les plateformes de publication des marchés publics.</div>
+  </div>
+</section>
+
+<!-- 2. PUBLICS -->
+<section id="publics" aria-labelledby="t-publics">
+  <p class="eyebrow">Livrable 2</p>
+  <h2 id="t-publics"><span class="num">2</span>Publics à tester</h2>
+  <p class="intro">Un public cœur, deux publics d'extension et un groupe de contrôle, pour voir où l'intérêt est le plus fort. Les relais servent à diffuser, pas à mesurer la demande.</p>
+  <div class="tscroll"><table>
+    <thead><tr><th>Public</th><th>Rôle dans le test</th><th>Profils et entreprises</th><th>Pourquoi le tester</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Dirigeants</td><td><span class="pill p-core">Cœur</span></td><td>Gérants de TPE et PME de l'électricité et de l'éclairage : installateurs, distributeurs, maintenance de l'éclairage public.</td><td>Ils vivent le problème et décident d'un éventuel pilote.</td></tr>
+      <tr><td class="k">Commerciaux</td><td><span class="pill p-core">Cœur</span></td><td>Responsables commerciaux, chargés d'affaires des mêmes entreprises.</td><td>Ce sont souvent eux qui repèrent et préparent les réponses.</td></tr>
+      <tr><td class="k">Administratif</td><td><span class="pill p-core">Cœur</span></td><td>Assistants administratifs, chargés d'appels d'offres, responsables marchés publics en PME.</td><td>Ils rassemblent les pièces : c'est là que la charge se voit au quotidien.</td></tr>
+      <tr><td class="k">Autres métiers du bâtiment</td><td><span class="pill p-test">Extension</span></td><td>PME de plomberie, chauffage-ventilation, second œuvre qui répondent aux collectivités.</td><td>Vérifier si le problème dépasse l'électricité.</td></tr>
+      <tr><td class="k">Fournitures et services</td><td><span class="pill p-ctrl">Contrôle</span></td><td>PME de nettoyage, d'espaces verts, de mobilier travaillant pour le public.</td><td>Comparer : un intérêt plus fort ici ouvrirait une autre piste.</td></tr>
+      <tr><td class="k">Relais</td><td><span class="pill p-ctrl">Diffusion</span></td><td>Experts-comptables, conseillers des chambres consulaires, fédérations professionnelles.</td><td>Peuvent faire suivre la publication 4 ; leurs inscriptions ne comptent pas comme demande.</td></tr>
+      <tr><td class="k">Consultants en réponse aux appels d'offres</td><td><span class="pill p-no">Prudence</span></td><td>Cabinets et indépendants qui rédigent des réponses.</td><td>Possibles concurrents ou partenaires : écouter, ne rien détailler.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 3. POSTS -->
+<section id="posts" aria-labelledby="t-posts">
+  <p class="eyebrow">Livrable 3</p>
+  <h2 id="t-posts"><span class="num">3</span>Quatre publications</h2>
+  <p class="intro">Une par semaine. Chaque texte se termine par une question ouverte ou un appel à échanger, pour susciter des commentaires utiles plutôt que des « J'aime ». Visuel conseillé : une phrase clé du texte sur un fond crème ou terracotta aux couleurs de la marque, sans capture du produit.</p>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Publication 1 · Le problème · semaine 1</span><span class="count" data-count="t-p1"></span><button class="copy" type="button" data-copy="t-p1">Copier</button></div>
+    <div class="ready-body" id="t-p1">Répondre à un appel d'offres public, pour une PME, commence rarement par la réponse.
+
+Cela commence par une recherche.
+Plusieurs plateformes à consulter, chacune avec son compte.
+Des annonces à trier pour trouver celles qui correspondent vraiment au métier, à la zone, à la taille de l'entreprise.
+
+Puis vient la lecture.
+Un règlement de consultation, un cahier des charges, des annexes.
+Des pièces à rassembler, des dates à ne pas manquer, parfois une visite obligatoire mentionnée au détour d'une page.
+
+Dans beaucoup de PME, ce travail repose sur une ou deux personnes, en plus de leur activité habituelle.
+
+C'est ce constat qui est à l'origine de Ready To Reply.
+
+Et vous, qu'est-ce qui vous prend le plus de temps quand vous répondez à un marché public : trouver les bonnes consultations, les comprendre ou préparer le dossier ?
+
+#MarchésPublics #AppelsDOffres #PME</div>
+  </div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Publication 2 · Les conséquences · semaine 2</span><span class="count" data-count="t-p2"></span><button class="copy" type="button" data-copy="t-p2">Copier</button></div>
+    <div class="ready-body" id="t-p2">Quand on manque de temps pour les appels d'offres, les conséquences se voient rarement. Mais elles existent.
+
+→ Des consultations intéressantes repérées trop tard, ou pas du tout.
+→ Des candidatures abandonnées parce que le dossier paraît trop lourd.
+→ Des offres écartées pour une pièce manquante ou une date dépassée.
+→ Des heures passées sur des marchés qui ne correspondaient pas vraiment à l'entreprise.
+→ Un prix fixé dans l'urgence, sans bien savoir où se situer.
+
+Aucune de ces situations n'est une question de compétence. C'est une question de temps et de visibilité.
+
+Nous cherchons à comprendre lesquelles sont les plus fréquentes, et les plus coûteuses, pour les entreprises qui répondent aux marchés publics.
+
+Si l'une d'elles vous parle, dites-nous laquelle en commentaire, ou écrivez-nous directement.
+
+#MarchésPublics #CommandePublique #TPE #PME</div>
+  </div>
+  <p class="note"><b>Option, uniquement après vérification de la source :</b> ajouter avant la dernière phrase « Selon l'Observatoire économique de la commande publique, <span class="ph">[part]</span> des contrats sont attribués aux TPE et PME, pour <span class="ph">[part]</span> de leur valeur (<span class="ph">[année]</span>). » Les chiffres de la plaquette doivent être contrôlés dans la publication officielle avant d'être repris.</p>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Publication 3 · L'idée de Ready To Reply · semaine 3</span><span class="count" data-count="t-p3"></span><button class="copy" type="button" data-copy="t-p3">Copier</button></div>
+    <div class="ready-body" id="t-p3">Ready To Reply part d'une idée simple : aider les PME à consacrer leur temps aux appels d'offres qui leur correspondent vraiment, et à y répondre plus sereinement.
+
+Concrètement, nous travaillons sur un outil qui aiderait à :
+1. repérer plus facilement les consultations adaptées à l'activité de l'entreprise ;
+2. comprendre rapidement l'essentiel d'une consultation ;
+3. préparer le dossier plus simplement ;
+4. suivre ses candidatures.
+
+L'entreprise garde toujours la main : c'est elle qui relit, valide et dépose sa réponse.
+
+Le projet est en construction. Nous commençons par les métiers de l'électricité et de l'éclairage, et nous voulons le construire avec les personnes qui répondent réellement aux marchés publics.
+
+Si vous êtes concerné, un formulaire de deux minutes permet de nous décrire votre situation : [lien du formulaire]
+
+#MarchésPublics #AppelsDOffres #PME</div>
+  </div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Publication 4 · Invitation à échanger · semaine 4</span><span class="count" data-count="t-p4"></span><button class="copy" type="button" data-copy="t-p4">Copier</button></div>
+    <div class="ready-body" id="t-p4">Nous cherchons à échanger avec des professionnels qui répondent aux marchés publics.
+
+Vous êtes dirigeant, responsable commercial ou chargé des appels d'offres dans une TPE ou une PME, en particulier dans l'électricité ou l'éclairage ?
+
+Nous aimerions comprendre comment vous travaillez aujourd'hui : comment vous repérez les consultations, comment vous préparez vos dossiers, ce qui vous fait perdre le plus de temps.
+
+C'est un échange de 15 minutes, sans présentation commerciale ni engagement. Votre retour nous aidera à vérifier que Ready To Reply répond à un vrai besoin avant d'aller plus loin.
+
+Les entreprises qui le souhaitent pourront aussi être recontactées pour tester une première version, le moment venu.
+
+Pour participer : [lien du formulaire], ou un simple message à cette page.
+
+Merci à celles et ceux qui feront suivre ce message à une personne concernée.
+
+#MarchésPublics #AppelsDOffres #PME #Électricité</div>
+  </div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Relais par le fondateur (commentaire au partage, à personnaliser)</span><span class="count" data-count="t-relais"></span><button class="copy" type="button" data-copy="t-relais">Copier</button></div>
+    <div class="ready-body" id="t-relais">Je prépare moi-même des réponses à des appels d'offres, et c'est en vivant ces difficultés que l'idée de Ready To Reply est née. Avant d'aller plus loin, j'ai besoin de vérifier que d'autres entreprises les vivent aussi. Si vous répondez à des marchés publics, votre avis m'est précieux.</div>
+  </div>
+</section>
+
+<!-- 4. FORMULAIRE -->
+<section id="formulaire" aria-labelledby="t-form">
+  <p class="eyebrow">Livrable 4</p>
+  <h2 id="t-form"><span class="num">4</span>Formulaire d'intérêt</h2>
+  <p class="intro">Outil conseillé : <b>Tally</b> (gratuit, logique conditionnelle, hébergement annoncé dans l'Union européenne, à vérifier) ou <b>Google Forms</b> (gratuit, réponses directement dans une feuille Google). Un seul lien, placé dans le bouton de la page, les publications 3 et 4 et les messages privés. Durée visée : 2 minutes.</p>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Titre et introduction du formulaire</span><span class="count" data-count="t-fintro"></span><button class="copy" type="button" data-copy="t-fintro">Copier</button></div>
+    <div class="ready-body" id="t-fintro">Ready To Reply : votre avis sur les appels d'offres
+
+Ready To Reply est un projet en construction qui vise à aider les TPE et PME à repérer les appels d'offres publics adaptés à leur activité et à préparer leurs réponses plus simplement.
+
+Avant d'aller plus loin, nous voulons vérifier que nous travaillons sur les bons problèmes. Ce formulaire prend environ 2 minutes. Aucun produit n'est proposé à la vente à ce stade.</div>
+  </div>
+
+  <h3>Questions</h3>
+  <div class="tscroll"><table>
+    <thead><tr><th>#</th><th>Question</th><th>Type</th><th>Réponses proposées</th><th>Sert à repérer</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Prénom et nom</td><td>Texte · obligatoire</td><td>—</td><td>Identification</td></tr>
+      <tr><td>2</td><td>Adresse e-mail professionnelle</td><td>E-mail · obligatoire</td><td>—</td><td>Contact</td></tr>
+      <tr><td>3</td><td>Entreprise</td><td>Texte · obligatoire</td><td>—</td><td>Type d'entreprise</td></tr>
+      <tr><td>4</td><td>Fonction</td><td>Texte · obligatoire</td><td>—</td><td>Type de décideur</td></tr>
+      <tr><td>5</td><td>Secteur d'activité</td><td>Choix unique · obligatoire</td><td>Électricité / éclairage · Autres travaux du bâtiment · Fournitures · Services · Conseil ou accompagnement · Autre</td><td>Public cœur, extension ou contrôle</td></tr>
+      <tr><td>6</td><td>Taille de l'entreprise</td><td>Choix unique · facultatif</td><td>1 à 9 · 10 à 49 · 50 à 249 · 250 et plus</td><td>Profil</td></tr>
+      <tr><td>7</td><td>Votre entreprise répond-elle à des marchés publics ?</td><td>Choix unique · obligatoire</td><td>Oui, régulièrement · Oui, occasionnellement · Pas encore, mais nous l'envisageons · Non</td><td><b>Curieux ou concerné</b></td></tr>
+      <tr><td>8</td><td>En quelques mots, quelle est votre principale difficulté avec les appels d'offres ?</td><td>Texte court · obligatoire</td><td>—</td><td><b>Problème réellement vécu</b></td></tr>
+      <tr><td>9</td><td>Qu'est-ce qui vous intéresse le plus dans Ready To Reply ?</td><td>Choix unique · obligatoire</td><td>Repérer les consultations adaptées · Comprendre plus vite les consultations · Préparer les dossiers et les pièces · Suivre les candidatures · Simplement suivre le projet</td><td>Intérêt principal</td></tr>
+      <tr><td>10</td><td>Accepteriez-vous un échange de 15 minutes pour nous expliquer votre façon de faire ?</td><td>Choix unique · obligatoire</td><td>Oui · Non, pas pour le moment</td><td><b>Intéressé par un échange</b></td></tr>
+      <tr><td>11</td><td>Accepteriez-vous d'être recontacté pour tester une première version, le moment venu ?</td><td>Choix unique · obligatoire</td><td>Oui · Peut-être · Non</td><td><b>Candidat à un pilote</b></td></tr>
+      <tr><td>12</td><td>J'accepte que Ready To Reply utilise ces informations pour me recontacter au sujet de cette démarche.</td><td>Case à cocher · obligatoire · non cochée par défaut</td><td>—</td><td>Accord explicite</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Phrase sous le formulaire (usage des coordonnées)</span><span class="count" data-count="t-rgpd"></span><button class="copy" type="button" data-copy="t-rgpd">Copier</button></div>
+    <div class="ready-body" id="t-rgpd">Vos réponses servent uniquement à cette démarche : mieux comprendre vos besoins et, si vous l'avez accepté, vous recontacter à ce sujet. Elles ne sont ni vendues ni partagées. Vous pouvez demander à tout moment leur modification ou leur suppression en écrivant à [adresse e-mail]. Elles seront supprimées au plus tard [durée] après la fin de la démarche.</div>
+  </div>
+
+  <h3>Classer chaque réponse</h3>
+  <div class="levels">
+    <div class="lvl"><b>Curieux</b><span>Q7 « Non » ou « Pas encore », ou Q9 « Simplement suivre le projet ».</span></div>
+    <div class="lvl"><b>Concerné</b><span>Q7 « Oui » et une difficulté concrète décrite en Q8.</span></div>
+    <div class="lvl"><b>Échange souhaité</b><span>Concerné et Q10 « Oui ».</span></div>
+    <div class="lvl l3"><b>Pilote possible</b><span>Q11 « Oui » et accord de recontact (Q12).</span></div>
+  </div>
+
+  <div class="box alert" style="margin-top:1.25rem">
+    <h4>À vérifier avant la mise en ligne (ceci n'est pas un avis juridique)</h4>
+    <ul>
+      <li>Qui est responsable des données : une société existante ou le fondateur à titre personnel.</li>
+      <li>La durée de conservation annoncée, puis son respect réel (suppression effective).</li>
+      <li>L'outil de formulaire : où sont stockées les réponses et avec quelles conditions.</li>
+      <li>Une adresse de contact qui fonctionne pour les demandes d'accès ou de suppression, et la mention du droit de réclamation auprès de la CNIL.</li>
+      <li>La case d'accord non cochée par défaut, et aucun usage des coordonnées pour une prospection commerciale sans nouvel accord.</li>
+      <li>L'accès au tableau de suivi limité aux personnes qui mènent la campagne.</li>
+      <li>Faire relire ces points par une personne compétente.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5. MESSAGES -->
+<section id="messages" aria-labelledby="t-msg">
+  <p class="eyebrow">Livrable 5</p>
+  <h2 id="t-msg"><span class="num">5</span>Confirmation et réponses privées</h2>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Message de confirmation après envoi du formulaire</span><span class="count" data-count="t-conf"></span><button class="copy" type="button" data-copy="t-conf">Copier</button></div>
+    <div class="ready-body" id="t-conf">Merci, votre réponse a bien été enregistrée.
+
+Nous lisons chaque réponse. Si vous avez accepté un échange, nous vous écrirons dans les prochains jours pour convenir d'un créneau de 15 minutes, à votre convenance.
+
+Ready To Reply est encore en construction : il n'y a rien à acheter aujourd'hui. Votre retour nous aide à vérifier que nous travaillons sur les bons problèmes.
+
+Une question, ou une demande de suppression de vos réponses : [adresse e-mail].</div>
+  </div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Message privé · personne inscrite qui accepte un échange</span><span class="count" data-count="t-mp1"></span><button class="copy" type="button" data-copy="t-mp1">Copier</button></div>
+    <div class="ready-body" id="t-mp1">Bonjour [Prénom],
+
+Merci pour votre réponse au sujet de Ready To Reply, et pour avoir décrit votre situation ([reprendre sa difficulté en quelques mots]).
+
+Seriez-vous disponible pour un échange de 15 minutes dans les deux prochaines semaines ? L'idée est de mieux comprendre comment vous gérez aujourd'hui les appels d'offres ; ce n'est pas une présentation commerciale.
+
+Quelques créneaux possibles : [créneaux]. Si aucun ne vous convient, proposez-moi le vôtre.
+
+Bonne journée,
+[Prénom Nom]
+Ready To Reply</div>
+  </div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Message privé · réponse à un commentaire ou à un message spontané</span><span class="count" data-count="t-mp2"></span><button class="copy" type="button" data-copy="t-mp2">Copier</button></div>
+    <div class="ready-body" id="t-mp2">Bonjour [Prénom],
+
+Merci pour votre commentaire sur [sujet]. Vous répondez vous-même à des marchés publics ?
+
+Si vous êtes d'accord, j'aimerais en parler 15 minutes avec vous pour mieux comprendre votre façon de faire. Nous sommes en phase de validation : il n'y a rien à vendre, seulement des questions.
+
+Si c'est plus simple, un formulaire de deux minutes est ici : [lien du formulaire].
+
+Bonne journée,
+[Prénom]</div>
+  </div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Message privé · personne simplement curieuse</span><span class="count" data-count="t-mp3"></span><button class="copy" type="button" data-copy="t-mp3">Copier</button></div>
+    <div class="ready-body" id="t-mp3">Bonjour [Prénom],
+
+Merci pour votre intérêt pour Ready To Reply. Nous partagerons l'avancement du projet sur cette page. Si, dans votre entourage, quelqu'un répond régulièrement à des appels d'offres, n'hésitez pas à lui transmettre le lien : son retour nous serait très utile.
+
+Bonne journée,
+[Prénom]</div>
+  </div>
+</section>
+
+<!-- 6. ÉCHANGES -->
+<section id="echanges" aria-labelledby="t-ech">
+  <p class="eyebrow">Livrable 6</p>
+  <h2 id="t-ech"><span class="num">6</span>Questions pour un échange de 15 minutes</h2>
+  <p class="intro">Faire parler de faits passés plutôt que d'intentions. Présenter Ready To Reply seulement à la fin, en deux phrases, si la personne le demande. Ne pas parler de prix. Noter les phrases exactes et l'intensité du problème de 1 à 5 dans l'onglet « Échanges » du tableau.</p>
+  <ol class="clean">
+    <li>Pouvez-vous me raconter la dernière fois que vous avez répondu à un appel d'offres, depuis la découverte de l'annonce jusqu'au dépôt ?</li>
+    <li>Comment repérez-vous aujourd'hui les consultations qui vous intéressent ? Avez-vous le sentiment d'en manquer ?</li>
+    <li>Dans la préparation d'un dossier, qu'est-ce qui vous prend le plus de temps ou vous pose le plus de difficultés ?</li>
+    <li>Vous est-il arrivé de renoncer à un marché, d'être écarté, ou de le perdre pour une raison que vous auriez pu éviter ? Que s'est-il passé ?</li>
+    <li>Quels outils, services ou aides utilisez-vous déjà pour cela ? Qu'est-ce qui vous satisfait, et qu'est-ce qui manque ?</li>
+    <li>Si vous pouviez régler un seul de ces problèmes dès demain, lequel choisiriez-vous, et pourquoi ?</li>
+    <li>Seriez-vous prêt à tester une première version sur vos propres appels d'offres ? Qu'est-ce qui devrait être vrai pour que ce test vaille votre temps ?</li>
+  </ol>
+</section>
+
+<!-- 7. SUIVI -->
+<section id="suivi" aria-labelledby="t-suivi">
+  <p class="eyebrow">Livrable 7</p>
+  <h2 id="t-suivi"><span class="num">7</span>Tableau de suivi</h2>
+  <p class="intro">Le fichier Excel fourni avec cette page (<b>ready-to-reply-suivi-validation-linkedin.xlsx</b>) contient cinq onglets : mode d'emploi, publications, inscriptions (une ligne par personne, avec listes déroulantes), échanges et synthèse calculée automatiquement. Il s'ouvre aussi dans Google Sheets. Mise à jour conseillée : chaque vendredi.</p>
+
+  <h3>Trois niveaux à ne pas confondre</h3>
+  <div class="levels">
+    <div class="lvl"><b>Visibilité</b><span>Impressions, visites, « J'aime ». Le message circule ; cela ne dit rien de l'intérêt.</span></div>
+    <div class="lvl"><b>Inscription</b><span>Une personne laisse ses coordonnées : curiosité ou intérêt déclaré, pas un besoin prouvé.</span></div>
+    <div class="lvl l3"><b>Intérêt commercial réel</b><span>Un échange où le problème est confirmé, puis un accord pour un pilote qui engage du temps ou des documents.</span></div>
+  </div>
+  <p class="note"><b>Une inscription n'est ni une preuve d'achat ni une intention d'achat.</b> Seuls les échanges réalisés et les pilotes acceptés permettent de décider.</p>
+
+  <h3>Onglet « Publications » : aperçu</h3>
+  <div class="tscroll"><table>
+    <thead><tr><th>Date et publication</th><th>Audience visée</th><th>Impressions et visites</th><th>Clics vers le formulaire</th><th>Formulaires commencés / envoyés</th><th>Inscriptions reçues</th><th>Inscriptions pertinentes</th><th>Demandes de contact</th><th>RDV pris / réalisés</th><th>Intérêt pilote</th><th>Commentaires ou objections</th></tr></thead>
+    <tbody>
+      <tr><td class="k">[date] · P1 Le problème</td><td>Dirigeants, commerciaux électricité / éclairage</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td></tr>
+      <tr><td class="k">[date] · P2 Les conséquences</td><td>Mêmes publics + chargés d'appels d'offres</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td></tr>
+      <tr><td class="k">[date] · P3 L'idée</td><td>Tous publics testés</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td></tr>
+      <tr><td class="k">[date] · P4 Invitation</td><td>Professionnels qui répondent aux marchés</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td></tr>
+      <tr><td class="k">Hors publications</td><td>Messages directs, bouche-à-oreille</td><td>—</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ] / [ ]</td><td>[ ]</td><td>[ ]</td></tr>
+      <tr><td class="k"><b>Synthèse des inscriptions</b></td><td>Toutes</td><td>total calculé</td><td>total</td><td>total</td><td>total</td><td>total</td><td>total</td><td>total</td><td>total</td><td>voir synthèse</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 8. SYNTHÈSE -->
+<section id="synthese" aria-labelledby="t-syn">
+  <p class="eyebrow">Livrable 8</p>
+  <h2 id="t-syn"><span class="num">8</span>Compte rendu interne</h2>
+  <p class="intro">À remplir après la campagne. Aucun chiffre n'est prérempli.</p>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Trame du compte rendu</span><span class="count" data-count="t-cr"></span><button class="copy" type="button" data-copy="t-cr">Copier</button></div>
+    <div class="ready-body" id="t-cr">READY TO REPLY · COMPTE RENDU DE LA CAMPAGNE DE VALIDATION LINKEDIN
+
+1. Objectif du test
+Vérifier si le problème traité par Ready To Reply est assez important pour que des entreprises s'y intéressent et acceptent d'en discuter, et identifier les profils les plus réceptifs.
+
+2. Période et publics
+Du [date] au [date]. Publics : [publics réellement touchés]. Canaux : page Ready To Reply, profil du fondateur, [nombre] messages directs.
+
+3. Publications et résultats
+[4] publications. Impressions : [ ]. Clics vers le formulaire : [ ]. Publication la plus commentée : [ ], pourquoi selon nous : [ ].
+
+4. Inscriptions et profils
+Inscriptions reçues : [ ], dont pertinentes : [ ].
+Curieux [ ] · Concernés [ ] · Échange souhaité [ ] · Pilote possible [ ].
+Secteurs : [répartition]. Fonctions : [répartition]. Tailles : [répartition].
+
+5. Problèmes les plus souvent mentionnés
+1. [problème] · [nombre de mentions]
+2. [problème] · [nombre]
+3. [problème] · [nombre]
+
+6. Objections et questions récurrentes
+[objection ou question] · [fréquence] · [réponse apportée ou à préparer]
+
+7. Échanges et pilotes
+Rendez-vous pris : [ ]. Réalisés : [ ]. Intensité moyenne du problème : [ ]/5.
+Entreprises prêtes à tester une première version : [ ], avec leurs conditions : [ ].
+
+8. Ce que les résultats permettent de conclure
+[ ]
+
+9. Ce qu'ils ne permettent pas encore de conclure
+Par exemple : la volonté de payer, le prix acceptable, la taille réelle du marché, la représentativité d'un échantillon issu d'un seul réseau.
+
+10. Recommandation
+Poursuivre · Ajuster le positionnement · Revoir l'idée
+Justification : [ ]
+Prochaines étapes : [ ]</div>
+  </div>
+
+  <div class="ready">
+    <div class="ready-head"><span class="lab">Page de synthèse très courte</span><span class="count" data-count="t-one"></span><button class="copy" type="button" data-copy="t-one">Copier</button></div>
+    <div class="ready-body" id="t-one">READY TO REPLY · VALIDATION LINKEDIN EN UNE PAGE · [période]
+
+Chiffres clés
+Publications : [4] · Impressions : [ ] · Inscriptions : [ ] dont pertinentes [ ]
+Échanges réalisés : [ ] · Intensité moyenne du problème : [ ]/5 · Pilotes acceptés : [ ]
+
+Ce que nous avons entendu (verbatims anonymisés)
+« [verbatim] » · [fonction], [secteur], [taille]
+« [verbatim] » · [fonction], [secteur], [taille]
+« [verbatim] » · [fonction], [secteur], [taille]
+
+Problème le plus cité : [ ]
+Objection principale : [ ]
+
+Décision proposée : [poursuivre / ajuster / revoir], parce que [ ].</div>
+  </div>
+</section>
+
+<!-- 9. DÉROULÉ -->
+<section id="deroule" aria-labelledby="t-der">
+  <p class="eyebrow">Livrable 9</p>
+  <h2 id="t-der"><span class="num">9</span>Déroulement et critères de décision</h2>
+  <p class="intro">Une page LinkedIn neuve a très peu d'abonnés : au début, l'essentiel de la portée viendra du profil du fondateur et des messages directs. Des impressions faibles sont donc normales et ne disent rien de l'intérêt pour le problème.</p>
+
+  <div class="timeline">
+    <div class="step"><p class="when">Semaine 0</p><p><b>Préparation.</b> Créer la page et le formulaire, le tester soi-même, préparer le tableau. Lister 60 à 100 personnes correspondant aux publics cœur, à contacter individuellement pendant la campagne.</p></div>
+    <div class="step"><p class="when">Semaines 1 à 4</p><p><b>Une publication par semaine</b>, le mardi ou le jeudi en début de matinée, relayée le jour même par le fondateur avec un commentaire personnel. Répondre à chaque commentaire sous 24 heures. Envoyer 10 à 15 messages personnalisés par semaine (pas de message automatique). Mener les échanges au fil de l'eau.</p></div>
+    <div class="step"><p class="when">Chaque vendredi</p><p><b>30 minutes de suivi</b> : reporter les chiffres dans le tableau, classer les inscriptions, relancer une seule fois les personnes qui n'ont pas répondu.</p></div>
+    <div class="step"><p class="when">Semaines 5 et 6</p><p><b>Terminer les échanges</b>, regrouper les problèmes et objections, remplir le compte rendu et décider.</p></div>
+  </div>
+
+  <h3>Repères pour décider</h3>
+  <p class="note" style="margin-top:.5rem">Ces critères sont indicatifs, pensés pour un premier test avec un réseau modeste. Ce ne sont pas des seuils universels : les adapter à l'audience réellement touchée.</p>
+  <div class="decide">
+    <div class="box go"><h4>Poursuivre</h4><ul>
+      <li>8 à 10 échanges réalisés, ou plus, avec des entreprises du public cœur.</li>
+      <li>La majorité décrivent spontanément le problème et le jugent important (4 ou 5 sur 5).</li>
+      <li>Au moins 3 entreprises acceptent un pilote concret, avec une date ou leurs propres documents.</li>
+    </ul></div>
+    <div class="box adj"><h4>Ajuster le positionnement</h4><ul>
+      <li>L'intérêt est réel mais porte sur une seule partie du problème, par exemple le repérage.</li>
+      <li>Un autre public (extension ou contrôle) réagit plus fortement que le public cœur.</li>
+      <li>Beaucoup d'inscriptions, mais surtout des curieux et peu d'échanges.</li>
+    </ul></div>
+    <div class="box stop"><h4>Revoir l'idée</h4><ul>
+      <li>Moins de 5 échanges malgré les messages ciblés et une relance.</li>
+      <li>Le problème est jugé secondaire (intensité de 1 ou 2 sur 5 en moyenne).</li>
+      <li>Les solutions actuelles sont jugées suffisantes, et aucun pilote n'est accepté.</li>
+    </ul></div>
+  </div>
+</section>
+
+<footer>
+  <p>Vérifications faites sur ce kit : aucun texte ne présente le produit comme disponible, utilisé ou ayant produit des résultats ; aucun chiffre, témoignage ou partenariat n'est inventé ; les tarifs, la méthode, les sources de données et la feuille de route restent hors des publications.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  // Compteur de caractères (repère : LinkedIn coupe l'aperçu d'une publication vers 210 caractères, et la limite totale est de 3 000).
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var t=document.getElementById(el.getAttribute('data-count')); if(!t)return;
+    el.textContent=t.innerText.trim().length.toLocaleString('fr-FR')+' caractères';
+  });
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=document.getElementById(b.getAttribute('data-copy')); if(!t)return;
+      var text=t.innerText.trim();
+      var done=function(){b.textContent='Copié';b.classList.add('done');setTimeout(function(){b.textContent='Copier';b.classList.remove('done')},1800)};
+      var fallback=function(){var r=document.createRange();r.selectNodeContents(t);var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Sélectionné : Ctrl+C';};
+      try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}
+    });
+  });
+})();
+</script>
