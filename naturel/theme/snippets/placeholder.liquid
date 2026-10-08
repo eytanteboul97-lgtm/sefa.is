@@ -1,0 +1,15 @@
+{%- comment -%}
+  Clearly identified placeholder for photography that hasn't been uploaded yet.
+  Never a stock photo standing in for the real product.
+
+  Params:
+  - label: what the final image should be (e.g. "Photographie de mer calme")
+  - tone: 'sand' (default) | 'ocean' | 'stone' | 'ink'
+  - class: extra classes
+{%- endcomment -%}
+<div class="placeholder{% if tone %} placeholder--{{ tone }}{% endif %}{% if class %} {{ class }}{% endif %}" role="img" aria-label="{{ 'general.placeholder' | t }} — {{ label | escape }}">
+  <p class="placeholder__label" aria-hidden="true">
+    {{- 'general.placeholder' | t -}}
+    {%- if label != blank -%}<span>{{ label }}</span>{%- endif -%}
+  </p>
+</div>

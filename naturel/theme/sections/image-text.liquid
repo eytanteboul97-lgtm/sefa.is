@@ -1,0 +1,48 @@
+<section class="section{% if section.settings.background != 'none' %} section--{{ section.settings.background }}{% endif %}">
+  <div class="container">
+    <div class="split{% if section.settings.reverse %} split--reverse{% endif %}">
+      <div class="split__media media media--{{ section.settings.ratio }} reveal-media reveal">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy' }}
+        {%- else -%}
+          {% render 'placeholder', label: section.settings.placeholder_label %}
+        {%- endif -%}
+      </div>
+      <div class="split__text">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--rule reveal">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="h2 reveal" style="--d: 1">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="rte lede reveal" style="--d: 2">{{ section.settings.text }}</div>{%- endif -%}
+        {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+          <a href="{{ section.settings.link }}" class="link reveal" style="--d: 3">{{ section.settings.link_label }} {% render 'icon', name: 'arrow' %}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image et texte",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photographie" },
+    { "type": "text", "id": "placeholder_label", "label": "Description de l'image attendue", "default": "Photographie à importer" },
+    {
+      "type": "select", "id": "ratio", "label": "Format",
+      "options": [{ "value": "4-5", "label": "Portrait 4:5" }, { "value": "1-1", "label": "Carré" }, { "value": "3-2", "label": "Paysage 3:2" }],
+      "default": "4-5"
+    },
+    { "type": "checkbox", "id": "reverse", "label": "Image à droite", "default": false },
+    {
+      "type": "select", "id": "background", "label": "Fond",
+      "options": [{ "value": "none", "label": "Sable" }, { "value": "paper", "label": "Blanc cassé" }, { "value": "beige", "label": "Beige chaud" }],
+      "default": "none"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Titre" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "link_label", "label": "Lien — libellé" },
+    { "type": "url", "id": "link", "label": "Lien" }
+  ],
+  "presets": [{ "name": "Image et texte" }]
+}
+{% endschema %}

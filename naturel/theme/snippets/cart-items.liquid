@@ -1,0 +1,56 @@
+{%- comment -%}
+  Cart line items, shared by the drawer and the cart page.
+  Quantity changes go through Shopify's /cart/change.js (naturel.js) with a
+  plain <form action="/cart"> fallback when JavaScript is unavailable.
+{%- endcomment -%}
+<ul class="list-reset" role="list">
+  {%- for item in cart.items -%}
+    <li class="cart-item" data-line="{{ forloop.index }}">
+      <a href="{{ item.url }}" class="cart-item__media media" tabindex="-1" aria-hidden="true">
+        {%- if item.image -%}
+          {{ item.image | image_url: width: 240 | image_tag: width: 84, sizes: '84px', loading: 'lazy', alt: '' }}
+        {%- else -%}
+          {% render 'placeholder', label: '' %}
+        {%- endif -%}
+      </a>
+      <div>
+        <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+        {%- unless item.product.has_only_default_variant -%}
+          <p class="cart-item__meta">{{ item.variant.title }}</p>
+        {%- endunless -%}
+        {%- for property in item.properties -%}
+          {%- assign first_char = property.first | slice: 0 -%}
+          {%- if property.last != blank and first_char != '_' -%}
+            <p class="cart-item__meta">{{ property.first }} : {{ property.last }}</p>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- for discount in item.line_level_discount_allocations -%}
+          <p class="cart-item__meta">{{ discount.discount_application.title }} (−{{ discount.amount | money }})</p>
+        {%- endfor -%}
+        <div class="cart-item__actions">
+          <div class="qty">
+            <button type="button" data-qty-change="-1" aria-label="{{ 'cart.decrease' | t: title: item.product.title | escape }}">{% render 'icon', name: 'minus' %}</button>
+            <input
+              type="number"
+              name="updates[]"
+              value="{{ item.quantity }}"
+              min="0"
+              {% if item.variant.inventory_management == 'shopify' and item.variant.inventory_policy == 'deny' %}max="{{ item.variant.inventory_quantity }}"{% endif %}
+              inputmode="numeric"
+              aria-label="{{ 'cart.quantity' | t: title: item.product.title | escape }}"
+              data-qty-input
+            >
+            <button type="button" data-qty-change="1" aria-label="{{ 'cart.increase' | t: title: item.product.title | escape }}">{% render 'icon', name: 'plus' %}</button>
+          </div>
+          <a href="{{ item.url_to_remove }}" class="cart-item__remove" data-remove>{{ 'cart.remove' | t }}</a>
+        </div>
+      </div>
+      <div class="cart-item__price">
+        {%- if item.original_line_price != item.final_line_price -%}
+          <s>{{ item.original_line_price | money }}</s>
+        {%- endif -%}
+        {{ item.final_line_price | money }}
+      </div>
+    </li>
+  {%- endfor -%}
+</ul>

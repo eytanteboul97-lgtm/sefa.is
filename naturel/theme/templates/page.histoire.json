@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "drift": true, "overlay": 24, "eyebrow": "Notre histoire", "heading": "", "subheading": "Le luxe n'a pas besoin d'en faire trop.",
+        "placeholder_label": "Paysage côtier méditerranéen, lumière douce", "placeholder_tone": "ocean"
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "e": { "type": "eyebrow", "settings": { "text": "La maison" } },
+        "q": { "type": "quote", "settings": { "text": "<p>« Inspirée par la nature, façonnée par le détail. »</p>" } },
+        "t": { "type": "text", "settings": { "text": "<p>[À COMPLÉTER — l'histoire de NATUREL : origine, fondateurs, lieux, intention.]</p>" } }
+      },
+      "block_order": ["e", "q", "t"],
+      "settings": { "center": true, "background": "none" }
+    },
+    "chapter_1": {
+      "type": "image-text",
+      "settings": {
+        "placeholder_label": "Sable, mer, matières naturelles", "ratio": "4-5", "reverse": false, "background": "paper",
+        "eyebrow": "Chapitre I", "heading": "Le sable et la mer",
+        "text": "<p>[À COMPLÉTER — ce qui inspire la marque : les paysages côtiers, la lumière, les matières.]</p>"
+      }
+    },
+    "chapter_2": {
+      "type": "image-text",
+      "settings": {
+        "placeholder_label": "Architecture méditerranéenne", "ratio": "4-5", "reverse": true, "background": "none",
+        "eyebrow": "Chapitre II", "heading": "Le temps du détail",
+        "text": "<p>[À COMPLÉTER — la façon de concevoir chaque édition.]</p>",
+        "link_label": "Découvrir le savoir-faire", "link": "/pages/savoir-faire"
+      }
+    },
+    "newsletter": { "type": "newsletter", "settings": { "heading": "Stay close to Naturel", "text": "<p>Découvrez nos prochaines éditions et les histoires qui les inspirent.</p>", "background": "beige" } }
+  },
+  "order": ["hero", "intro", "chapter_1", "chapter_2", "newsletter"]
+}

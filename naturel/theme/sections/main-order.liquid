@@ -1,0 +1,33 @@
+<div class="container section--tight">
+  <header class="page-head" style="padding-top: 0">
+    <a href="{{ routes.account_url }}" class="link" style="justify-self: start">{% render 'icon', name: 'arrow-left' %} {{ 'customer.account.title' | t }}</a>
+    <h1 class="h1">{{ 'customer.order.title' | t: name: order.name }}</h1>
+    <p class="muted">{{ order.created_at | time_tag: format: 'date_at_time' }}{% if order.cancelled %} · {{ 'customer.order.cancelled' | t }}{% endif %}</p>
+  </header>
+  <div class="cart-page">
+    <ul class="list-reset" role="list">
+      {%- for line_item in order.line_items -%}
+        <li class="cart-item" style="grid-template-columns: 1fr auto">
+          <div>
+            <p class="cart-item__title">{{ line_item.title }}</p>
+            <p class="cart-item__meta">{{ line_item.quantity }} × {{ line_item.final_price | money }}{% if line_item.fulfillment %} · {{ line_item.fulfillment.created_at | time_tag: format: 'date' }}{% endif %}</p>
+            {%- if line_item.fulfillment.tracking_url -%}<a class="link" href="{{ line_item.fulfillment.tracking_url }}">{{ 'customer.order.track' | t }}</a>{%- endif -%}
+          </div>
+          <div class="cart-item__price">{{ line_item.final_line_price | money }}</div>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <aside class="cart-page__summary">
+      <div class="cart-summary__row"><span>{{ 'cart.subtotal' | t }}</span><span>{{ order.line_items_subtotal_price | money }}</span></div>
+      {%- for discount in order.cart_level_discount_applications -%}<div class="cart-summary__row small"><span>{{ discount.title }}</span><span>−{{ discount.total_allocated_amount | money }}</span></div>{%- endfor -%}
+      {%- for shipping_method in order.shipping_methods -%}<div class="cart-summary__row small"><span>{{ shipping_method.title }}</span><span>{{ shipping_method.price | money }}</span></div>{%- endfor -%}
+      {%- for tax_line in order.tax_lines -%}<div class="cart-summary__row small"><span>{{ tax_line.title }} ({{ tax_line.rate_percentage }} %)</span><span>{{ tax_line.price | money }}</span></div>{%- endfor -%}
+      <div class="cart-summary__row" style="margin-top: 12px"><span class="eyebrow">{{ 'customer.order.total' | t }}</span><span class="cart-summary__total">{{ order.total_price | money_with_currency }}</span></div>
+      {%- if order.shipping_address -%}<h2 class="eyebrow" style="margin-top: 32px; display: block">{{ 'customer.order.shipping_address' | t }}</h2><p class="small">{{ order.shipping_address | format_address }}</p>{%- endif -%}
+    </aside>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Commande", "settings": [] }
+{% endschema %}

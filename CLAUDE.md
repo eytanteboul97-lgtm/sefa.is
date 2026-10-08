@@ -149,6 +149,13 @@ trigger automatically) instead of improvising these workflows from scratch:
 - `photo-curation` — criteria for replacing the actual stock photos with a
   coherent, premium-feeling set instead of generic/mismatched images.
 
+## Other projects in this repo
+
+- `naturel/` — a standalone **Shopify Online Store 2.0 theme** (Liquid, JSON
+  templates, vanilla CSS/JS) for the NATUREL cap brand. It is unrelated to the
+  Next.js site and the Sefa conventions above don't apply to it; see
+  `naturel/README.md`. Package with `naturel/build-theme-zip.sh`.
+
 ## Working in this repo
 
 - This is a small, single-purpose site (~1,900 lines across `components/`).

@@ -1,0 +1,24 @@
+{%- layout none -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ 'gift_card.title' | t }} — {{ shop.name }}</title>
+    {{ content_for_header }}
+    {% render 'theme-styles' %}
+    {{ 'naturel.css' | asset_url | stylesheet_tag }}
+  </head>
+  <body>
+    <main class="container cart-empty" style="min-height: 100vh; align-content: center">
+      {% render 'emblem', width: 64 %}
+      <h1 class="h2">{{ 'gift_card.title' | t }}</h1>
+      <p class="cart-summary__total">{{ gift_card.balance | money_with_currency }}</p>
+      {%- if gift_card.expired -%}<p class="muted">{{ 'gift_card.expired' | t }}</p>{%- endif -%}
+      <p class="eyebrow">{{ 'gift_card.code' | t }}</p>
+      <p class="h3" style="letter-spacing: 0.1em">{{ gift_card.code | format_code }}</p>
+      <a href="{{ shop.url }}" class="btn btn--solid">{{ 'gift_card.shop' | t }}</a>
+      {%- if gift_card.pass_url -%}<a href="{{ gift_card.pass_url }}" class="link">Apple Wallet</a>{%- endif -%}
+    </main>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<section class="section{% if section.settings.background != 'none' %} section--{{ section.settings.background }}{% endif %}">
+  <div class="container container--text{% if section.settings.center %} text-center{% endif %}" style="display: grid; gap: 24px;{% if section.settings.center %} justify-items: center;{% endif %}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'eyebrow' -%}
+          <p class="eyebrow reveal" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+        {%- when 'heading' -%}
+          <h2 class="h2 reveal" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+        {%- when 'quote' -%}
+          <blockquote class="quote reveal" {{ block.shopify_attributes }}>{{ block.settings.text }}</blockquote>
+        {%- when 'text' -%}
+          <div class="rte lede reveal" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+        {%- when 'button' -%}
+          {%- if block.settings.label != blank -%}
+            <a href="{{ block.settings.link }}" class="btn reveal" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+          {%- endif -%}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Texte éditorial",
+  "settings": [
+    { "type": "checkbox", "id": "center", "label": "Centré", "default": true },
+    {
+      "type": "select", "id": "background", "label": "Fond",
+      "options": [{ "value": "none", "label": "Sable" }, { "value": "paper", "label": "Blanc cassé" }, { "value": "beige", "label": "Beige chaud" }, { "value": "ink", "label": "Brun profond" }],
+      "default": "none"
+    }
+  ],
+  "blocks": [
+    { "type": "eyebrow", "name": "Surtitre", "settings": [{ "type": "text", "id": "text", "label": "Texte", "default": "Surtitre" }] },
+    { "type": "heading", "name": "Titre", "settings": [{ "type": "text", "id": "text", "label": "Texte", "default": "Titre" }] },
+    { "type": "quote", "name": "Citation", "settings": [{ "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Citation</p>" }] },
+    { "type": "text", "name": "Paragraphe", "settings": [{ "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Texte</p>" }] },
+    { "type": "button", "name": "Bouton", "settings": [{ "type": "text", "id": "label", "label": "Libellé" }, { "type": "url", "id": "link", "label": "Lien" }] }
+  ],
+  "presets": [{ "name": "Texte éditorial", "blocks": [{ "type": "eyebrow" }, { "type": "heading" }, { "type": "text" }] }]
+}
+{% endschema %}

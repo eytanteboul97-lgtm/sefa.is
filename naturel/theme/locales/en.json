@@ -1,0 +1,220 @@
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "general": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "page": "Page {{ page }}",
+    "pagination": "Pagination",
+    "pause_video": "Pause video",
+    "placeholder": "Visual coming soon",
+    "skip_intro": "Skip"
+  },
+  "header": {
+    "main_nav": "Main navigation",
+    "menu": "Menu"
+  },
+  "footer": {
+    "country": "Country / region",
+    "language": "Language",
+    "legal": "Legal",
+    "payment_methods": "Accepted payment methods"
+  },
+  "sound": {
+    "on": "Mute ambience",
+    "off": "Ambient sound"
+  },
+  "newsletter": {
+    "label": "Your email address",
+    "button": "Subscribe",
+    "success": "Thank you. You are now close to NATUREL.",
+    "consent": "By subscribing you agree to receive our emails. Unsubscribe at any time from any email."
+  },
+  "products": {
+    "card": {
+      "add": "Add",
+      "add_aria": "Add {{ title }} to cart",
+      "discover": "Discover",
+      "photo_placeholder": "Product photograph — {{ title }}"
+    },
+    "product": {
+      "add_to_cart": "Add to cart",
+      "add_short": "Add",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "in_stock": "Available",
+      "limited_edition": "Limited edition",
+      "edition_of": {
+        "one": "Limited edition — {{ count }} piece",
+        "other": "Limited edition — {{ count }} pieces"
+      },
+      "remaining": {
+        "one": "Last piece available",
+        "other": "{{ count }} pieces available"
+      },
+      "gallery": "Product photographs",
+      "zoom": "Enlarge photograph",
+      "price_from": "From {{ price }}",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "taxes_included": "Tax included",
+      "taxes_excluded": "Tax excluded",
+      "shipping_link": "Shipping"
+    }
+  },
+  "collections": {
+    "eyebrow": "Collection",
+    "all_title": "Collections",
+    "count": {
+      "one": "{{ count }} piece",
+      "other": "{{ count }} pieces"
+    },
+    "empty": "No products in this collection yet.",
+    "sort_by": "Sort by",
+    "view_all": "View the collection"
+  },
+  "sections": {
+    "limited": {
+      "registry": "Edition registry",
+      "statement": {
+        "one": "Each colourway is made in {{ count }} numbered piece.",
+        "other": "Each colourway is made in {{ count }} numbered pieces."
+      },
+      "edition_of": {
+        "one": "Edition of {{ count }}",
+        "other": "Edition of {{ count }}"
+      }
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    },
+    "empty": "Your cart is empty",
+    "continue": "Discover the collection",
+    "view": "View cart",
+    "checkout": "Secure checkout",
+    "subtotal": "Subtotal",
+    "summary": "Summary",
+    "remove": "Remove",
+    "update": "Update",
+    "note": "Add an order note",
+    "quantity": "Quantity for {{ title }}",
+    "increase": "Increase quantity of {{ title }}",
+    "decrease": "Decrease quantity of {{ title }}",
+    "error": "Something went wrong. Please try again.",
+    "taxes_included_shipping_at_checkout": "Tax included. Shipping and discount codes applied at checkout.",
+    "taxes_and_shipping_at_checkout": "Taxes, shipping and discount codes calculated at checkout."
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "success": "Thank you, your message has been sent."
+  },
+  "blogs": {
+    "eyebrow": "Journal",
+    "back": "Back to the journal",
+    "empty": "The first stories are coming soon."
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "A colourway, an edition…",
+    "submit": "Search",
+    "results": {
+      "one": "{{ count }} result for “{{ terms }}”",
+      "other": "{{ count }} results for “{{ terms }}”"
+    }
+  },
+  "templates": {
+    "404": {
+      "title": "Page not found",
+      "text": "This page got lost between sand and horizon."
+    }
+  },
+  "password": {
+    "owner": "Owner access",
+    "label": "Password",
+    "enter": "Enter"
+  },
+  "gift_card": {
+    "title": "Gift card",
+    "code": "Code",
+    "expired": "This gift card has expired.",
+    "shop": "Visit the store"
+  },
+  "customer": {
+    "email": "Email",
+    "password": "Password",
+    "password_confirm": "Confirm password",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "login": {
+      "title": "Sign in",
+      "submit": "Sign in",
+      "forgot": "Forgot your password?",
+      "guest": "Continue as a guest",
+      "guest_continue": "Continue"
+    },
+    "register": {
+      "title": "Create an account",
+      "submit": "Create my account",
+      "marketing": "Receive new editions by email"
+    },
+    "recover": {
+      "title": "Reset your password",
+      "text": "We will send you an email to choose a new password.",
+      "submit": "Send",
+      "success": "An email has been sent."
+    },
+    "account": {
+      "title": "My account",
+      "logout": "Sign out"
+    },
+    "orders": {
+      "title": "Orders",
+      "none": "You haven't placed any orders yet."
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "cancelled": "Cancelled",
+      "total": "Total",
+      "track": "Track parcel",
+      "shipping_address": "Shipping address"
+    },
+    "addresses": {
+      "title": "Addresses",
+      "manage": "Manage addresses",
+      "default": "Default address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "add": "Add an address",
+      "save": "Save",
+      "company": "Company",
+      "address1": "Address",
+      "address2": "Apartment, suite, etc.",
+      "zip": "Postal code",
+      "city": "City",
+      "country": "Country",
+      "province": "Region",
+      "phone": "Phone",
+      "set_default": "Set as default address"
+    },
+    "activate": {
+      "title": "Activate your account",
+      "text": "Choose a password to activate your account.",
+      "submit": "Activate",
+      "decline": "Decline invitation"
+    },
+    "reset": {
+      "title": "New password",
+      "submit": "Save"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{%- comment -%} Totals + checkout. Checkout itself is Shopify's native checkout. {%- endcomment -%}
+{%- if cart.cart_level_discount_applications.size > 0 -%}
+  <ul class="cart-summary__discounts list-reset" role="list">
+    {%- for discount in cart.cart_level_discount_applications -%}
+      <li>{{ discount.title }} (−{{ discount.total_allocated_amount | money }})</li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+<div class="cart-summary__row">
+  <span class="eyebrow">{{ 'cart.subtotal' | t }}</span>
+  <span class="cart-summary__total">{{ cart.total_price | money_with_currency }}</span>
+</div>
+<p class="cart-summary__note">
+  {%- if cart.taxes_included -%}
+    {{ 'cart.taxes_included_shipping_at_checkout' | t }}
+  {%- else -%}
+    {{ 'cart.taxes_and_shipping_at_checkout' | t }}
+  {%- endif -%}
+</p>
+{%- if settings.cart_note -%}
+  <details class="cart-note">
+    <summary class="small">{{ 'cart.note' | t }}</summary>
+    <label class="visually-hidden" for="CartNote-{{ id }}">{{ 'cart.note' | t }}</label>
+    <textarea id="CartNote-{{ id }}" name="note" form="{{ form_id }}" data-cart-note>{{ cart.note }}</textarea>
+  </details>
+{%- endif -%}
+<button type="submit" name="checkout" class="btn btn--solid btn--block" form="{{ form_id }}">{{ 'cart.checkout' | t }}</button>
+{%- if additional_checkout_buttons and show_dynamic -%}
+  <div class="cart-dynamic">{{ content_for_additional_checkout_buttons }}</div>
+{%- endif -%}

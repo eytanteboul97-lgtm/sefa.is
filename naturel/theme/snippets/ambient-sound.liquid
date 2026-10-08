@@ -1,0 +1,10 @@
+{%- comment -%}
+  Optional ambient sound. Silent until the visitor presses the button;
+  the same button mutes it at any time. Logic in naturel.js (AmbientSound).
+{%- endcomment -%}
+{%- if settings.sound_source == 'generated' or settings.sound_file_url != blank -%}
+  <button type="button" class="sound" data-sound-toggle aria-pressed="false">
+    <span class="sound__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span data-sound-label>{{ 'sound.off' | t }}</span>
+  </button>
+{%- endif -%}

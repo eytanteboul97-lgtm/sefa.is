@@ -1,0 +1,54 @@
+{%- comment -%}
+  Design tokens generated from theme settings (Personnaliser > Paramètres du thème).
+  Everything else in naturel.css reads these custom properties.
+{%- endcomment -%}
+{%- liquid
+  if settings.type_source == 'library'
+    assign heading_family = settings.type_heading_font.family | append: ', ' | append: settings.type_heading_font.fallback_families
+    assign body_family = settings.type_body_font.family | append: ', ' | append: settings.type_body_font.fallback_families
+  else
+    assign heading_family = '"Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif'
+    assign body_family = '"Jost", "Helvetica Neue", Arial, sans-serif'
+  endif
+-%}
+{% style %}
+  {%- if settings.type_source == 'library' -%}
+    {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+    {{ settings.type_body_font | font_modify: 'weight', 500 | font_face: font_display: 'swap' }}
+  {%- else -%}
+    @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 300; font-display: swap; src: url({{ 'cormorant-garamond-latin-300-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 400; font-display: swap; src: url({{ 'cormorant-garamond-latin-400-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 400; font-display: swap; src: url({{ 'cormorant-garamond-latin-400-italic.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 500; font-display: swap; src: url({{ 'cormorant-garamond-latin-500-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: "Jost"; font-style: normal; font-weight: 300; font-display: swap; src: url({{ 'jost-latin-300-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: "Jost"; font-style: normal; font-weight: 400; font-display: swap; src: url({{ 'jost-latin-400-normal.woff2' | asset_url }}) format("woff2"); }
+    @font-face { font-family: "Jost"; font-style: normal; font-weight: 500; font-display: swap; src: url({{ 'jost-latin-500-normal.woff2' | asset_url }}) format("woff2"); }
+  {%- endif -%}
+
+  {%- if settings.animations_enabled and settings.page_transitions -%}
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+    }
+  {%- endif -%}
+
+  :root {
+    --c-sand: {{ settings.color_background }};
+    --c-paper: {{ settings.color_surface }};
+    --c-beige: {{ settings.color_beige }};
+    --c-camel: {{ settings.color_accent }};
+    --c-leather: {{ settings.color_leather }};
+    --c-ink: {{ settings.color_text }};
+    --c-ink-rgb: {{ settings.color_text.red }}, {{ settings.color_text.green }}, {{ settings.color_text.blue }};
+    --c-ocean: {{ settings.color_ocean }};
+    --c-sand-rgb: {{ settings.color_background.red }}, {{ settings.color_background.green }}, {{ settings.color_background.blue }};
+
+    --font-heading: {{ heading_family }};
+    --font-body: {{ body_family }};
+    --heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+
+    --grain-opacity: {{ settings.grain_intensity | divided_by: 100.0 }};
+    --logo-width: {{ settings.logo_width }}px;
+    --card-ratio: {{ settings.card_ratio }};
+  }
+{% endstyle %}

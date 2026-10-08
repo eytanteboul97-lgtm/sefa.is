@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-collection", "settings": { "per_page": 24, "columns": 5, "show_sort": true, "quick_add": true } },
+    "newsletter": { "type": "newsletter", "settings": { "heading": "Stay close to Naturel", "text": "<p>Découvrez nos prochaines éditions et les histoires qui les inspirent.</p>", "background": "paper" } }
+  },
+  "order": ["main", "newsletter"]
+}

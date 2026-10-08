@@ -1,0 +1,240 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Naturel",
+    "theme_version": "1.0.0",
+    "theme_author": "NATUREL",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Identité",
+    "settings": [
+      { "type": "header", "content": "Logo NATUREL" },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo (mot NATUREL)",
+        "info": "Importez le logo original (PNG transparent ou SVG converti en PNG, 1200 px de large conseillé) pour conserver sa typographie. Sans logo, le nom de la boutique s'affiche en texte."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_light",
+        "label": "Logo clair (sur photographie)",
+        "info": "Version blanc cassé du logo, utilisée sur la photographie d'accueil. Facultatif."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Largeur du logo",
+        "min": 80,
+        "max": 240,
+        "step": 4,
+        "unit": "px",
+        "default": 132
+      },
+      {
+        "type": "image_picker",
+        "id": "emblem",
+        "label": "Écusson N",
+        "info": "Photographie ou export de l'écusson N (fond transparent idéalement). Utilisé dans l'ouverture et le pied de page. Sans image, un écusson dessiné en CSS sert de remplacement."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Carré, 64 × 64 px minimum."
+      }
+    ]
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Palette NATUREL : sable ivoire, beige chaud, camel, brun profond, bleu océan désaturé, blanc cassé."
+      },
+      { "type": "color", "id": "color_background", "label": "Fond — sable ivoire", "default": "#F3EDE3" },
+      { "type": "color", "id": "color_surface", "label": "Surfaces — blanc cassé", "default": "#FAF8F4" },
+      { "type": "color", "id": "color_beige", "label": "Beige chaud", "default": "#E5D5C0" },
+      { "type": "color", "id": "color_accent", "label": "Camel (accents décoratifs)", "default": "#B78B65" },
+      {
+        "type": "color",
+        "id": "color_leather",
+        "label": "Camel profond (liens, prix barrés)",
+        "info": "Version plus soutenue du camel, lisible sur le fond sable (contraste AA).",
+        "default": "#8A5D3B"
+      },
+      { "type": "color", "id": "color_text", "label": "Texte — brun profond", "default": "#514337" },
+      { "type": "color", "id": "color_ocean", "label": "Bleu océan désaturé", "default": "#788C96" }
+    ]
+  },
+  {
+    "name": "Matière",
+    "settings": [
+      {
+        "type": "range",
+        "id": "grain_intensity",
+        "label": "Grain du papier",
+        "info": "Texture granuleuse du fond. 0 = désactivée. Générée en SVG, sans image à charger.",
+        "min": 0,
+        "max": 14,
+        "step": 1,
+        "unit": "%",
+        "default": 6
+      }
+    ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      {
+        "type": "select",
+        "id": "type_source",
+        "label": "Polices",
+        "options": [
+          { "value": "brand", "label": "NATUREL — Cormorant Garamond & Jost (incluses)" },
+          { "value": "library", "label": "Bibliothèque de polices Shopify" }
+        ],
+        "default": "brand"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_heading_font",
+        "label": "Titres (si bibliothèque Shopify)",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Texte et navigation (si bibliothèque Shopify)",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "label": "Taille des titres",
+        "min": 80,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "animations_enabled",
+        "label": "Activer les animations",
+        "info": "Apparitions au défilement, mouvements lents des photographies, transitions de pages. Toujours désactivées si le visiteur a demandé moins d'animations.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "intro_enabled",
+        "label": "Ouverture signature (première visite)",
+        "info": "Écusson N puis mot NATUREL, environ 2,6 secondes, une seule fois par visiteur. Le visiteur peut la passer.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "page_transitions",
+        "label": "Transitions entre les pages",
+        "info": "Fondu natif du navigateur (View Transitions). Ignoré par les navigateurs qui ne le prennent pas en charge.",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Ambiance sonore",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Aucun son n'est joué sans action du visiteur. Un discret bouton « Ambiance sonore » permet de l'activer puis de la couper à tout moment."
+      },
+      { "type": "checkbox", "id": "sound_enabled", "label": "Proposer l'ambiance sonore", "default": true },
+      {
+        "type": "select",
+        "id": "sound_source",
+        "label": "Source",
+        "options": [
+          { "value": "generated", "label": "Vagues douces générées dans le navigateur (0 Ko)" },
+          { "value": "file", "label": "Mon fichier audio" }
+        ],
+        "default": "generated"
+      },
+      {
+        "type": "url",
+        "id": "sound_file_url",
+        "label": "Lien du fichier audio",
+        "info": "Importez un MP3 léger (< 1 Mo, en boucle) dans Contenu > Fichiers, puis collez son lien ici."
+      },
+      {
+        "type": "range",
+        "id": "sound_volume",
+        "label": "Volume",
+        "min": 5,
+        "max": 60,
+        "step": 5,
+        "unit": "%",
+        "default": 25
+      }
+    ]
+  },
+  {
+    "name": "Produits",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_ratio",
+        "label": "Format des photographies produit",
+        "options": [
+          { "value": "4 / 5", "label": "Portrait 4:5" },
+          { "value": "1 / 1", "label": "Carré" },
+          { "value": "3 / 4", "label": "Portrait 3:4" }
+        ],
+        "default": "4 / 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_hover_image",
+        "label": "Deuxième photographie au survol (ordinateur)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_inventory_count",
+        "label": "Afficher le nombre de pièces restantes",
+        "info": "Basé sur le stock réel Shopify, uniquement si le suivi des stocks est activé pour la variante.",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Panier",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Après « Ajouter au panier »",
+        "options": [
+          { "value": "drawer", "label": "Ouvrir le panier latéral" },
+          { "value": "page", "label": "Aller à la page panier" }
+        ],
+        "default": "drawer"
+      },
+      { "type": "checkbox", "id": "cart_note", "label": "Note de commande (message, emballage cadeau…)", "default": false }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+      { "type": "url", "id": "social_pinterest", "label": "Pinterest" }
+    ]
+  }
+]

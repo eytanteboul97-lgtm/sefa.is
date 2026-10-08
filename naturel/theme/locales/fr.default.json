@@ -1,0 +1,220 @@
+{
+  "accessibility": {
+    "skip_to_content": "Aller au contenu"
+  },
+  "general": {
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "page": "Page {{ page }}",
+    "pagination": "Pagination",
+    "pause_video": "Mettre la vidéo en pause",
+    "placeholder": "Visuel à venir",
+    "skip_intro": "Passer"
+  },
+  "header": {
+    "main_nav": "Navigation principale",
+    "menu": "Menu"
+  },
+  "footer": {
+    "country": "Pays / région",
+    "language": "Langue",
+    "legal": "Informations légales",
+    "payment_methods": "Moyens de paiement acceptés"
+  },
+  "sound": {
+    "on": "Couper l'ambiance",
+    "off": "Ambiance sonore"
+  },
+  "newsletter": {
+    "label": "Votre adresse email",
+    "button": "S'inscrire",
+    "success": "Merci. Vous êtes désormais proche de NATUREL.",
+    "consent": "En vous inscrivant, vous acceptez de recevoir nos emails. Désinscription possible à tout moment depuis chaque email."
+  },
+  "products": {
+    "card": {
+      "add": "Ajouter",
+      "add_aria": "Ajouter {{ title }} au panier",
+      "discover": "Découvrir",
+      "photo_placeholder": "Photographie produit — {{ title }}"
+    },
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "add_short": "Ajouter",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "in_stock": "Disponible",
+      "limited_edition": "Édition limitée",
+      "edition_of": {
+        "one": "Édition limitée — {{ count }} exemplaire",
+        "other": "Édition limitée — {{ count }} exemplaires"
+      },
+      "remaining": {
+        "one": "Dernière pièce disponible",
+        "other": "{{ count }} pièces disponibles"
+      },
+      "gallery": "Photographies du produit",
+      "zoom": "Agrandir la photographie",
+      "price_from": "À partir de {{ price }}",
+      "regular_price": "Prix habituel",
+      "sale_price": "Prix réduit",
+      "taxes_included": "TTC",
+      "taxes_excluded": "HT",
+      "shipping_link": "Frais de livraison"
+    }
+  },
+  "collections": {
+    "eyebrow": "Collection",
+    "all_title": "Collections",
+    "count": {
+      "one": "{{ count }} pièce",
+      "other": "{{ count }} pièces"
+    },
+    "empty": "Aucun produit dans cette collection pour le moment.",
+    "sort_by": "Trier par",
+    "view_all": "Voir toute la collection"
+  },
+  "sections": {
+    "limited": {
+      "registry": "Registre des éditions",
+      "statement": {
+        "one": "Chaque coloris est produit en {{ count }} exemplaire numéroté.",
+        "other": "Chaque coloris est produit en {{ count }} exemplaires numérotés."
+      },
+      "edition_of": {
+        "one": "Édition de {{ count }}",
+        "other": "Édition de {{ count }}"
+      }
+    }
+  },
+  "cart": {
+    "title": "Panier",
+    "count": {
+      "one": "{{ count }} article",
+      "other": "{{ count }} articles"
+    },
+    "empty": "Votre panier est vide",
+    "continue": "Découvrir la collection",
+    "view": "Voir le panier",
+    "checkout": "Paiement sécurisé",
+    "subtotal": "Sous-total",
+    "summary": "Récapitulatif",
+    "remove": "Retirer",
+    "update": "Mettre à jour",
+    "note": "Ajouter une note à la commande",
+    "quantity": "Quantité pour {{ title }}",
+    "increase": "Augmenter la quantité de {{ title }}",
+    "decrease": "Diminuer la quantité de {{ title }}",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "taxes_included_shipping_at_checkout": "Taxes incluses. Frais de livraison et codes promotionnels appliqués à l'étape du paiement.",
+    "taxes_and_shipping_at_checkout": "Taxes, frais de livraison et codes promotionnels calculés à l'étape du paiement."
+  },
+  "contact": {
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "send": "Envoyer",
+    "success": "Merci, votre message a bien été envoyé."
+  },
+  "blogs": {
+    "eyebrow": "Journal",
+    "back": "Retour au journal",
+    "empty": "Les premiers récits arrivent bientôt."
+  },
+  "search": {
+    "title": "Recherche",
+    "placeholder": "Un coloris, une édition…",
+    "submit": "Rechercher",
+    "results": {
+      "one": "{{ count }} résultat pour « {{ terms }} »",
+      "other": "{{ count }} résultats pour « {{ terms }} »"
+    }
+  },
+  "templates": {
+    "404": {
+      "title": "Page introuvable",
+      "text": "Cette page s'est perdue entre sable et horizon."
+    }
+  },
+  "password": {
+    "owner": "Accès propriétaire",
+    "label": "Mot de passe",
+    "enter": "Entrer"
+  },
+  "gift_card": {
+    "title": "Carte cadeau",
+    "code": "Code",
+    "expired": "Cette carte cadeau a expiré.",
+    "shop": "Découvrir la boutique"
+  },
+  "customer": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "password_confirm": "Confirmer le mot de passe",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "login": {
+      "title": "Connexion",
+      "submit": "Se connecter",
+      "forgot": "Mot de passe oublié ?",
+      "guest": "Continuer en tant qu'invité",
+      "guest_continue": "Continuer"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "submit": "Créer mon compte",
+      "marketing": "Recevoir les nouvelles éditions par email"
+    },
+    "recover": {
+      "title": "Réinitialiser le mot de passe",
+      "text": "Nous vous enverrons un email pour choisir un nouveau mot de passe.",
+      "submit": "Envoyer",
+      "success": "Un email vous a été envoyé."
+    },
+    "account": {
+      "title": "Mon compte",
+      "logout": "Se déconnecter"
+    },
+    "orders": {
+      "title": "Commandes",
+      "none": "Vous n'avez pas encore passé de commande."
+    },
+    "order": {
+      "title": "Commande {{ name }}",
+      "cancelled": "Annulée",
+      "total": "Total",
+      "track": "Suivre le colis",
+      "shipping_address": "Adresse de livraison"
+    },
+    "addresses": {
+      "title": "Adresses",
+      "manage": "Gérer les adresses",
+      "default": "Adresse par défaut",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "add": "Ajouter une adresse",
+      "save": "Enregistrer",
+      "company": "Société",
+      "address1": "Adresse",
+      "address2": "Complément d'adresse",
+      "zip": "Code postal",
+      "city": "Ville",
+      "country": "Pays",
+      "province": "Région",
+      "phone": "Téléphone",
+      "set_default": "Définir comme adresse par défaut"
+    },
+    "activate": {
+      "title": "Activer votre compte",
+      "text": "Choisissez un mot de passe pour activer votre compte.",
+      "submit": "Activer",
+      "decline": "Refuser l'invitation"
+    },
+    "reset": {
+      "title": "Nouveau mot de passe",
+      "submit": "Enregistrer"
+    }
+  }
+}

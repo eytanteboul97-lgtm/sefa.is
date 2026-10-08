@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title", "settings": { "show_vendor": false } },
+        "price": { "type": "price", "settings": {} },
+        "edition": { "type": "edition", "settings": {} },
+        "variant_picker": { "type": "variant_picker", "settings": {} },
+        "colorways": { "type": "colorways", "settings": { "heading": "Coloris" } },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "description": { "type": "description", "settings": {} },
+        "composition": { "type": "collapsible", "settings": { "heading": "Composition", "source": "composition", "show_policies": false, "open": false } },
+        "care": { "type": "collapsible", "settings": { "heading": "Entretien", "source": "care", "show_policies": false, "open": false } },
+        "shipping": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Livraison & retours",
+            "source": "custom",
+            "content": "<p>[À COMPLÉTER — délais et tarifs de livraison réellement configurés dans Shopify.] Vous disposez d'un délai légal de rétractation de 14 jours à compter de la réception de votre commande.</p>",
+            "show_policies": true,
+            "open": false
+          }
+        }
+      },
+      "block_order": ["title", "price", "edition", "variant_picker", "colorways", "buy_buttons", "description", "composition", "care", "shipping"],
+      "settings": {}
+    },
+    "details": {
+      "type": "image-text",
+      "settings": {
+        "placeholder_label": "Gros plan du produit porté, lumière naturelle",
+        "ratio": "4-5",
+        "reverse": true,
+        "background": "paper",
+        "eyebrow": "Le savoir-faire",
+        "heading": "Pensée pour durer",
+        "text": "<p>Chaque détail est choisi pour accompagner vos étés, saison après saison.</p>",
+        "link_label": "Découvrir le savoir-faire",
+        "link": "/pages/savoir-faire"
+      }
+    }
+  },
+  "order": ["main", "details"]
+}

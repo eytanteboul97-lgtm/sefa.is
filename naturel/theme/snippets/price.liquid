@@ -1,0 +1,24 @@
+{%- comment -%}
+  Params: product (required), variant (optional, defaults to selected/first available)
+  Prices always come from Shopify; nothing is hard-coded.
+{%- endcomment -%}
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign on_sale = false
+  if target.compare_at_price > target.price
+    assign on_sale = true
+  endif
+-%}
+<span class="price{% if on_sale %} price--sale{% endif %}" data-price>
+  {%- if on_sale -%}
+    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+    <s>{{ target.compare_at_price | money }}</s>
+    <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+    <ins>{{ target.price | money }}</ins>
+  {%- elsif product.price_varies and variant == blank -%}
+    {%- assign price_min = product.price_min | money -%}
+    {{ 'products.product.price_from' | t: price: price_min }}
+  {%- else -%}
+    {{ target.price | money }}
+  {%- endif -%}
+</span>

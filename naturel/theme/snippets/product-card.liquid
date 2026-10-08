@@ -1,0 +1,53 @@
+{%- comment -%}
+  Product card. All data from Shopify: title, media, price, availability,
+  and optional metafields (custom.series, custom.edition_size).
+  Params: product, index (for stagger), sizes, show_quick_add (bool)
+{%- endcomment -%}
+{%- liquid
+  assign series = product.metafields.custom.series.value
+  assign edition_size = product.metafields.custom.edition_size.value
+  assign img1 = product.featured_media
+  assign img2 = nil
+  if settings.card_hover_image and product.media.size > 1
+    assign img2 = product.media[1]
+  endif
+  assign d = index | default: 0 | modulo: 5
+  assign sizes = sizes | default: '(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw'
+-%}
+<article class="card reveal" style="--d: {{ d }}">
+  <div class="card__media media"{% if settings.animations_enabled and settings.page_transitions %} style="view-transition-name: pm-{{ product.id }}"{% endif %}>
+    {%- if img1 -%}
+      {{ img1 | image_url: width: 1100 | image_tag: widths: '360, 540, 720, 900, 1100', sizes: sizes, loading: 'lazy', class: 'card__img-1', alt: img1.alt | default: product.title }}
+      {%- if img2 -%}
+        {{ img2 | image_url: width: 1100 | image_tag: widths: '360, 540, 720, 900, 1100', sizes: sizes, loading: 'lazy', class: 'card__img-2', alt: '' }}
+      {%- endif -%}
+    {%- else -%}
+      {%- capture ph_label -%}{{ 'products.card.photo_placeholder' | t: title: product.title }}{%- endcapture -%}
+      {% render 'placeholder', label: ph_label, class: 'card__img-1' %}
+    {%- endif -%}
+
+    {%- if product.available == false -%}
+      <span class="card__badge">{{ 'products.product.sold_out' | t }}</span>
+    {%- elsif edition_size -%}
+      <span class="card__badge">{{ 'products.product.limited_edition' | t }}</span>
+    {%- endif -%}
+  </div>
+
+  <div class="card__info">
+    {%- if series != blank -%}<p class="card__series">{{ series }}</p>{%- endif -%}
+    <h3 class="card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="card__row">
+      {% render 'price', product: product %}
+      {%- if product.available and product.has_only_default_variant and show_quick_add -%}
+        {%- form 'product', product, class: 'card__form', data-type: 'add-to-cart-form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="card__add" aria-label="{{ 'products.card.add_aria' | t: title: product.title | escape }}">
+            <span>{{ 'products.card.add' | t }}</span>
+          </button>
+        {%- endform -%}
+      {%- elsif product.available -%}
+        <span class="card__add" aria-hidden="true"><span>{{ 'products.card.discover' | t }}</span></span>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

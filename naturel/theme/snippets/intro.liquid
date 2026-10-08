@@ -1,0 +1,12 @@
+{%- comment -%}
+  Opening sequence: sand texture → N emblem → NATUREL wordmark → reveal.
+  Plays once per visitor (localStorage), never in the theme editor or with
+  prefers-reduced-motion; the decision is made inline in <head> before paint.
+{%- endcomment -%}
+<div class="intro" id="Intro" aria-hidden="true">
+  <div class="intro__stage">
+    <div class="intro__emblem">{% render 'emblem', width: 92 %}</div>
+    <div class="intro__wordmark">{% render 'wordmark', width: 360, loading: 'eager' %}</div>
+  </div>
+  <button type="button" class="intro__skip" data-intro-skip tabindex="-1">{{ 'general.skip_intro' | t }}</button>
+</div>

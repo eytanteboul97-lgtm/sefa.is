@@ -1,0 +1,27 @@
+{
+  "type": "footer",
+  "name": "Groupe pied de page",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu_maison": {
+          "type": "menu",
+          "settings": { "heading": "La maison", "menu": "main-menu" }
+        },
+        "menu_service": {
+          "type": "menu",
+          "settings": { "heading": "Service client", "menu": "footer" }
+        }
+      },
+      "block_order": ["menu_maison", "menu_service"],
+      "settings": {
+        "text": "Inspirée par la nature, façonnée par le détail.",
+        "show_policies": true,
+        "legal_line": "",
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": ["footer"]
+}

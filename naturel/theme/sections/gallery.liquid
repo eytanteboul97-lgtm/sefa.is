@@ -1,0 +1,91 @@
+{%- comment -%} L'univers NATUREL — immersive horizontal gallery, drag / swipe / arrows. {%- endcomment -%}
+<section class="section{% if section.settings.background != 'none' %} section--{{ section.settings.background }}{% endif %}" data-gallery>
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div class="stack-sm">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--rule reveal">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="h2 reveal" style="--d: 1">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}<div class="lede reveal" style="--d: 2; max-width: 46ch">{{ section.settings.text }}</div>{%- endif -%}
+      </div>
+      <div class="gallery__controls reveal" style="--d: 2">
+        <button type="button" data-gallery-prev>{% render 'icon', name: 'arrow-left' %}<span class="visually-hidden">{{ 'general.previous' | t }}</span></button>
+        <button type="button" data-gallery-next>{% render 'icon', name: 'arrow' %}<span class="visually-hidden">{{ 'general.next' | t }}</span></button>
+      </div>
+    </div>
+  </div>
+
+  <ul class="gallery__track list-reset" role="list" data-gallery-track tabindex="0" aria-label="{{ section.settings.heading | escape }}">
+    {%- for block in section.blocks -%}
+      <li class="gallery__item gallery__item--{{ block.settings.format }}{% if block.settings.offset %} gallery__item--offset{% endif %} reveal" style="--d: {{ forloop.index0 | modulo: 4 }}" {{ block.shopify_attributes }}>
+        <div class="media">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1400 | image_tag: widths: '500, 800, 1100, 1400', sizes: '(min-width: 990px) 40vw, 80vw', loading: 'lazy', draggable: 'false' }}
+          {%- else -%}
+            {%- assign tone = 'sand' -%}
+            {%- if forloop.index0 == 0 or forloop.index0 == 4 -%}{%- assign tone = 'ocean' -%}{%- elsif forloop.index0 == 2 -%}{%- assign tone = 'stone' -%}{%- endif -%}
+            {% render 'placeholder', label: block.settings.caption, tone: tone %}
+          {%- endif -%}
+        </div>
+        {%- if block.settings.caption != blank -%}<p class="gallery__caption">{{ block.settings.caption }}</p>{%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "L'univers NATUREL",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "L'univers" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Entre sable et horizon" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [
+        { "value": "none", "label": "Sable" },
+        { "value": "paper", "label": "Blanc cassé" },
+        { "value": "beige", "label": "Beige chaud" }
+      ],
+      "default": "none"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Photographie",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photographie" },
+        {
+          "type": "select",
+          "id": "format",
+          "label": "Format",
+          "options": [
+            { "value": "portrait", "label": "Portrait 3:4" },
+            { "value": "landscape", "label": "Paysage 3:2" },
+            { "value": "square", "label": "Carré" },
+            { "value": "tall", "label": "Vertical 9:16" }
+          ],
+          "default": "portrait"
+        },
+        { "type": "checkbox", "id": "offset", "label": "Décaler vers le bas", "default": false },
+        { "type": "text", "id": "caption", "label": "Légende" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "L'univers NATUREL",
+      "blocks": [
+        { "type": "image", "settings": { "format": "landscape", "caption": "Paysage côtier, lumière du matin" } },
+        { "type": "image", "settings": { "format": "portrait", "offset": true, "caption": "Portrait de mode, casquette Sable 01" } },
+        { "type": "image", "settings": { "format": "square", "caption": "Architecture méditerranéenne, murs chaulés" } },
+        { "type": "image", "settings": { "format": "tall", "offset": true, "caption": "Sable fin, texture et ombre" } },
+        { "type": "image", "settings": { "format": "landscape", "caption": "Horizon, fin de journée" } },
+        { "type": "image", "settings": { "format": "portrait", "caption": "Détail de la visière au soleil" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

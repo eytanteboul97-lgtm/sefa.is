@@ -1,0 +1,133 @@
+{%- liquid
+  assign has_video = false
+  if section.settings.video != blank
+    assign has_video = true
+  endif
+  assign poster = section.settings.image
+  if poster == blank and has_video
+    assign poster = section.settings.video.preview_image
+  endif
+  assign is_first = false
+  if section.index == 1
+    assign is_first = true
+  endif
+-%}
+<section
+  class="hero{% if section.settings.height == 'short' %} hero--short{% endif %}{% if section.settings.align == 'center' %} hero--center{% endif %} on-media"
+  data-hero
+  aria-label="{{ section.settings.heading | strip_html | escape }}"
+>
+  <div class="hero__media{% if section.settings.drift and has_video == false %} is-drifting{% endif %}">
+    {%- if poster != blank -%}
+      {%- capture img_sizes -%}100vw{%- endcapture -%}
+      {%- if is_first -%}
+        {{ poster | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 1920, 2400', sizes: img_sizes, loading: 'eager', fetchpriority: 'high', alt: section.settings.image_alt | default: poster.alt }}
+      {%- else -%}
+        {{ poster | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 1920, 2400', sizes: img_sizes, loading: 'lazy', alt: section.settings.image_alt | default: poster.alt }}
+      {%- endif -%}
+    {%- else -%}
+      {% render 'placeholder', tone: 'ocean', label: 'Photographie ou vidéo cinématographique : mer calme, sable et horizon (paysage, 2400 px min.)' %}
+    {%- endif -%}
+
+    {%- if has_video -%}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '1600x' }}
+    {%- endif -%}
+  </div>
+  <div class="hero__overlay" style="opacity: {{ section.settings.overlay | divided_by: 100.0 }}"></div>
+
+  <div class="hero__content container">
+    {%- if section.settings.show_logo -%}
+      <div class="hero__logo hero__fade" style="--d: 0">{% render 'wordmark', light: true, loading: 'eager' %}</div>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      {%- if is_first -%}<h1 class="h-display">{%- else -%}<h2 class="h-display">{%- endif -%}
+        {%- assign lines = section.settings.heading | newline_to_br | split: '<br />' -%}
+        {%- for line in lines -%}
+          <span class="hero__line" style="--d: {{ forloop.index }}"><span>{{ line | strip }}</span></span>
+        {%- endfor -%}
+      {%- if is_first -%}</h1>{%- else -%}</h2>{%- endif -%}
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="hero__sub hero__fade" style="--d: 3">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn--light hero__cta hero__fade" style="--d: 4">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+
+  {%- if has_video -%}
+    <button type="button" class="icon-btn hero__pause" data-video-toggle aria-pressed="false">
+      <span data-icon-pause>{% render 'icon', name: 'pause' %}</span>
+      <span data-icon-play hidden>{% render 'icon', name: 'play' %}</span>
+      <span class="visually-hidden">{{ 'general.pause_video' | t }}</span>
+    </button>
+  {%- endif -%}
+  {%- if section.settings.height != 'short' -%}<span class="hero__scroll" aria-hidden="true"></span>{%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Hero immersif",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Média" },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vidéo (facultative)",
+      "info": "MP4 court en boucle, muet, < 8 Mo. L'image ci-dessous sert d'image de remplacement pendant le chargement."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photographie",
+      "info": "Mer calme, sable, horizon. 2400 px de large minimum."
+    },
+    { "type": "text", "id": "image_alt", "label": "Texte alternatif", "info": "Décrit la photographie pour les lecteurs d'écran et le référencement." },
+    { "type": "checkbox", "id": "drift", "label": "Mouvement lent de la photographie", "default": true },
+    {
+      "type": "range",
+      "id": "overlay",
+      "label": "Voile pour la lisibilité",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "%",
+      "default": 22
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Hauteur",
+      "options": [
+        { "value": "full", "label": "Plein écran" },
+        { "value": "short", "label": "Réduite" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Position du texte",
+      "options": [
+        { "value": "bottom", "label": "Bas" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "bottom"
+    },
+    { "type": "header", "content": "Texte" },
+    { "type": "checkbox", "id": "show_logo", "label": "Afficher le logo", "info": "Utilise le logo clair s'il est importé.", "default": false },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Accroche",
+      "info": "Un retour à la ligne = une ligne animée.",
+      "default": "The art of\nnatural elegance"
+    },
+    { "type": "text", "id": "subheading", "label": "Sous-titre", "default": "Inspired by nature. Defined by detail." },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Explore the collection" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" }
+  ],
+  "presets": [{ "name": "Hero immersif" }]
+}
+{% endschema %}

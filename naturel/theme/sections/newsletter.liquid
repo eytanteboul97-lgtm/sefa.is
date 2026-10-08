@@ -1,0 +1,67 @@
+{%- comment -%}
+  Native Shopify customer form: subscribers land in Clients with email
+  marketing consent (double opt-in configurable in Paramètres > Notifications).
+{%- endcomment -%}
+<section class="section{% if section.settings.background != 'none' %} section--{{ section.settings.background }}{% endif %}">
+  <div class="container container--narrow newsletter">
+    {% render 'emblem', width: 40 %}
+    <h2 class="h2 h-caps reveal">{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}<div class="lede reveal" style="--d: 1">{{ section.settings.text }}</div>{%- endif -%}
+
+    {%- assign form_id = 'Newsletter-' | append: section.id -%}
+    {%- form 'customer', class: 'newsletter__form reveal', id: form_id -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="field-line">
+        <label for="NewsletterEmail-{{ section.id }}" class="visually-hidden">{{ 'newsletter.label' | t }}</label>
+        <input
+          id="NewsletterEmail-{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          autocomplete="email"
+          autocapitalize="off"
+          spellcheck="false"
+          required
+          placeholder="{{ 'newsletter.label' | t }}"
+          {% if form.errors %}aria-invalid="true" aria-describedby="NewsletterMsg-{{ section.id }}"{% endif %}
+        >
+        <button type="submit">{{ 'newsletter.button' | t }}</button>
+      </div>
+      {%- if form.errors -%}
+        <p class="form-message form-message--error" id="NewsletterMsg-{{ section.id }}" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+      {%- elsif form.posted_successfully? -%}
+        <p class="form-message" role="status">{{ 'newsletter.success' | t }}</p>
+      {%- endif -%}
+      <p class="consent">
+        {{ 'newsletter.consent' | t }}
+        {% if shop.privacy_policy -%}<a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title }}</a>.{%- endif -%}
+      </p>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Stay close to Naturel" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "default": "<p>Découvrez nos prochaines éditions et les histoires qui les inspirent.</p>"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [
+        { "value": "none", "label": "Sable" },
+        { "value": "paper", "label": "Blanc cassé" },
+        { "value": "beige", "label": "Beige chaud" }
+      ],
+      "default": "paper"
+    }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

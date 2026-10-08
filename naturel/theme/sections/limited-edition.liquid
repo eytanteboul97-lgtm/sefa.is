@@ -1,0 +1,109 @@
+{%- comment -%}
+  "Limited by nature". The edition size is never typed in here: it is read
+  from each product's custom.edition_size metafield. The "N numbered pieces
+  per colourway" statement only appears when every product in the chosen
+  collection carries the same confirmed value. No countdowns, no fake urgency.
+{%- endcomment -%}
+{%- liquid
+  assign collection = section.settings.collection
+  assign shared_size = nil
+  assign sizes_consistent = true
+  if collection != blank
+    for product in collection.products limit: 50
+      assign size = product.metafields.custom.edition_size.value
+      if size == blank
+        assign sizes_consistent = false
+        break
+      endif
+      if shared_size == nil
+        assign shared_size = size
+      elsif shared_size != size
+        assign sizes_consistent = false
+        break
+      endif
+    endfor
+  else
+    assign sizes_consistent = false
+  endif
+-%}
+<section class="section section--{{ section.settings.background }}">
+  <div class="container limited">
+    <div class="limited__figure">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow reveal">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if sizes_consistent and shared_size -%}
+        <p class="limited__number reveal" style="--d: 1" aria-hidden="true">{{ shared_size }}</p>
+      {%- else -%}
+        <p class="limited__number reveal" style="--d: 1" aria-hidden="true"><span class="italic">N°</span></p>
+      {%- endif -%}
+      <h2 class="h2 h-caps reveal" style="--d: 2">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="limited__text">
+      {%- if sizes_consistent and shared_size -%}
+        <p class="quote reveal">{{ 'sections.limited.statement' | t: count: shared_size }}</p>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="rte lede reveal" style="--d: 1">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_registry and collection != blank and collection.products_count > 0 -%}
+      <div class="reveal">
+        <p class="eyebrow text-center" style="display:block; margin-bottom: 20px;">{{ 'sections.limited.registry' | t }}</p>
+        <ul class="registry list-reset" role="list">
+          {%- for product in collection.products limit: 50 -%}
+            {%- assign code = product.metafields.custom.colorway_code.value -%}
+            {%- assign size = product.metafields.custom.edition_size.value -%}
+            <li>
+              <a class="registry__row" href="{{ product.url }}">
+                <span class="registry__code">{{ code | default: forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                <span class="registry__name">{{ product.title }}</span>
+                {%- if product.available -%}
+                  <span class="registry__state">
+                    {%- if size -%}{{ 'sections.limited.edition_of' | t: count: size }}{%- else -%}{{ 'products.product.in_stock' | t }}{%- endif -%}
+                  </span>
+                {%- else -%}
+                  <span class="registry__state">{{ 'products.product.sold_out' | t }}</span>
+                {%- endif -%}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Limited by nature",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Le nombre d'exemplaires est lu dans le métachamp produit custom.edition_size. La phrase « chaque coloris est produit en … exemplaires numérotés » n'apparaît que si tous les produits ont la même valeur."
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Éditions limitées" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Limited by nature" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "default": "<p>Chaque coloris naît d'une série courte, numérotée pièce par pièce. La rareté n'est pas un argument : c'est simplement notre façon de faire.</p>"
+    },
+    { "type": "checkbox", "id": "show_registry", "label": "Afficher le registre des coloris", "info": "Liste les coloris avec leur disponibilité réelle.", "default": true },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [
+        { "value": "beige", "label": "Beige chaud" },
+        { "value": "paper", "label": "Blanc cassé" }
+      ],
+      "default": "beige"
+    }
+  ],
+  "presets": [{ "name": "Limited by nature" }]
+}
+{% endschema %}

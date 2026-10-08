@@ -1,0 +1,28 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_background": "#F3EDE3",
+      "color_surface": "#FAF8F4",
+      "color_beige": "#E5D5C0",
+      "color_accent": "#B78B65",
+      "color_leather": "#8A5D3B",
+      "color_text": "#514337",
+      "color_ocean": "#788C96",
+      "grain_intensity": 6,
+      "type_source": "brand",
+      "heading_scale": 100,
+      "animations_enabled": true,
+      "intro_enabled": true,
+      "page_transitions": true,
+      "sound_enabled": true,
+      "sound_source": "generated",
+      "sound_volume": 25,
+      "card_ratio": "4 / 5",
+      "card_hover_image": true,
+      "show_inventory_count": false,
+      "cart_type": "drawer",
+      "cart_note": false
+    }
+  }
+}

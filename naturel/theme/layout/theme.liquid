@@ -1,0 +1,108 @@
+<!doctype html>
+<html
+  lang="{{ request.locale.iso_code }}"
+  class="no-js{% unless settings.animations_enabled %} motion-off{% endunless %}{% if request.design_mode %} design-mode{% endif %}"
+>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+    {%- endif -%}
+
+    {%- unless settings.type_source == 'library' -%}
+      {{ 'cormorant-garamond-latin-300-normal.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+      {{ 'jost-latin-300-normal.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+    {%- endunless -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    <script>
+      document.documentElement.classList.replace('no-js', 'js');
+      {%- comment -%} Decide before first paint whether the opening sequence plays, so it never flashes. {%- endcomment -%}
+      (function () {
+        var el = document.documentElement;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var seen = false;
+        try { seen = localStorage.getItem('naturel:intro') === '1'; } catch (e) {}
+        if (!{{ settings.intro_enabled | json }} || {{ request.design_mode | json }} || reduce || seen) {
+          el.classList.add('intro-done');
+        } else {
+          el.classList.add('intro-playing');
+        }
+      })();
+    </script>
+
+    {{ content_for_header }}
+
+    {% render 'theme-styles' %}
+    {{ 'naturel.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      window.Naturel = {
+        routes: {
+          root: {{ routes.root_url | json }},
+          cart: {{ routes.cart_url | json }},
+          cartAdd: {{ routes.cart_add_url | json }},
+          cartChange: {{ routes.cart_change_url | json }}
+        },
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          addShort: {{ 'products.product.add_short' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }},
+          cartError: {{ 'cart.error' | t | json }},
+          soundOn: {{ 'sound.on' | t | json }},
+          soundOff: {{ 'sound.off' | t | json }}
+        },
+        cartType: {{ settings.cart_type | json }},
+        sound: {
+          enabled: {{ settings.sound_enabled | json }},
+          source: {{ settings.sound_source | json }},
+          url: {{ settings.sound_file_url | json }},
+          volume: {{ settings.sound_volume | divided_by: 100.0 | json }}
+        }
+      };
+    </script>
+    <script src="{{ 'naturel.js' | asset_url }}" defer></script>
+  </head>
+
+  <body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}--{{ template.suffix }}{% endif %}">
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+    {%- if settings.intro_enabled -%}
+      {% render 'intro' %}
+    {%- endif -%}
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" class="main" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {% section 'cart-drawer' %}
+
+    {%- if settings.sound_enabled -%}
+      {% render 'ambient-sound' %}
+    {%- endif -%}
+
+    <div class="visually-hidden" aria-live="polite" id="LiveRegion"></div>
+  </body>
+</html>

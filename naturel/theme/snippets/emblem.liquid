@@ -1,0 +1,12 @@
+{%- comment -%}
+  The N patch. Uses the uploaded emblem (Paramètres > Identité > Écusson N);
+  until then, a CSS-drawn stitched camel patch based on the brand visuals.
+  Params: width (px, default 64), class
+{%- endcomment -%}
+{%- assign w = width | default: 64 -%}
+{%- if settings.emblem != blank -%}
+  {{ settings.emblem | image_url: width: 400 | image_tag: width: w, height: w, alt: shop.name, loading: loading, class: class, style: 'object-fit: contain' }}
+{%- else -%}
+  {%- assign s = w | divided_by: 64.0 -%}
+  <span class="patch{% if class %} {{ class }}{% endif %}" style="--s: {{ s }}" role="img" aria-label="{{ shop.name | escape }}"><span aria-hidden="true">N</span></span>
+{%- endif -%}

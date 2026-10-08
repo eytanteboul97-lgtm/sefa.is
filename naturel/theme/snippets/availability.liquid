@@ -1,0 +1,10 @@
+{%- comment -%} Real availability from Shopify inventory. Param: variant {%- endcomment -%}
+{%- if variant.available -%}
+  {%- if settings.show_inventory_count and variant.inventory_management == 'shopify' and variant.inventory_quantity > 0 and variant.inventory_policy == 'deny' -%}
+    {{ 'products.product.remaining' | t: count: variant.inventory_quantity }}
+  {%- else -%}
+    {{ 'products.product.in_stock' | t }}
+  {%- endif -%}
+{%- else -%}
+  {{ 'products.product.sold_out' | t }}
+{%- endif -%}

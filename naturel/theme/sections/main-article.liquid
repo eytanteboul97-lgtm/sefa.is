@@ -1,0 +1,22 @@
+<article class="section--tight">
+  <header class="container container--text page-head page-head--center" style="padding-top: 0">
+    <p class="eyebrow">{{ article.published_at | time_tag: format: 'date' }}</p>
+    <h1 class="h1">{{ article.title }}</h1>
+  </header>
+  {%- if article.image -%}
+    <div class="container" style="margin-bottom: 64px">
+      <div class="media media--16-9 reveal-media reveal">
+        {{ article.image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1600, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high' }}
+      </div>
+    </div>
+  {%- endif -%}
+  <div class="container container--text rte lede">{{ article.content }}</div>
+  <p class="container container--text" style="margin-top: 64px">
+    <a href="{{ blog.url }}" class="link">{% render 'icon', name: 'arrow-left' %} {{ 'blogs.back' | t }}</a>
+  </p>
+</article>
+<div style="height: var(--section-space)"></div>
+
+{% schema %}
+{ "name": "Article", "tag": "section", "settings": [] }
+{% endschema %}

@@ -1,0 +1,122 @@
+{%- liquid
+  assign overlay = false
+  if section.settings.transparent_on_home and template.name == 'index'
+    assign overlay = true
+  endif
+  assign menu = linklists[section.settings.menu]
+-%}
+<div
+  class="header-wrapper{% if overlay %} header-wrapper--overlay{% endif %}"
+  data-header
+  {% if overlay %}data-overlay{% endif %}
+  {% if section.settings.hide_on_scroll %}data-hide-on-scroll{% endif %}
+>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="header__left">
+        <button type="button" class="icon-btn header__menu-btn" data-open-dialog="MenuDrawer" aria-controls="MenuDrawer" aria-expanded="false">
+          {% render 'icon', name: 'menu' %}
+          <span class="visually-hidden">{{ 'header.menu' | t }}</span>
+        </button>
+        {%- if menu.links.size > 0 -%}
+          <nav class="nav" aria-label="{{ 'header.main_nav' | t }}">
+            <ul class="nav__list list-reset" role="list">
+              {%- for link in menu.links -%}
+                <li>
+                  <a href="{{ link.url }}" class="nav__link"{% if link.current or link.child_active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+      </div>
+
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}" class="header__logo{% if settings.logo_light != blank %} has-light-logo{% endif %}">
+        {% render 'wordmark', class: 'logo-dark', loading: 'eager' %}
+        {%- if settings.logo_light != blank -%}
+          {% render 'wordmark', light: true, class: 'logo-light', loading: 'eager' %}
+        {%- endif -%}
+      </a>
+
+      <div class="header__right">
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="icon-btn header__account">
+            {% render 'icon', name: 'account' %}
+            <span class="visually-hidden">{%- if customer -%}{{ 'customer.account.title' | t }}{%- else -%}{{ 'customer.login.title' | t }}{%- endif -%}</span>
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" class="icon-btn" data-cart-toggle id="CartIcon">
+          {% render 'icon', name: 'cart' %}
+          <span class="visually-hidden">{{ 'cart.title' | t }}</span>
+          <span class="cart-count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %} aria-hidden="true">{{ cart.item_count }}</span>
+          <span class="visually-hidden" data-cart-count-label>{{ 'cart.count' | t: count: cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </header>
+</div>
+
+<dialog class="drawer drawer--left" id="MenuDrawer" aria-label="{{ 'header.menu' | t }}">
+  <div class="drawer__inner">
+    <div class="drawer__head">
+      <span class="drawer__title">{{ 'header.menu' | t }}</span>
+      <button type="button" class="icon-btn" data-close-dialog>
+        {% render 'icon', name: 'close' %}
+        <span class="visually-hidden">{{ 'general.close' | t }}</span>
+      </button>
+    </div>
+    <nav class="drawer__body" aria-label="{{ 'header.main_nav' | t }}">
+      <ul class="list-reset menu-drawer__list" role="list">
+        {%- for link in menu.links -%}
+          <li>
+            <a href="{{ link.url }}" class="menu-drawer__link"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- if link.links.size > 0 -%}
+              <ul class="list-reset menu-drawer__sub" role="list">
+                {%- for child in link.links -%}
+                  <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="menu-drawer__secondary">
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+            {%- if customer -%}{{ 'customer.account.title' | t }}{%- else -%}{{ 'customer.login.title' | t }}{%- endif -%}
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}">{{ 'cart.title' | t }}</a>
+      </div>
+    </nav>
+  </div>
+</dialog>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "class": "section-header",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu principal",
+      "info": "Conseillé : Collection, Notre histoire, Le savoir-faire, Journal.",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_on_home",
+      "label": "Transparent sur la photographie d'accueil",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_scroll",
+      "label": "Se retirer en descendant, revenir en remontant",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

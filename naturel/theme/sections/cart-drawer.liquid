@@ -1,0 +1,38 @@
+{%- comment -%}
+  Rendered once in layout/theme.liquid and re-rendered through Shopify's
+  Section Rendering API after each cart change (naturel.js).
+{%- endcomment -%}
+<dialog class="drawer" id="CartDrawer" aria-label="{{ 'cart.title' | t }}" data-cart-drawer>
+  <div class="drawer__inner" id="CartDrawerInner">
+    <div class="drawer__head">
+      <span class="drawer__title">{{ 'cart.title' | t }}{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</span>
+      <button type="button" class="icon-btn" data-close-dialog>
+        {% render 'icon', name: 'close' %}
+        <span class="visually-hidden">{{ 'general.close' | t }}</span>
+      </button>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" id="CartDrawerForm" class="drawer__body" novalidate>
+        {% render 'cart-items' %}
+      </form>
+      <div class="drawer__foot">
+        {% render 'cart-summary', form_id: 'CartDrawerForm', id: 'drawer', show_dynamic: false %}
+        <p class="text-center" style="margin-top: 14px;"><a href="{{ routes.cart_url }}" class="link">{{ 'cart.view' | t }}</a></p>
+      </div>
+    {%- else -%}
+      <div class="drawer__body cart-empty">
+        {% render 'emblem', width: 44 %}
+        <p class="h3">{{ 'cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="link">{{ 'cart.continue' | t }} {% render 'icon', name: 'arrow' %}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</dialog>
+
+{% schema %}
+{
+  "name": "Panier latéral",
+  "settings": []
+}
+{% endschema %}

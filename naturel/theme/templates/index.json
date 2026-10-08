@@ -1,0 +1,127 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "drift": true,
+        "overlay": 22,
+        "height": "full",
+        "align": "bottom",
+        "show_logo": false,
+        "heading": "The art of\nnatural elegance",
+        "subheading": "Inspired by nature. Defined by detail.",
+        "button_label": "Explore the collection",
+        "button_link": "/collections/all"
+      }
+    },
+    "philosophy": {
+      "type": "philosophy",
+      "settings": {
+        "reverse": false,
+        "background": "none",
+        "eyebrow": "Notre philosophie",
+        "heading": "Simply Naturel",
+        "text": "<p>« Inspirée par la nature, façonnée par le détail. NATUREL célèbre une élégance instinctive, libre et intemporelle. »</p>",
+        "body": "<p>Le luxe n'a pas besoin d'en faire trop.</p>",
+        "link_label": "Découvrir notre histoire",
+        "link": "/pages/notre-histoire"
+      }
+    },
+    "collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Coastal Series",
+        "heading": "La collection",
+        "text": "<p>Dix coloris, inspirés du sable, de la mer et des pierres de la Méditerranée.</p>",
+        "limit": 10,
+        "columns": 5,
+        "quick_add": true,
+        "show_link": true,
+        "background": "none"
+      }
+    },
+    "details": {
+      "type": "details",
+      "blocks": {
+        "patch": {
+          "type": "detail",
+          "settings": {
+            "title": "L'écusson N",
+            "text": "<p>Un carré ton camel, surpiqué sur son pourtour, frappé du N. La signature de la maison, posée au centre.</p>"
+          }
+        },
+        "stitch": {
+          "type": "detail",
+          "settings": {
+            "title": "Les coutures",
+            "text": "<p>Des surpiqûres ton sur ton qui dessinent la silhouette, panneau après panneau.</p>"
+          }
+        },
+        "visor": {
+          "type": "detail",
+          "settings": {
+            "title": "La visière",
+            "text": "<p>Un liseré camel souligne son bord, comme une ligne d'horizon.</p>"
+          }
+        },
+        "buckle": {
+          "type": "detail",
+          "settings": {
+            "title": "La boucle métallique",
+            "text": "<p>Une boucle en métal et sa bride camel ajustent la casquette à l'arrière.</p>"
+          }
+        },
+        "number": {
+          "type": "detail",
+          "settings": {
+            "title": "La numérotation",
+            "text": "<p>Chaque pièce porte son numéro sur le côté. Le vôtre n'appartient qu'à vous.</p>"
+          }
+        }
+      },
+      "block_order": ["patch", "stitch", "visor", "buckle", "number"],
+      "settings": {
+        "eyebrow": "L'art du détail",
+        "heading": "Every detail matters",
+        "background": "paper"
+      }
+    },
+    "limited": {
+      "type": "limited-edition",
+      "settings": {
+        "eyebrow": "Éditions limitées",
+        "heading": "Limited by nature",
+        "text": "<p>Chaque coloris naît d'une série courte, numérotée pièce par pièce. La rareté n'est pas un argument : c'est simplement notre façon de faire.</p>",
+        "show_registry": true,
+        "background": "beige"
+      }
+    },
+    "gallery": {
+      "type": "gallery",
+      "blocks": {
+        "g1": { "type": "image", "settings": { "format": "landscape", "offset": false, "caption": "Paysage côtier, lumière du matin" } },
+        "g2": { "type": "image", "settings": { "format": "portrait", "offset": true, "caption": "Portrait de mode, casquette Sable 01" } },
+        "g3": { "type": "image", "settings": { "format": "square", "offset": false, "caption": "Architecture méditerranéenne, murs chaulés" } },
+        "g4": { "type": "image", "settings": { "format": "tall", "offset": true, "caption": "Sable fin, texture et ombre" } },
+        "g5": { "type": "image", "settings": { "format": "landscape", "offset": false, "caption": "Horizon, fin de journée" } },
+        "g6": { "type": "image", "settings": { "format": "portrait", "offset": false, "caption": "Détail de la visière au soleil" } }
+      },
+      "block_order": ["g1", "g2", "g3", "g4", "g5", "g6"],
+      "settings": {
+        "eyebrow": "L'univers",
+        "heading": "Entre sable et horizon",
+        "text": "<p>La lumière sur les matières, le calme de la mer, la liberté d'un été qui ne finit pas.</p>",
+        "background": "none"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Stay close to Naturel",
+        "text": "<p>Découvrez nos prochaines éditions et les histoires qui les inspirent.</p>",
+        "background": "paper"
+      }
+    }
+  },
+  "order": ["hero", "philosophy", "collection", "details", "limited", "gallery", "newsletter"]
+}

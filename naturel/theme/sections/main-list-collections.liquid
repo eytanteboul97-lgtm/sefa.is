@@ -1,0 +1,26 @@
+<div class="container">
+  <header class="page-head page-head--center">
+    <h1 class="h1 h-caps">{{ 'collections.all_title' | t }}</h1>
+  </header>
+  <ul class="blog-grid list-reset" role="list">
+    {%- for collection in collections -%}
+      {%- if collection.products_count > 0 -%}
+        <li class="article-card reveal">
+          <a href="{{ collection.url }}" class="media media--4-5">
+            {%- if collection.featured_image -%}
+              {{ collection.featured_image | image_url: width: 1000 | image_tag: widths: '500, 750, 1000', sizes: '(min-width: 750px) 33vw, 100vw', loading: 'lazy' }}
+            {%- else -%}
+              {% render 'placeholder', label: collection.title %}
+            {%- endif -%}
+          </a>
+          <h2 class="article-card__title"><a href="{{ collection.url }}">{{ collection.title }}</a></h2>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>
+<div style="height: var(--section-space)"></div>
+
+{% schema %}
+{ "name": "Liste des collections", "settings": [] }
+{% endschema %}

@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "drift": true, "overlay": 26, "eyebrow": "Le savoir-faire", "heading": "", "subheading": "Defined by detail.",
+        "placeholder_label": "Gros plan : écusson N et coutures", "placeholder_tone": "stone"
+      }
+    },
+    "details": {
+      "type": "details",
+      "blocks": {
+        "patch": { "type": "detail", "settings": { "title": "L'écusson N", "text": "<p>Un carré ton camel, surpiqué sur son pourtour, frappé du N.</p>" } },
+        "stitch": { "type": "detail", "settings": { "title": "Les coutures", "text": "<p>Des surpiqûres ton sur ton qui dessinent la silhouette.</p>" } },
+        "visor": { "type": "detail", "settings": { "title": "La visière", "text": "<p>Un liseré camel souligne son bord.</p>" } },
+        "buckle": { "type": "detail", "settings": { "title": "La boucle métallique", "text": "<p>Une boucle en métal et sa bride camel, à l'arrière.</p>" } },
+        "number": { "type": "detail", "settings": { "title": "La numérotation", "text": "<p>Chaque pièce porte son numéro sur le côté.</p>" } }
+      },
+      "block_order": ["patch", "stitch", "visor", "buckle", "number"],
+      "settings": { "eyebrow": "Le savoir-faire", "heading": "Every detail matters", "text": "<p>[À COMPLÉTER — matières, fabrication, origine : uniquement des informations vérifiées.]</p>", "background": "none" }
+    },
+    "materials": {
+      "type": "image-text",
+      "settings": {
+        "placeholder_label": "Matières et échantillons de coloris", "ratio": "1-1", "reverse": false, "background": "paper",
+        "eyebrow": "Matières", "heading": "Choisies pour la lumière",
+        "text": "<p>[À COMPLÉTER — composition réelle des matières.]</p>",
+        "link_label": "Voir la collection", "link": "/collections/all"
+      }
+    }
+  },
+  "order": ["hero", "details", "materials"]
+}

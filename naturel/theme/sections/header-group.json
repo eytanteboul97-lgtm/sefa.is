@@ -1,0 +1,19 @@
+{
+  "type": "header",
+  "name": "Groupe en-tête",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": { "text": "", "link": "" }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "transparent_on_home": true,
+        "hide_on_scroll": true
+      }
+    }
+  },
+  "order": ["announcement", "header"]
+}

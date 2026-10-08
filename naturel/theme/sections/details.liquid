@@ -1,0 +1,91 @@
+{%- comment -%}
+  "Every detail matters" — desktop: sticky frame whose close-up crossfades as
+  each detail scrolls into focus. Mobile: swipeable cards, each with its image.
+{%- endcomment -%}
+<section class="section{% if section.settings.background != 'none' %} section--{{ section.settings.background }}{% endif %}" data-details>
+  <div class="container">
+    <div class="section-head section-head--center">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow reveal">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="h2 h-caps reveal" style="--d: 1">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="lede reveal" style="--d: 2; max-width: 50ch">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    <div class="details">
+      <div class="details__frame" aria-hidden="true">
+        {%- for block in section.blocks -%}
+          <div class="media{% if forloop.first %} is-active{% endif %}" data-detail-media="{{ forloop.index0 }}">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1600 | image_tag: widths: '800, 1200, 1600', sizes: '50vw', loading: 'lazy', alt: '' }}
+            {%- else -%}
+              {%- capture ph -%}Gros plan : {{ block.settings.title | strip_html }}{%- endcapture -%}
+              {% render 'placeholder', label: ph, tone: 'stone' %}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <ol class="details__steps list-reset" role="list">
+        {%- for block in section.blocks -%}
+          <li class="details__step{% if forloop.first %} is-active{% endif %}" data-detail-step="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <div class="media media--4-5">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1000 | image_tag: widths: '500, 750, 1000', sizes: '84vw', loading: 'lazy', alt: block.settings.image.alt | default: block.settings.title }}
+              {%- else -%}
+                {%- capture ph -%}Gros plan : {{ block.settings.title | strip_html }}{%- endcapture -%}
+                {% render 'placeholder', label: ph, tone: 'stone' %}
+              {%- endif -%}
+            </div>
+            <span class="details__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <h3 class="h3">{{ block.settings.title }}</h3>
+            {%- if block.settings.text != blank -%}<div class="rte">{{ block.settings.text }}</div>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "L'art du détail",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "L'art du détail" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Every detail matters" },
+    { "type": "richtext", "id": "text", "label": "Introduction" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [
+        { "value": "none", "label": "Sable" },
+        { "value": "paper", "label": "Blanc cassé" },
+        { "value": "beige", "label": "Beige chaud" }
+      ],
+      "default": "paper"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Détail",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Gros plan", "info": "Photographie réelle du produit, format portrait 4:5." },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Détail" },
+        { "type": "richtext", "id": "text", "label": "Texte", "info": "Décrivez uniquement ce qui est vrai du produit." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "L'art du détail",
+      "blocks": [
+        { "type": "detail", "settings": { "title": "L'écusson N" } },
+        { "type": "detail", "settings": { "title": "Les coutures" } },
+        { "type": "detail", "settings": { "title": "La visière" } },
+        { "type": "detail", "settings": { "title": "La boucle métallique" } },
+        { "type": "detail", "settings": { "title": "La numérotation" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

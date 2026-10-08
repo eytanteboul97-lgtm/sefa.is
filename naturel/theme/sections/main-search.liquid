@@ -1,0 +1,31 @@
+<div class="container">
+  <header class="page-head page-head--center">
+    <h1 class="h1">{{ 'search.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="newsletter__form">
+      <div class="field-line">
+        <label for="SearchInput" class="visually-hidden">{{ 'search.title' | t }}</label>
+        <input id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}">
+        <input type="hidden" name="type" value="product">
+        <button type="submit">{{ 'search.submit' | t }}</button>
+      </div>
+    </form>
+  </header>
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="text-center muted" style="margin-bottom: 48px">{{ 'search.results' | t: count: search.results_count, terms: search.terms }}</p>
+      <ul class="grid list-reset" role="list">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            <li>{% render 'product-card', product: item, index: forloop.index0 %}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- if paginate.pages > 1 -%}{% render 'pagination', paginate: paginate %}{%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+<div style="height: var(--section-space)"></div>
+
+{% schema %}
+{ "name": "Recherche", "settings": [] }
+{% endschema %}
